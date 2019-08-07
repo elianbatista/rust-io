@@ -20,7 +20,7 @@ class food {
             }
             const zero = createVector(0, 0);
             
-            this.dir = p5.Vector.lerp(this.dir, zero, 0.2);
+            this.dir = p5.Vector.lerp(this.dir, this.dir.copy().mult(0.9), 0.2);
            
             this.dirAng = lerp(this.dirAng, 0, 0.4);
             this.rotate += this.dirAng;
