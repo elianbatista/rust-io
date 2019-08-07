@@ -18,13 +18,13 @@ class food {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 20);
             }
-            const zero = createVector(0, 0);
+            const zero = this.dir.copy().normalize().mult(0.001);
             
-            let dir = p5.Vector.lerp(this.dir, this.dir.copy().mult(0.002), 0.2);
+            this.dir = p5.Vector.lerp(this.dir, zero, 0.2);
            
             this.dirAng = lerp(this.dirAng, 0, 0.4);
             this.rotate += this.dirAng;
-            this.pos.add(dir);
+            this.pos.add(this.dir);
 
             push();
 
