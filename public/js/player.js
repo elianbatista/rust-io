@@ -38,11 +38,11 @@ class player {
         this.bullets = [];
         this.bulletDamage = 50;
         this.bulletLife = 1000
-        this.bulletAcurac = 0.1
+        this.bulletAcurac = 0.9
         this.bulletSpeed = 500
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(25);
+        this.bulletTimer = new spellTimer(250);
 
     }
     display() {
