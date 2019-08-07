@@ -131,15 +131,15 @@ class player {
         }
         if(keyWentDown('a')){
           let prox = createVector(world.fruits[0].pos.x,world.fruits[0].pos.y);
-          for(food of world.fruits){
-            if(pos.dist(food)>= pos.dist(prox)){
-              prox = food.copy();
+          for(let f of world.fruits){
+            if(this.pos.dist(prox) <= this.pos.dist(f.pos)  ){
+              prox = createVector(f.pos.x, f.pos.y);
             }
           }
           if (this.bulletTimer.checkTimer()) {
                         //criar nova bala
                         const bullet = new spell(this.pos,
-                            this.rpox,
+                            prox,
                             this.bulletAcurac,
                             this.bulletSpeed,
                             this.bulletLife,
