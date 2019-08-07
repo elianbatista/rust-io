@@ -18,9 +18,9 @@ class food {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 20);
             }
-            const zero = this.dir.copy().normalize().mult(0.001);
+            const zero = this.dir.copy().normalize().mult(0.15);
             
-            this.dir = p5.Vector.lerp(this.dir, zero, 0.2);
+            this.dir = p5.Vector.lerp(this.dir, zero, 0.15);
            
             this.dirAng = lerp(this.dirAng, 0, 0.4);
             this.rotate += this.dirAng;
