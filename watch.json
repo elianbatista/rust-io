@@ -1,0 +1,11 @@
+00"restart": {
+    "exclude": [
+      "^public/",
+      "^dist/"
+    ],
+    "include": [
+      "\\.js$",
+      "\\.coffee$",
+      "\\.json"
+    ]
+  }
