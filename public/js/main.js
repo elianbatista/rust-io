@@ -1,4 +1,5 @@
 let world;
+var socket = io();
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
