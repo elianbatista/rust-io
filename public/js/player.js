@@ -1,25 +1,4 @@
-class spellTimer {
-    constructor(cd) {
-        this.cd = cd;
-        this.start = 0;
-        this.end = 0;
-    }
-    startTimer() {
-        this.start = millis();
-        this.end = this.start + this.cd;
-    }
-    remainTime(){
-        return this.end - this.start;
-    }
-    runTimer() {
-        if(this.start <= this.end){
-            this.start += world.deltaTime;
-        }
-    }
-    checkTimer() {
-        return (this.start >= this.end);
-    }
-}
+
 class player {
     constructor(x, y, id) {
         this.pos = createVector(x, y);
@@ -45,6 +24,7 @@ class player {
         this.bulletTimer = new spellTimer(250);
 
     }
+    
     display() {
         for (let bullet of this.bullets) {
             bullet.update();
@@ -89,24 +69,25 @@ class player {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
     }
+    shoot(){
+        if (this.bulletTimer.checkTimer()) {
+            const bullet = new spell(this.pos,
+                this.mira,
+                this.bulletAcurac,
+                this.bulletSpeed,
+                this.bulletLife,
+                this.bulletDamage,
+                this.bulletSize);
+
+            this.bullets.push(bullet)
+            this.bulletTimer.startTimer();
+        }
+    }
     handleMouseInput(mousex, mousey) {
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
-                    if (this.bulletTimer.checkTimer()) {
-                        //criar nova bala
-                        const bullet = new spell(this.pos,
-                            this.mira,
-                            this.bulletAcurac,
-                            this.bulletSpeed,
-                            this.bulletLife,
-                            this.bulletDamage,
-                            this.bulletSize);
-
-
-                        this.bullets.push(bullet)
-                        this.bulletTimer.startTimer();
-                    }
+                    this.shoot();
                     break;
 
                 case RIGHT:
