@@ -20,7 +20,5 @@
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "socket.io": "^2.2.0"
-  },
-  "predeploy": "node server.js",
-  "deploy": "gh-pages -d dist"
+  }
 }
