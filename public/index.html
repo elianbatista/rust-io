@@ -22,15 +22,19 @@
        </head>
 
        <body>
-              
-              <script >
+              <script src="/socket.io/socket.io.js"></script>
+              <script>
                      
-                     //var socket = io();
-                    //console.log("alo");
+
+                    var socket = io('http://localhost:3000/');
        
               </script>
               <script src = "js/p5/p5.min.js"></script>
               <script src = "js/p5/p5.play.js"></script>
-              <script src = "js/p5/p5.play.js"></script>     
-       </body>
+
+              <script src = "js/p5/arena.js"></script>
+              <script src = "js/p5/fruit.js"></script>
+              <script src = "js/p5/player.js"></script>
+              <script src = "js/p5/spell.js"></script>
+  </body>
 </html>
