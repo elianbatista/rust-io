@@ -1,5 +1,21 @@
 let world;
 var socket = io();
+
+const playerState = {
+  STOP: 0,
+  WALK: 1,
+  RUN: 2,
+  SHOT: 3,
+  DAMAGE: 4,
+  DYING: 5,
+  DEAD: 6,
+}
+const foodState = {
+  WALK: 0,
+  DAMAGE: 1,
+  DYING: 3,
+  DEAD: 4,
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);

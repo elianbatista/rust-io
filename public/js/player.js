@@ -10,9 +10,9 @@ class player {
         
         this.size = 40;
         this.camera = createVector(this.pos.x, this.pos.y);
-        camera.position = this.camera;
 
-        this.state = 'parado';
+
+        this.state = playerState.STOP;
 
         this.bullets = [];
         this.bulletDamage = 50;
