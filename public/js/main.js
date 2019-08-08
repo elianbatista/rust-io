@@ -4,7 +4,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
 
-  world = new arena(700, 700);
+  world = new arena(400, 400);
   world.setPlayer(new player(0, 0, 12345))
   world.setFruits(100);
   camera.position.x = 0;

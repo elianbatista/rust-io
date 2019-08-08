@@ -30,7 +30,7 @@ class arena {
         }
     }
     createPlayers(protPlayers){
-        
+
     }
     displayPlayers(protPlayers){
         //this.playerPrincipal.display();
@@ -48,7 +48,8 @@ class arena {
         }
     }
     display() {
-        fill(200, 150, 230);
+        //fill(200, 150, 230);
+      fill(255, 255, 255);
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
