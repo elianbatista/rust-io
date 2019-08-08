@@ -1,5 +1,4 @@
 let world;
-var socket = io();
 
 const playerState = {
   STOP: 0,
@@ -16,7 +15,8 @@ const foodState = {
   DYING: 3,
   DEAD: 4,
 }
-function setup() {
+let flag = false;
+function set(){
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
 
@@ -25,17 +25,23 @@ function setup() {
   world.setFruits(100);
   camera.position.x = 0;
   camera.position.y = 0;
+  flag = true;
+}
+function setup() {
+  
 
 }
 
 
 function draw() {
- 
-  background(220);
-  //frameRate(25);
-  world.display();
-  world.update();
-  
+ if(flag){
+     background(220);
+    //frameRate(25);
+    world.display();
+    world.update();
 
-  camera.off()
+
+    camera.off()
+ }
+  
 }

@@ -39,11 +39,10 @@
   
       </div> 
   
-      <script>
-  
-        document.querySelector('body').addEventListener()
-        
-      </script>
+      <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
   
        <script src="/socket.io/socket.io.js"></script>
        <script src="/js/p5/p5.min.js"></script>
@@ -59,8 +58,26 @@
        <script src="/js/fruit.js"></script>
        <script src="/js/player.js"></script>
        <script src="/js/spell.js"></script>
-       
+       <script src="/js/main.js"></script>
        <script src="/js/life.js"></script>
+        <script src="/js/main.js"></script>
+  
+        <script>
+  
+        document.querySelector('body').addEventListener('keydown', function(event) {
+          
+          if(event.keyCode == 13){
+            
+            $(".box").fadeOut();
+            
+            set();
+            
+          }
+          
+        });
+        
+      </script>
+  
 </body>
 
 </html>
