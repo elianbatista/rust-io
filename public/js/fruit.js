@@ -12,14 +12,15 @@ class food {
         this.zero.normalize().mult(0.1);
         this.zeroRot = random(-1, 1) * (PI / 8);
 
-        this.hit = new spellTimer(200);
-
+        this.hit = new spellTimer(600);
+        this.flag = true;
     }
     checkLife() {
         return this.life >= 0;
     }
     display() {
         this.hit.runTimer()
+        
         if (this.checkLife()) {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 20);
@@ -47,17 +48,36 @@ class food {
             }
 
 
-
+            //console.log("b")
             pop();
 
         } else {
-            this.hit.startTimer();
+            //console.log("a")
+            if(this.flag){
+                this.flag = false;
+                this.hit.startTimer();
+            }
             if (this.hit.checkTimer()) {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
+            
+                
+                
             } else {
+                this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
+
+                this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+                this.rotate += this.dirAng;
+                this.pos.add(this.dir);
+                push()
+                translate(this.pos.x, this.pos.y);
+                
+                rotate(this.rotate * PI / 180)
+                stroke(0);
                 fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
-                const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, 0)
+                const anim = map(this.hit.remainTime(), this.hit.cd, 0, this.size, 0)
                 rect(0, 0, anim, anim);
+                pop()
+                
             }
         }
 
@@ -65,4 +85,3 @@ class food {
 
 }
 
-}
