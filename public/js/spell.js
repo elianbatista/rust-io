@@ -33,7 +33,7 @@ class spell {
         this.dir.rotate(random(angle, -angle));
         this.dir.normalize();
         this.dir.mult(speed);
-        
+
         this.damage = damage;
 
         this.life = life;
@@ -59,6 +59,7 @@ class spell {
                     food.life -= this.damage;
                     food.dir.x = dir.x;
                     food.dir.y = dir.y;
+                    food.hit.startTimer();
                     if (food.dir.x > food.dir.y) {
                         food.dirAng = food.dir.x * random(10);
                     } else {
