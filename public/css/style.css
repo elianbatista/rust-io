@@ -1,5 +1,29 @@
-.box .titulo {
+body {
   
-  font-family: 'Lexend Tera', sans-serif;
+  background-color: #AA00FF;
+  
+}
+
+.box {
+  
+  position: absolute;
+  
+  top: 50%;
+  
+  left: 50%;
+  
+  transform: TranslateY(-50%) TranslateX(-50%);
+  
+}
+
+.box h1{
+  
+  font-family: 'Dosis', sans-serif;
+  
+  font-weight: 800;
+  
+  font-size: 40px;
+  
+  color: white;
   
 }
