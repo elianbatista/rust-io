@@ -46,6 +46,44 @@ body {
   
   width: 300px;
   
+  text-transform: uppercase;
+  
+  color: #AA00FF;
+  
+  text-align: center;
+  
+}
+
+.box .nome:focus {
+  
+  outline: none;
+  
+}
+
+.informacoes {
+  
+  position: absolute;
+  
+  bottom: 10px;
+  
+  color: white;
+  
+  font-family: 'Dosis', sans-serif;
+  
+  text-transform: uppercase;
+  
+}
+
+.informacoes.left {
+  
+  left: 10px;
+  
+}
+
+.informacoes.right {
+  
+  right: 10px;
+  
 }
 
 @keyframes intro {

@@ -1,14 +1,9 @@
 {
-  "restart": {
-    "exclude": [
-      "^public/",
-      "^dist/"
-    ],
+  "install": {
     "include": [
-      "\\.js$",
-      "\\.coffee$",
-      "\\.json"
+      "^.trigger-rebuild$"
     ]
   },
-  "throttle": 2000
+  "throttle": 100
 }
+
