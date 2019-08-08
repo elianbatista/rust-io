@@ -70,7 +70,7 @@ class spell {
             }
         } else {
             world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
-            world.setRandomFruit();
+            
 
         }
     }

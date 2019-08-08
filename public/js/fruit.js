@@ -18,6 +18,7 @@ class food {
     checkLife() {
         return this.life >= 0;
     }
+   
     display() {
         this.hit.runTimer()
         
@@ -59,7 +60,7 @@ class food {
             }
             if (this.hit.checkTimer()) {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
-            
+                world.setRandomFruit();
                 
                 
             } else {
