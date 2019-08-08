@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
@@ -15,61 +13,63 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 
-var playerProt = function (x, y, id){
-  
-  this.x = x;
-  this.y = y;
-  this.id = id;
-  
+var playerProt = function (x, y, angle, life, xp, id) {
+
+       this.x = x;
+       this.y = y;
+       this.angle = angle;
+       this.life = life;
+       this.xp = xp;
+       this.id = id;
+
 };
 
 io.on('connect', (socket) => {
-  
-    var newSocket = new playerProt(Math.random()*500, Math.random()*500, socket.id);
-  
-    socket.broadcast.emit('newSocket', newSocket);
 
-    arrayPlayersObject.push(newSocket);
+       var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, socket.id);
 
-    socket.emit('mensagem', arrayPlayersObject);
-  
-    socket.on('disconnect', function(){
+       socket.broadcast.emit('newSocket', newSocket);
 
-      socket.broadcast.emit('disconectPlayer', socket.id);
+       arrayPlayersObject.push(newSocket);
 
-      for(var i = 0; i < arrayPlayersObject.length; i++){
+       socket.emit('mensagem', arrayPlayersObject);
 
-             if(arrayPlayersObject[i]['id'] == socket.id){
+       socket.on('disconnect', function () {
 
-                    arrayPlayersObject.splice(i, 1);
+              socket.broadcast.emit('disconectPlayer', socket.id);
 
-             }
+              for (var i = 0; i < arrayPlayersObject.length; i++) {
 
-      }
-      
-    });
-  
-    socket.on('update', (playerX, playerY)=> {
+                     if (arrayPlayersObject[i]['id'] == socket.id) {
 
-          for(var i = 0; i < arrayPlayersObject.length; i++){
+                            arrayPlayersObject.splice(i, 1);
 
-                 if(arrayPlayersObject[i]['id'] == socket.id){
+                     }
 
-                        arrayPlayersObject[i]['x'] = playerX;
+              }
 
-                        arrayPlayersObject[i]['y'] = playerY;
+       });
 
-                 }
+       socket.on('update', (playerX, playerY) => {
 
-                 socket.broadcast.emit('updatePositions', socket.id, playerX, playerY);
+              for (var i = 0; i < arrayPlayersObject.length; i++) {
 
-          }
+                     if (arrayPlayersObject[i]['id'] == socket.id) {
 
-   });
-  
+                            arrayPlayersObject[i]['x'] = playerX;
+
+                            arrayPlayersObject[i]['y'] = playerY;
+
+                     }
+
+                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY);
+
+              }
+
+       });
+
 });
 
 server.listen(port, function () {
-    console.log('Server listening at port %d', port);
+       console.log('Server listening at port %d', port);
 });
-
