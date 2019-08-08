@@ -8,24 +8,25 @@ class food {
 
         this.life = 100;
         this.lifeD = new life(100);
-        this.zero = createVector(random(-10,10),random(-10,10));
+        this.zero = createVector(random(-10, 10), random(-10, 10));
         this.zero.normalize().mult(0.1);
-        this.zeroRot = random(-1,1) * (PI/8);
+        this.zeroRot = random(-1, 1) * (PI / 8);
 
-        this.hit = spellTimer(15);
+        this.hit = new spellTimer(200);
 
     }
     checkLife() {
         return this.life >= 0;
     }
     display() {
+        this.hit.runTimer()
         if (this.checkLife()) {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 20);
             }
-            
+
             this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
-           
+
             this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
             this.rotate += this.dirAng;
             this.pos.add(this.dir);
@@ -34,20 +35,34 @@ class food {
 
             translate(this.pos.x, this.pos.y);
             rotate(this.rotate * PI / 180)
-            if(this.hit.checkTimer()){
-                fill(50, 200, 50);
-            }else{
-                fill(250, 20, 50);
-            }
-            
             stroke(0);
-            rect(0, 0, this.size, this.size);
+            if (this.hit.checkTimer()) {
+                fill(50, 200, 50);
+                rect(0, 0, this.size, this.size);
+            } else {
+
+                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
+                const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, this.size * 1.2)
+                rect(0, 0, anim, anim);
+            }
+
+
+
             pop();
-            fruit.hit.runTimer()
-        }else{
-            world.fruits.splice(world.fruits.indexOf(this),1);
+
+        } else {
+            this.hit.startTimer();
+            if (this.hit.checkTimer()) {
+                world.fruits.splice(world.fruits.indexOf(this), 1);
+            } else {
+                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
+                const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, 0)
+                rect(0, 0, anim, anim);
+            }
         }
 
     }
+
+}
 
 }
