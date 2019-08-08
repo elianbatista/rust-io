@@ -13,13 +13,14 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 
-var playerProt = function (x, y, angle, life, xp, id) {
+var playerProt = function (x, y, angle, life, size, id) {
 
        this.x = x;
        this.y = y;
        this.angle = angle;
        this.life = life;
-       this.xp = xp;
+       this.size = size;
+
        this.id = id;
 
 };

@@ -29,6 +29,10 @@ class arena {
             this.setRandomFruit();
         }
     }
+
+    displayPlayers(protPlayers){
+        
+    }
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
@@ -39,8 +43,6 @@ class arena {
         let i = 0;
         for (let fruit of this.fruits) {
             fruit.display();
-     
-       
         }
     }
     display() {
