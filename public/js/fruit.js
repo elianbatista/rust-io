@@ -72,10 +72,10 @@ class food {
                 translate(this.pos.x, this.pos.y);
                 
                 rotate(this.rotate * PI / 180)
-                stroke(0);
-                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
-                const anim = map(this.hit.remainTime(), this.hit.cd, 0, this.size, 0)
-                rect(0, 0, anim, anim);
+                stroke(0,0,0,map(this.hit.remainTime(),this.hit.cd,0, 255, 0));
+                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100,map(this.hit.remainTime(),this.hit.cd,0, 255, 0));
+               
+                rect(0, 0, this.size,this.size);
                 pop()
                 
             }
