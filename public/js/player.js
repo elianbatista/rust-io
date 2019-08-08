@@ -49,7 +49,8 @@ class player {
         translate(this.pos.x, this.pos.y);
       
         textSize(24);
-        text(this.name.toUpperCase(), -12, this.size + 10);
+        textAlign(CENTER);
+        text(this.name.toUpperCase(), 0,12);
         fill(255, 0, 0);
         circle(0, 0, this.size);
         //

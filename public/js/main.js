@@ -29,10 +29,14 @@ function createWorld(playerName){
   flag = true;
 }
 
-
+function preload(){
+ 
+}
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
+
+  textFont('Dosis');
   
 }
 function draw() {
