@@ -40,12 +40,13 @@ class arena {
         this.oldTime = this.newTime;
         this.newTime = millis();
         
-        this.playerPrincipal.display();
-        this.playerPrincipal.update(camera.mouseX, camera.mouseY);
+        
         let i = 0;
         for (let fruit of this.fruits) {
             fruit.display();
         }
+      this.playerPrincipal.display();
+        this.playerPrincipal.update(camera.mouseX, camera.mouseY);
     }
     display() {
         //fill(200, 150, 230);

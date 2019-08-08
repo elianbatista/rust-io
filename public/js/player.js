@@ -22,7 +22,7 @@ class player {
         this.bulletSpeed = 500
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(250);
+        this.bulletTimer = new spellTimer(10);
 
     }
     
@@ -50,7 +50,7 @@ class player {
       
         textSize(24);
         textAlign(CENTER);
-        text(this.name.toUpperCase(), 0,12);
+        text(this.name.toUpperCase(), 0,this.size + 12);
         fill(255, 0, 0);
         circle(0, 0, this.size);
         //
