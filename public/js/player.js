@@ -22,7 +22,7 @@ class player {
         this.bulletSpeed = 500
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(10);
+        this.bulletTimer = new spellTimer(1);
 
     }
     
@@ -118,7 +118,7 @@ class player {
         if(keyWentDown('a')){
           let prox = createVector(world.fruits[0].pos.x,world.fruits[0].pos.y);
           for(let f of world.fruits){
-            if(this.pos.dist(prox) <= this.pos.dist(f.pos)  ){
+            if(this.pos.dist(prox) >= this.pos.dist(f.pos)  ){
               prox = createVector(f.pos.x, f.pos.y);
             }
           }
