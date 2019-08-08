@@ -16,7 +16,7 @@ const foodState = {
   DEAD: 4,
 }
 let flag = false;
-function settt(playerName){
+function createWorld(playerName){
   
   console.log(playerName)
   world = new arena(400, 400);
@@ -29,15 +29,13 @@ function settt(playerName){
   flag = true;
 }
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
   
 }
-
-
 function draw() {
-  
  if(flag){
     background(170, 0, 255);
     
