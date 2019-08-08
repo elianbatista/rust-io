@@ -29,9 +29,11 @@ class arena {
             this.setRandomFruit();
         }
     }
-
-    displayPlayers(protPlayers){
+    createPlayers(protPlayers){
         
+    }
+    displayPlayers(protPlayers){
+        //this.playerPrincipal.display();
     }
     update() {
         this.deltaTime = this.newTime - this.oldTime;

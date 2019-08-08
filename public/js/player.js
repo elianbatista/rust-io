@@ -170,13 +170,15 @@ class player {
     }
 }
 class protoPlayer{
-    constructor(x, y, life, size, angle){
+    constructor(x, y, size, angle){
         this.x = x;
         this.y = y;
+        this.size = size;
         this.angle = angle;
     }
     display(){
         let mira = p5.Vector.fromAngle(angle);
+        mira.mult(this.size);
         push()
 
         translate(this.pos.x, this.pos.y);
