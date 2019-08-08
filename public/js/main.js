@@ -16,32 +16,35 @@ const foodState = {
   DEAD: 4,
 }
 let flag = false;
-function set(){
-  createCanvas(windowWidth, windowHeight);
-  rectMode(CENTER);
-
+function settt(playerName){
+  
+  console.log(playerName)
   world = new arena(400, 400);
   world.setPlayer(new player(0, 0, 12345))
   world.setFruits(100);
+  
+  world.playerPrincipal.name = playerName;
   camera.position.x = 0;
   camera.position.y = 0;
   flag = true;
 }
-function setup() {
-  
 
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  rectMode(CENTER);
+  
 }
 
 
 function draw() {
+  
  if(flag){
-     background(220);
-    //frameRate(25);
+    background(170, 0, 255);
+    
     world.display();
     world.update();
 
 
     camera.off()
  }
-  
 }

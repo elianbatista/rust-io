@@ -1,6 +1,7 @@
 
 class player {
     constructor(x, y, id) {
+        this.name;
         this.pos = createVector(x, y);
         this.mira = createVector(x, y);
         this.dir = createVector(0, 0);
