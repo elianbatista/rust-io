@@ -14,7 +14,6 @@ class arena {
         this.newTime = millis();
         this.deltaTime;
 
-        this.playerGui = new interface();
     }
     setPlayer(player) {
         this.playerPrincipal = player;
@@ -33,6 +32,9 @@ class arena {
     }
     createPlayers(protPlayers){
 
+    }
+    getPlayer(){
+        return this.playerPrincipal;
     }
 
     displayPlayers(protPlayers){
@@ -54,14 +56,20 @@ class arena {
     }
     display() {
         //fill(200, 150, 230);
-      fill(255, 255, 255);
+        fill(255, 255, 255);
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
+
+        displayGui(this.playerPrincipal.life,this.playerPrincipal.xp);
 
     
         noStroke();
     }
 }
 function displayGui(life, xp){
-    
+    fill(0,0,255,100);
+    push();
+    translate(world.getPlayer().camera.x,world.getPlayer().camera.y)
+    rect(0,height/2,width/2,200,50);
+    pop();
 }

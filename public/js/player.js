@@ -9,6 +9,7 @@ class player {
         this.speed = 200;
         this.target = createVector(x, y);
         
+        this.xp = 0;
         this.size = 40;
         this.camera = createVector(this.pos.x, this.pos.y);
 
@@ -210,3 +211,4 @@ class protoPlayer{
         this.x = x;
         this.y = y;
     }
+}
