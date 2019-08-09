@@ -20,11 +20,11 @@ class player {
         this.bullets = [];
         this.bulletDamage = 50;
         this.bulletLife = 16000
-        this.bulletAcurac = 0.1
+        this.bulletAcurac = 0.9
         this.bulletSpeed = 1000
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(1000);
+        this.bulletTimer = new spellTimer(0);
 
 
     }
@@ -41,9 +41,9 @@ class player {
         fill(0, 0, 255);
         circle(this.target.x, this.target.y, 20);
         //----
-        stroke(0, 0, 255);
-        strokeWeight(5);
-        line(this.pos.x, this.pos.y, this.target.x, this.target.y);
+       // stroke(0, 0, 255);
+        //strokeWeight(5);
+        //line(this.pos.x, this.pos.y, this.target.x, this.target.y);
 
 
         noStroke();
@@ -57,7 +57,7 @@ class player {
        // text(this.name.toUpperCase(), 0,this.size + 12);
         fill(255, 0, 0);
         circle(0, 0, this.size);
-        //
+        
         stroke(0)
         strokeWeight(8);
         

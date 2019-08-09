@@ -4,7 +4,7 @@ class food {
         this.dir = createVector(0, 0);
         this.dirAng = 0;
         this.rotate = random(360);
-        this.size = 40;
+        this.size = 20;
 
         this.life = 100;
         this.lifeD = new life(100);

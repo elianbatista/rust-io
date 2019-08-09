@@ -29,7 +29,7 @@ class spell {
         this.speed = speed;
         this.dir = createVector(target.x, target.y);
 
-        const angle = map(acurac, 0, 1, -PI / 4, 0);
+        const angle = map(acurac, 0, 1, -PI / 4, PI/4);
         this.dir.rotate(random(angle, -angle));
         this.dir.normalize();
         this.dir.mult(speed);
