@@ -12,7 +12,6 @@ class player {
         this.size = 40;
         this.camera = createVector(this.pos.x, this.pos.y);
 
-
         this.state = playerState.STOP;
 
         this.bullets = [];
@@ -23,6 +22,7 @@ class player {
         this.bulletSize = 16;
 
         this.bulletTimer = new spellTimer(1);
+
 
     }
     
@@ -50,6 +50,7 @@ class player {
       
         textSize(24);
         textAlign(CENTER);
+        textStyle(BOLD);
         text(this.name.toUpperCase(), 0,this.size + 12);
         fill(255, 0, 0);
         circle(0, 0, this.size);
@@ -209,4 +210,3 @@ class protoPlayer{
         this.x = x;
         this.y = y;
     }
-}

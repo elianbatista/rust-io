@@ -13,6 +13,8 @@ class arena {
         this.oldTime = 0;
         this.newTime = millis();
         this.deltaTime;
+
+        this.playerGui = new interface();
     }
     setPlayer(player) {
         this.playerPrincipal = player;
@@ -32,6 +34,7 @@ class arena {
     createPlayers(protPlayers){
 
     }
+
     displayPlayers(protPlayers){
         //this.playerPrincipal.display();
     }
@@ -45,8 +48,9 @@ class arena {
         for (let fruit of this.fruits) {
             fruit.display();
         }
-      this.playerPrincipal.display();
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
+        this.playerPrincipal.display();
+        
     }
     display() {
         //fill(200, 150, 230);
@@ -57,4 +61,7 @@ class arena {
     
         noStroke();
     }
+}
+function displayGui(life, xp){
+    
 }

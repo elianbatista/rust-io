@@ -4,7 +4,7 @@ class food {
         this.dir = createVector(0, 0);
         this.dirAng = 0;
         this.rotate = random(360);
-        this.size = 20;
+        this.size = 40;
 
         this.life = 100;
         this.lifeD = new life(100);
@@ -24,7 +24,7 @@ class food {
         
         if (this.checkLife()) {
             if (this.life < 100) {
-                this.lifeD.display(this.life, this.pos, 20);
+                this.lifeD.display(this.life, this.pos, 35);
             }
 
             this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
