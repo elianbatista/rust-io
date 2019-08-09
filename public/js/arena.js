@@ -90,14 +90,15 @@ function displayGui(player){
     fill(0,0,255);
     rect(0,-155,width/6,10,50)
 
-    fill(0,0,255);
-    rect(0,-155,width/6,10,50)
+    fill(255,255,0);
+    console.log(player.xp,player.xp%100 )
+    rect(0,-155,map((player.xp%100),0,100,0,width/6),10,50)
     
     stroke(0)
     fill(255,230,230,200);
     textSize(72);
     textAlign(CENTER);
     textStyle(BOLD);
-    text(player.name.toUpperCase(), 0,-30 );
+    text(`${parseInt(player.xp/100)}.   ${player.name.toUpperCase()}`, 0,-30 );
     pop();
 }

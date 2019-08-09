@@ -119,6 +119,9 @@ class player {
         if (keyWentDown('q')) {
             this.life -= 10;
         }
+        if (keyWentDown('e')) {
+            this.xp += 10;
+        }
         if(keyWentDown('a')){
           let prox = createVector(world.fruits[0].pos.x,world.fruits[0].pos.y);
           for(let f of world.fruits){
