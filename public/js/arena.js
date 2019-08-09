@@ -77,7 +77,21 @@ function displayGui(player){
     
     fill(255,0,0);
     rect(0,-125,width/4,50,50)
+
+    fill(0,255,0);
+    rect(0,-125,map(player.life,0,100,0,width/4),50,50)
     
+    fill(255,230,230,255);
+    textSize(52);
+    textAlign(CENTER);
+    textStyle(BOLD);
+    text(`${player.life}/100`,0,-110);
+
+    fill(0,0,255);
+    rect(0,-155,width/6,10,50)
+
+    fill(0,0,255);
+    rect(0,-155,width/6,10,50)
     
     stroke(0)
     fill(255,230,230,200);

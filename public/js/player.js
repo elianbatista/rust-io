@@ -9,12 +9,14 @@ class player {
         this.speed = 200;
         this.target = createVector(x, y);
         
+        this.life = 100;
         this.xp = 0;
         this.size = 40;
         this.camera = createVector(this.pos.x, this.pos.y);
 
         this.state = playerState.STOP;
 
+        
         this.bullets = [];
         this.bulletDamage = 50;
         this.bulletLife = 1000
@@ -115,7 +117,7 @@ class player {
             this.state = 'andando';
         }
         if (keyWentDown('q')) {
-
+            this.life -= 10;
         }
         if(keyWentDown('a')){
           let prox = createVector(world.fruits[0].pos.x,world.fruits[0].pos.y);
