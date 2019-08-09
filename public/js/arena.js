@@ -52,6 +52,8 @@ class arena {
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
+
+        displayGui(this.getPlayer());
         
     }
     display() {
@@ -60,16 +62,28 @@ class arena {
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
-        displayGui(this.playerPrincipal.life,this.playerPrincipal.xp);
+        
 
     
         noStroke();
     }
 }
-function displayGui(life, xp){
-    fill(0,0,255,100);
+function displayGui(player){
+    fill(10,10,75,100);
     push();
-    translate(world.getPlayer().camera.x,world.getPlayer().camera.y)
-    rect(0,height/2,width/2,200,50);
+    translate(player.camera.x,player.camera.y)
+    translate(0,height/2)
+    rect(0,0,width/2,200,50);
+    
+    fill(255,0,0);
+    rect(0,-125,width/4,50,50)
+    
+    
+    stroke(0)
+    fill(255,230,230,200);
+    textSize(72);
+    textAlign(CENTER);
+    textStyle(BOLD);
+    text(player.name.toUpperCase(), 0,-30 );
     pop();
 }
