@@ -14,6 +14,24 @@ class arena {
         this.newTime = millis();
         this.deltaTime;
 
+        const center = createVector(0,0);
+
+        this.quadFruits = new quadFood(center,_width*2,_height*2);
+        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height)));
+        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height)));
+        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height)));
+        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height)));
+        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height)));
+
+    }
+    randomFruit(){
+        return new food(random(-this.size.width, this.size.width),
+        random(-this.size.height, this.size.height))
     }
     setPlayer(player) {
         this.playerPrincipal = player;
@@ -56,9 +74,7 @@ class arena {
 
         displayGui(this.getPlayer());
 
-        const center = createVector(0,0)
-        let a = new quadFood(center,this.size.width*2,this.size.height*2);
-        a.display();
+        this.quadFruits.display();
         
     }
     display() {

@@ -12,13 +12,25 @@ class quadFood {
         this.h = h;
 
 
-        this.limit = 2;
+        this.limit = 3;
     }
     display(){
         noFill();
         stroke(255,0,0);
         strokeWeight(10);
         rect(this.center.x,this.center.y,this.w,this.h)
+        if(this.leftUp){
+            this.leftUp.display();
+        }
+        if(this.leftDown){
+            this.leftDown.display();
+        }
+        if(this.rightUp){
+            this.rightUp.display();
+        }
+        if(this.rightDown){
+            this.rightDown.display();
+        }
     }
     createLeftUp(){
         const center = createVector(this.center.x - this.w / 4, this.center.y - this.h / 4);
@@ -26,16 +38,16 @@ class quadFood {
     }
     createLeftDown(){
         const center = createVector(this.center.x - this.w / 4, this.center.y + this.h / 4);
-        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+        this.leftDown = new quadFood(center, this.w / 2, this.h / 2);
     }
 
     createRightUp(){
         const center = createVector(this.center.x + this.w / 4, this.center.y - this.h / 4);
-        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+        this.rightUp = new quadFood(center, this.w / 2, this.h / 2);
     }
     createRightDown(){
         const center = createVector(this.center.x + this.w / 4, this.center.y + this.h / 4);
-        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+        this.rightDown = new quadFood(center, this.w / 2, this.h / 2);
     }
     createQuads() {
         this.createLeftUp();
@@ -46,9 +58,6 @@ class quadFood {
         this.close = false;
     }
     checkQuad(fruit) {
-        const w = world.size.width;
-        const h = world.size.height;
-        const center = createVector(0, 0);
         const pos = fruit.pos.copy();
 
         if (pos.x <= this.center.x) {
@@ -68,14 +77,16 @@ class quadFood {
 
     }
     insert(fruit) {
-        if (this.fruits.lenght <= this.limit) {
+        if (this.fruits.length <= this.limit) {
             this.fruits.push(fruit);
+            console.log('a');
         } else {
             if(this.close){
                 this.close = false;
                 this.createQuads();
-                this.checkQuad(fruit);
+                
             }
+            this.checkQuad(fruit);
         }
     }
 }
