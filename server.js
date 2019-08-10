@@ -125,7 +125,7 @@ io.on('connect', (socket) => {
             
          }
         
-         socket.emit('clientUpdateFrutas', )
+         socket.emit('clientUpdateFrutas', arrayFruitsObject);
         
       });
 

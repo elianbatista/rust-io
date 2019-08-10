@@ -249,4 +249,17 @@ let protFruit = function(x,y,size,angle,life){
     this.angle = angle;
     this.life = life;
 }
+function simpleFruitDisplay(fruit){
+  push();
+      translate(fruit.pos.x, fruit.pos.y);
+      rotate(fruit.rotate * PI / 180)
+      stroke(0);
+
+
+      fill(50, 200, 50);
+      rect(0, 0, fruit.size, fruit.size);
+  pop();
+            
+}
+
   
