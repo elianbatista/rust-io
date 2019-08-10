@@ -121,29 +121,6 @@ class player {
         if (keyWentDown('e')) {
             this.xp += 10;
         }
-        if (keyWentDown('a')) {
-            let prox = createVector(world.fruits[0].pos.x, world.fruits[0].pos.y);
-            for (let f of world.fruits) {
-                if (this.pos.dist(prox) >= this.pos.dist(f.pos)) {
-                    prox = createVector(f.pos.x, f.pos.y);
-                }
-            }
-            if (this.bulletTimer.checkTimer()) {
-                //criar nova bala
-                const bullet = new spell(this.pos,
-                    prox,
-                    this.bulletAcurac,
-                    this.bulletSpeed,
-                    this.bulletLife,
-                    this.bulletDamage,
-                    this.bulletSize);
-
-
-                this.bullets.push(bullet)
-                this.bulletTimer.startTimer();
-            }
-        }
-
     }
     aplyForce(force) {
         this.pos.add(force.copy().mult(world.getDelta()));
@@ -169,7 +146,7 @@ class player {
 
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade
-        if (this.target.dist(this.pos) > 10 && this.state == 'andando') {
+        if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
             this.seekTarget();
         } else {
             this.dir.x = lerp(this.dir.x, 0, 0.3);
