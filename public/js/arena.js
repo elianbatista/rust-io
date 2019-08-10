@@ -132,14 +132,13 @@ class arena {
           socket.emit('hostUpdateFrutas', pf);
           
         }else{
-          console.log("Clienteando");
-          
+          //console.log("Clienteando");
+          //'clientUpdateFrutas'
           socket.on('clientUpdateFrutas', function(fruits){
             
-            console.log(fruits);
             
             for(let fruit of fruits){
-              
+              //console.log(fruit.life);
               simpleFruitDisplay(fruit);
               
             }
