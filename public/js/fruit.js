@@ -12,7 +12,7 @@ class quadFood {
         this.h = h;
 
 
-        this.limit = 3;
+        this.limit = 1;
     }
     display(){
         noFill();
