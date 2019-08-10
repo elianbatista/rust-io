@@ -88,6 +88,7 @@ class player {
         }
     }
     handleMouseInput(mousex, mousey) {
+      socket.emit('update', this.pos.x,this.pos.y,this.size, this.mousex, this.mousey);
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
@@ -98,7 +99,7 @@ class player {
                     this.state = playerState.WALK;
                     this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
-                    socket.emit('update', this.pos.x,this.pos.y,this.size, this.mousex, this.mousey);
+                    
                     break;
             }
         }
@@ -168,33 +169,28 @@ class protPlayer {
         this.mira = createVector(tx,ty);
     }
     display() {
-    
-      
-
         push()
 
-        strokeWeight(8);
-        noStroke();
-    
         translate(this.pos.x, this.pos.y);
 
-        //  textSize(24);
-        // textAlign(CENTER);
-        // textStyle(BOLD);
-        // text(this.name.toUpperCase(), 0,this.size + 12);
         stroke(0)
         strokeWeight(8);
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
-
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
         noStroke();
-        //
+        console.log(this.mira.x,this.mira.y);
         fill(0);
         circle(this.mira.x / 2, this.mira.y / 2, 20);
         pop()
+     
+      
+      //  textSize(24);
+        // textAlign(CENTER);
+        // textStyle(BOLD);
+        // text(this.name.toUpperCase(), 0,this.size + 12);
        
     }
     update(x, y) {

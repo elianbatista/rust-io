@@ -80,11 +80,11 @@ io.on('connect', (socket) => {
                        
                             arrayPlayersObject[i]['mousex'] = mousex;
 
-                            arrayPlayersObject[i]['mousey'] = size;
+                            arrayPlayersObject[i]['mousey'] = mousey;
 
                      }
 
-                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, size,);
+                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, size, mousex, mousey);
 
               }
 
