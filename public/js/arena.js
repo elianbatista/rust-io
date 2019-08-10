@@ -185,3 +185,67 @@ class arena {
         noStroke();
     }
 }
+/*
+update() {
+        this.deltaTime = this.newTime - this.oldTime;
+        this.oldTime = this.newTime;
+        this.newTime = millis();
+
+        const center = createVector(0, 0);
+        this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
+
+        let i = 0
+        let j = 0;
+        for (let fruit of this.fruits) {
+            if (fruit.state == foodState.DEAD) {
+                this.fruits.splice(i, 1);
+                continue;
+            }
+            fruit.update();
+            fruit.display();
+            this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
+            j = 0;
+            for (let fruit2 of this.fruits) {
+                this.collideAndPush(0.1, fruit, fruit2, i, j);
+                j++;
+            }
+            const quick = 1.5;
+            let force = createVector(0, 0);
+            if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
+                if (fruit.pos.x < 0) {
+                    force = createVector(1,0);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(-1,0);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+            if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
+                if (fruit.pos.y < 0) {
+                    force = createVector(0,1);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(0,-1);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+           // fruit.aplyForce(force, quick);
+            if (fruit.state != foodState.DYING) {
+                this.quadFruits.insert(fruit)
+            }
+
+            i++;
+        }
+        this.playerPrincipal.update(camera.mouseX, camera.mouseY);
+        this.playerPrincipal.display();
+        this.collideBullets();
+
+        const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
+        this.quadFruits.display();
+      
+        this.drawPlayers();
+    }
+
+
+
+*/
