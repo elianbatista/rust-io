@@ -2,7 +2,7 @@ class arena {
     constructor(_width, _height) {
         this.playerPrincipal;
         this.players = [];
-
+        this.name;
         this.fruits = [];
 
         this.size = {
@@ -18,6 +18,9 @@ class arena {
 
         this.quadFruits = new quadFood(center, _width * 2, _height * 2);
 
+    }
+    setName(name){
+      this.name = name;
     }
     randomFruit() {
         return new food(random(-this.size.width, this.size.width),
@@ -43,7 +46,7 @@ class arena {
         for(let p of protPlayers){
             
             if(p.id != socket.id){
-                this.players.push(new protPlayer(p.x,p.x,p.id))
+                this.players.push(new protPlayer(p.x,p.x,p.id,p.size,p.mousex,p.mousey))
             }else{
                 this.setPlayer(new player(p.x,p.y,p.id));
             }
@@ -122,7 +125,7 @@ class arena {
     drawPlayers(){
       
       for(let p of this.players){
-       console.log(p);
+      
         p.display();
        
 

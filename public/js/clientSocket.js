@@ -6,7 +6,8 @@ socket.on('mensagem', function (mensagem) {
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 socket.on('updatePositions', (id, playerX, playerY, size, mousex, mousey) => {
   
-    for (let p of world.players) {
+    if(world){
+      for (let p of world.players) {
       
      // console.log(p.id, id);
 
@@ -25,6 +26,8 @@ socket.on('updatePositions', (id, playerX, playerY, size, mousex, mousey) => {
         }
 
     }
+    }
+    
 
 });
 

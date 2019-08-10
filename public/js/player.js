@@ -88,7 +88,8 @@ class player {
         }
     }
     handleMouseInput(mousex, mousey) {
-      socket.emit('update', this.pos.x,this.pos.y,this.size, this.mousex, this.mousey);
+      
+      
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
@@ -141,6 +142,7 @@ class player {
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
+        socket.emit('update', this.pos.x,this.pos.y,this.size, this.mira.x, this.mira.y);
         this.bulletTimer.runTimer();
         this.hitTimer.runTimer();
 
@@ -181,7 +183,7 @@ class protPlayer {
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
         noStroke();
-        console.log(this.mira.x,this.mira.y);
+        //console.log(this.mira.x,this.mira.y);
         fill(0);
         circle(this.mira.x / 2, this.mira.y / 2, 20);
         pop()

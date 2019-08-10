@@ -1,8 +1,7 @@
 let world;
 let debugMode = false;
 let flag;
-let pname ;
-let plife;
+
 const playerState = {
   STOP: 0,
   WALK: 1,
@@ -22,10 +21,10 @@ function createWorld(playerName) {
 
   //console.log(playerName)
   world = new arena(400, 400);
- // world.setPlayer(new player(0, 0, 12345))
+  
   world.setFruits(30);
-
- // world.playerPrincipal.name = playerName;
+  world.setName( playerName ) ;
+  
   camera.position.x = 0;
   camera.position.y = 0;
   flag = true;
