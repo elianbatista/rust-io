@@ -12,13 +12,19 @@ class quadFood {
         this.h = h;
 
 
-        this.limit = 3;
+        this.limit = 2;
     }
     display(){
         noFill();
         stroke(255,0,0);
         strokeWeight(10);
         rect(this.center.x,this.center.y,this.w,this.h)
+        if(this.fruits>0){
+            console.log("a")
+            for(let food of this.fruits){
+                food.display();
+            }
+        }
         if(this.leftUp){
             this.leftUp.display();
         }
@@ -77,16 +83,20 @@ class quadFood {
 
     }
     insert(fruit) {
-        if (this.fruits.length <= this.limit) {
+        if (this.fruits.length <= this.limit && this.close) {
             this.fruits.push(fruit);
-            console.log('a');
         } else {
             if(this.close){
                 this.close = false;
                 this.createQuads();
                 
             }
+            for(let i=this.fruits.length-1;i>=0;i--){
+                this.checkQuad(this.fruits[i]);
+                this.fruits.splice(i,1);
+            }
             this.checkQuad(fruit);
+            
         }
     }
 }

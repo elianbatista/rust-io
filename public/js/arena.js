@@ -17,16 +17,27 @@ class arena {
         const center = createVector(0,0);
 
         this.quadFruits = new quadFood(center,_width*2,_height*2);
-        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
-        random(-this.size.height, this.size.height)));
-        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
-        random(-this.size.height, this.size.height)));
-        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
-        random(-this.size.height, this.size.height)));
-        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
-        random(-this.size.height, this.size.height)));
-        this.quadFruits.insert(new food(random(-this.size.width, this.size.width),
-        random(-this.size.height, this.size.height)));
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
+        this.quadFruits.insert(this.randomFruit());
 
     }
     randomFruit(){
@@ -66,8 +77,8 @@ class arena {
         
         let i = 0;
         for (let fruit of this.fruits) {
-            fruit.update();
-            fruit.display();
+            //fruit.update();
+           // fruit.display();
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
@@ -83,9 +94,7 @@ class arena {
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
-        fill(255,0,0);
-        circle(-this.size.width/2,-this.size.height/2,50);
-
+       
 
         noStroke();
     }
