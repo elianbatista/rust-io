@@ -2,6 +2,8 @@ body {
   
   background-color: #AA00FF;
   
+  overflow: hidden;
+  
 }
 
 .box {
