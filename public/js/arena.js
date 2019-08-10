@@ -63,31 +63,37 @@ class arena {
             j=0;
             for(let fruit2 of this.fruits){
                 const dist = fruit2.pos.dist(fruit.pos);
-                if (dist < fruit2.size +fruit.size && i!=j) {
+                if (dist < fruit2.size/2 +fruit.size/2 && i!=j) {
                     const angle = fruit.pos.angleBetween(fruit2.pos);
     
                     const mov = fruit2.pos.copy().sub(fruit.pos);
                    
-                    strokeWeight(10)
-                    stroke(0)
-                    line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
+                    //strokeWeight(10)
+                   // stroke(0)
+                    //line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
                     fruit2.aplyForce(mov,dist*0.001)
                     
                 }
                 j++;
             }
-            
+            const quick = 1.5
             if(fruit.pos.x >= this.size.width - 30 || fruit.pos.x <= -this.size.width+30){
-                
-                fruit.dir.x = -fruit.dir.x*1.05;
-                fill(0)
-                circle(fruit.pos.x,fruit.pos.y,70)
-        
+                if(fruit.pos.x<0){
+                    const force = createVector(1,0);
+                    fruit.aplyForce(force,quick);
+                }else{
+                    const force = createVector(-1,0);
+                    fruit.aplyForce(force,quick);
+                }
             }
             if(fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height+20){
-                fruit.zero.y = -fruit.zero.y;
-                fill(0)
-                circle(fruit.pos.x,fruit.pos.y,70)
+                if(fruit.pos.y<0){
+                    const force = createVector(0,1);
+                    fruit.aplyForce(force,quick);
+                }else{
+                    const force = createVector(0,-1);
+                    fruit.aplyForce(force,quick);
+                }
             }
            
             this.quadFruits.insert(fruit)
