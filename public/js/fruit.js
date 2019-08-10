@@ -1,23 +1,59 @@
-class quadFood{
-    constructor(){
+class quadFood {
+    constructor(center, w, h) {
         this.fruits = [];
+        this.close = true;
         this.leftUp = null;
         this.leftDown = null;
         this.rightUp = null;
         this.rightDown = null;
 
+        this.center = center;
+        this.w = w;
+        this.h = h;
+
+
         this.limit = 2;
     }
-    checkQuad(pos){
+    display(){
+        noFill();
+        stroke(255,0,0);
+        rect(this.center.x,this.center.y,this.w,this.h)
+    }
+    createQuads() {
+        this.leftUp = new quadFood(p5.Vector(this.center.x - this.w / 2,
+            this.center.y - this.h / 2,
+            this.w / 2, this.h / 2));
+        //  this.leftDown = new quadFood();
+        // this.rightUp = new quadFood();
+        // this.rightDown = new quadFood();
+
+        this.close = false;
+    }
+    checkQuad(pos) {
         const w = world.size.width;
         const h = world.size.height;
-        
+        const center = createVector(0, 0);
+
+        if (pos.x <= this.center.x) {
+            if (pos.y <= this.center.y) {
+                //leftUp
+            } else {
+                //leftDown
+            }
+        } else {
+            if (pos.y <= this.center.y) {
+                //rightUp
+            } else {
+                //rightDown
+
+            }
+        }
 
     }
-    insert(fruit){
-        if(this.fruits.lenght <= this.limit){
+    insert(fruit) {
+        if (this.fruits.lenght <= this.limit) {
             this.fruits.push(fruit);
-        }else{
+        } else {
 
         }
     }
@@ -43,7 +79,7 @@ class food {
     checkLife() {
         return this.life >= 0;
     }
-    update(){
+    update() {
         this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
 
         this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
@@ -52,7 +88,7 @@ class food {
     }
     display() {
         this.hit.runTimer()
-        
+
         if (this.checkLife()) {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 35);
@@ -76,8 +112,8 @@ class food {
             pop();
 
         } else {
-           
-            if(this.state == foodState.WALK){//
+
+            if (this.state == foodState.WALK) { //
                 this.state = foodState.DYING;
                 this.hit.startTimer();
             }
@@ -85,23 +121,22 @@ class food {
             if (this.hit.checkTimer()) {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
                 world.setRandomFruit();
-                
+
             } else {
-               
+
                 push()
                 translate(this.pos.x, this.pos.y);
-                
+
                 rotate(this.rotate * PI / 180)
-                stroke(0,0,0,map(this.hit.remainTime(),this.hit.cd,0, 255, 0));
-                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100,map(this.hit.remainTime(),this.hit.cd,0, 255, 0));
-               
-                rect(0, 0, this.size,this.size);
+                stroke(0, 0, 0, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
+                fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
+
+                rect(0, 0, this.size, this.size);
                 pop()
-                
+
             }
         }
 
     }
 
 }
-

@@ -55,6 +55,10 @@ class arena {
         this.playerPrincipal.display();
 
         displayGui(this.getPlayer());
+
+
+        let a = new quadFood(p5.Vector(0,0),this.size.width,this.size.height);
+        a.display();
         
     }
     display() {
@@ -64,7 +68,7 @@ class arena {
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
         fill(255,0,0);
-        circle(0,this.size.width,50);
+        circle(-this.size.width/2,-this.size.height/2,50);
 
 
         noStroke();
