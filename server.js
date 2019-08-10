@@ -26,6 +26,8 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 
+var arrayFruitsObject = [];
+
 var quantidadePlayers = 0;
 
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
@@ -39,13 +41,12 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.id = id;
 };
 
-let fruitProt = function(x, y, angle, sx, sy, sangle, life){
+let fruitProt = function(x, y, size, angle, life){
   
        this.x = x;
        this.y = y;
+       this.size = size;
        this.angle = angle;
-       this.sx = sx;
-       this.sy = sy;
        this.life = life;
   
 }
@@ -116,7 +117,7 @@ io.on('connect', (socket) => {
 
        });
   
-      socket.on('updateFrutas', () => {
+      socket.on('updateFrutas', (x, y, size, angle, life) => {
         
         
         

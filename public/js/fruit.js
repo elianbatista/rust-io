@@ -242,3 +242,13 @@ class food {
     }
 
 }
+class protFruit{
+  constructor(x,y,size,angle){
+    this.pos = createVector(x,y);
+    this.size = size;
+    this.angle = angle;
+  }
+  display(){
+    
+  }
+}
