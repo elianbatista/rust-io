@@ -20,10 +20,10 @@ class player {
         this.bulletDamage = 50;
         this.bulletLife = 16000
         this.bulletAcurac = 1
-        this.bulletSpeed = 200
+        this.bulletSpeed = 500
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(500);
+        this.bulletTimer = new spellTimer(200);
 
 
     }

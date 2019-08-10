@@ -48,7 +48,7 @@ class quadFood {
 
         if (this.fruits.length > 0) {
             for (let food of this.fruits) {
-                food.display();
+               // food.display();
             }
         }
         if (this.leftUp) {
@@ -121,10 +121,8 @@ class quadFood {
             for (let i = this.fruits.length - 1; i >= 0; i--) {
                 this.checkQuad(this.fruits[i]);
                 this.fruits.splice(i, 1);
-                //  console.log('a');
             }
             this.checkQuad(fruit);
-
         }
     }
 }
@@ -151,36 +149,35 @@ class food {
         return this.life >= 0;
     }
     checkWalls() {
-        const quick = 1.5
-        let force = createVector(0,0)
+        const quick = 1.5;
+        let force = createVector(0,0);
         if (this.pos.x >= this.size.width - 20 || this.pos.x <= -this.size.width + 20) {
             if (this.pos.x < 0) {
-                const force = createVector(1, 0);
-                this.aplyForce(force, quick);
+                force.add(p5.Vector(1,0));
+                
             } else {
-                const force = createVector(-1, 0);
-                this.aplyForce(force, quick);
+                force.add(p5.Vector(-1,0));
             }
         }
         if (this.pos.y > this.size.height - 20 || this.pos.y <= -this.size.height + 20) {
             if (this.pos.y < 0) {
-                const force = createVector(0, 1);
-                this.aplyForce(force, quick);
+                force.add(p5.Vector(0,1));
             } else {
-                const force = createVector(0, -1);
-                this.aplyForce(force, quick);
+                force.add(p5.Vector(1,0));
             }
         }
+        this.aplyForce(force, quick);
     }
     update() {
-        if (this.zero.mag() > 0.1) {
+        if (this.zero.magSq() > 0.1) {
             this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);
         }
         this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
-
         this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+
         this.rotate += this.dirAng;
         this.pos.add(this.dir);
+
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }

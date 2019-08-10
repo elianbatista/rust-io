@@ -60,6 +60,7 @@ class arena {
         let j = 0;
         for (let fruit of this.fruits){
             fruit.update();
+            fruit.display();
             this.collideAndPush(0.05,this.playerPrincipal,fruit ,1,0);
             j = 0;
             for (let fruit2 of this.fruits) {
@@ -85,8 +86,10 @@ class arena {
                     fruit.aplyForce(force, quick);
                 }
             }
-
-            this.quadFruits.insert(fruit)
+            if(fruit.state != foodState.DYING){
+                this.quadFruits.insert(fruit)
+            }
+            
             i++;
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
