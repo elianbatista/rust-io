@@ -142,6 +142,7 @@ class food {
         this.hit = new spellTimer(600);
         this.flag = true;
         this.state = foodState.WALK;
+        this.type = 'fruit';
     }
     checkLife() {
         return this.life >= 0;

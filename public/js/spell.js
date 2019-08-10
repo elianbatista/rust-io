@@ -59,13 +59,8 @@ class spell {
         this.pos.add(dir)
         this.life -= world.deltaTime;
 
-        if (this.checkLife()) {
-            
-            
-        } else {
-            world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
-            
-
-        }
+        if (!this.checkLife()) {
+            world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1); 
+        } 
     }
 }

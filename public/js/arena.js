@@ -72,7 +72,6 @@ class arena {
                     //stroke(0)
                     //line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
                     fruit2.aplyForce(mov, dist * 0.001)
-
                 }
                 j++;
             }
@@ -101,8 +100,7 @@ class arena {
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
-
-
+        this.collideBullets();
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
@@ -110,25 +108,36 @@ class arena {
 
         displayGui(this.getPlayer());
     }
-    collideBulletFruit() {
-        for()
-        const quad = world.quadFruits.getQuadbyPos(this.pos.x, this.pos.y);
+    collideAndPush(){
+        
+    }
+    collideBullets() {
+        for (let bullet of this.playerPrincipal.bullets) {
+            const quad = world.quadFruits.getQuadbyPos(bullet.pos.x, bullet.pos.y);
+            if (bullet.checkLife()) {
+                for (let food of quad.fruits) {
+                    if (bullet.pos.dist(food.pos) < food.size) {
+                        if(food.type == 'fruit'){
+                            const dir = bullet.dir.copy().mult(world.getDelta());
+                            food.life -= bullet.damage;
+                            food.aplyMovement(dir, 2)
+                            food.aplyForce(dir, 0.5)
+                            food.hit.startTimer();
+                            if (food.dir.x > food.dir.y) {
+                                food.dirAng = food.dir.x * random(10);
+                            } else {
+                                food.dirAng = food.dir.y * random(10);
+                            }
+                        }else{
 
-        for (let food of quad.fruits) {
-            if (this.pos.dist(food.pos) < food.size) {
-                food.life -= this.damage;
-                food.aplyMovement(dir, 2)
-                food.aplyForce(dir, 0.5)
-                food.hit.startTimer();
-                if (food.dir.x > food.dir.y) {
-                    food.dirAng = food.dir.x * random(10);
-                } else {
-                    food.dirAng = food.dir.y * random(10);
+                        }
+                        
+                        bullet.life = 0;
+                    }
+                    //fill(0);
+                    //circle(food.pos.x, food.pos.y, 40);
                 }
-                this.life = 0;
             }
-            fill(0);
-            circle(food.pos.x, food.pos.y, 40);
         }
     }
     display() {
