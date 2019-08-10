@@ -118,6 +118,12 @@ canvas {
 
   padding: 5px;
 
+  display: flex;
+
+  align-content: center;
+
+  align-items: center;
+
 }
 
 .gui .life .life-content {
