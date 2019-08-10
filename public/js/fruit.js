@@ -38,10 +38,10 @@ class quadFood {
 
     }
     display() {
-        noFill();
-        stroke(255, 0, 0);
-        strokeWeight(2);
-        rect(this.center.x, this.center.y, this.w, this.h)
+        //noFill();
+        //stroke(255, 0, 0);
+        //strokeWeight(2);
+        //rect(this.center.x, this.center.y, this.w, this.h)
 
         if (this.fruits.length > 0) {
             for (let food of this.fruits) {

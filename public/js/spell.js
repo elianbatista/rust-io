@@ -64,8 +64,7 @@ class spell {
             for (let food of quad.fruits) {
                 if (this.pos.dist(food.pos) < food.size) {
                     food.life -= this.damage;
-                    food.dir.x = dir.x;
-                    food.dir.y = dir.y;
+                    food.aplyForce(dir,1)
                     food.hit.startTimer();
                     if (food.dir.x > food.dir.y) {
                         food.dirAng = food.dir.x * random(10);

@@ -69,7 +69,7 @@ class arena {
                     const mov = fruit2.pos.copy().sub(fruit.pos);
                    
                     //strokeWeight(10)
-                   // stroke(0)
+                    //stroke(0)
                     //line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
                     fruit2.aplyForce(mov,dist*0.001)
                     
@@ -109,6 +109,9 @@ class arena {
        
         
         displayGui(this.getPlayer());
+    }
+    collideBulletFruit(){
+        
     }
     display() {
         //fill(200, 150, 230);
