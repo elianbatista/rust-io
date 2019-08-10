@@ -1,3 +1,27 @@
+class quadFood{
+    constructor(){
+        this.fruits = [];
+        this.leftUp = null;
+        this.leftDown = null;
+        this.rightUp = null;
+        this.rightDown = null;
+
+        this.limit = 2;
+    }
+    checkQuad(pos){
+        const w = world.size.width;
+        const h = world.size.height;
+        
+
+    }
+    insert(fruit){
+        if(this.fruits.lenght <= this.limit){
+            this.fruits.push(fruit);
+        }else{
+
+        }
+    }
+}
 class food {
     constructor(posx, posy) {
         this.pos = createVector(posx, posy);
@@ -53,10 +77,11 @@ class food {
 
         } else {
            
-        //    if(this.flag){//this.state = foodState.
-         //       this.flag = false;
-          //      this.hit.startTimer();
-           // }
+            if(this.state == foodState.WALK){//
+                this.state = foodState.DYING;
+                this.hit.startTimer();
+            }
+
             if (this.hit.checkTimer()) {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
                 world.setRandomFruit();

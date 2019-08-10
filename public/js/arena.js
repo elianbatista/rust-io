@@ -63,6 +63,9 @@ class arena {
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
+        fill(255,0,0);
+        circle(0,this.size.width,50);
+
 
         noStroke();
     }
