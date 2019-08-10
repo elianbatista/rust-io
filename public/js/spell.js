@@ -54,7 +54,8 @@ class spell {
         this.life -= world.deltaTime;
 
         if (this.checkLife()) {
-            for (let food of world.fruits) {
+            const quad = world.quadFruits.getQuadbyPos(this.pos.x,this.pos.y);
+            for (let food of quad.fruits) {
                 if (this.pos.dist(food.pos) < food.size) {
                     food.life -= this.damage;
                     food.dir.x = dir.x;
@@ -67,7 +68,10 @@ class spell {
                     }
                     this.life = 0;
                 }
+                fill(0);
+                circle(food.pos.x,food.pos.y,40);
             }
+            
         } else {
             world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
             

@@ -65,16 +65,13 @@ class arena {
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
 
-        displayGui(this.getPlayer());
+       
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX,camera.mouseY);
         this.quadFruits.display();
-        for(let p of quad.fruits){
-            fill(255,255,0);
-            circle(p.pos.x,p.pos.y,20);
-        }
+       
         
-        
+        displayGui(this.getPlayer());
     }
     display() {
         //fill(200, 150, 230);

@@ -20,18 +20,19 @@ class player {
         this.bulletDamage = 50;
         this.bulletLife = 16000
         this.bulletAcurac = 0.9
-        this.bulletSpeed = 1000
+        this.bulletSpeed = 200
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(0);
+        this.bulletTimer = new spellTimer(500);
 
 
     }
 
     display() {
         for (let bullet of this.bullets) {
-            bullet.update();
             bullet.display();
+            bullet.update();
+            
 
         }
 
@@ -136,6 +137,9 @@ class player {
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
     update(mousex, mousey) {
+        if(this.pos.x > world.size.width){
+            
+        }
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
@@ -153,6 +157,7 @@ class player {
             this.dir.y = lerp(this.dir.y, 0, 0.3);
         }
         this.aplyForce(this.dir);
+
         this.checkLimits();
 
     }

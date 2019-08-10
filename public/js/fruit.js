@@ -34,6 +34,9 @@ class quadFood {
             return this;
         }
     }
+    profundidade(){
+        
+    }
     display() {
         noFill();
         stroke(255, 0, 0);

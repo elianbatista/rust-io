@@ -21,7 +21,7 @@ function createWorld(playerName){
   console.log(playerName)
   world = new arena(400, 400);
   world.setPlayer(new player(0, 0, 12345))
-  world.setFruits(90);
+  world.setFruits(30);
   
   world.playerPrincipal.name = playerName;
   camera.position.x = 0;
