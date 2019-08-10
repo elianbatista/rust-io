@@ -37,7 +37,7 @@ var playerProt = function (x, y, angle, size, id) {
 
 io.on('connect', (socket) => {
 
-       var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, socket.id);
+       var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, 0, 40, socket.id);
 
        socket.broadcast.emit('newSocket', newSocket);
 

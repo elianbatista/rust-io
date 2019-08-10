@@ -39,7 +39,14 @@ class arena {
         }
     }
     createPlayers(protPlayers) {
-
+        for(let p of protPlayers){
+            if(p.id != socket.id){
+                this.players.push(new protPlayers(p.x,p.x,p.size,p.angle))
+            }else{
+                this.setPlayer(new player(p.x,p.y,p.id));
+            }
+            
+        }
     }
     getPlayer() {
         return this.playerPrincipal;

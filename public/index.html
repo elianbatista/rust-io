@@ -90,7 +90,7 @@
             
             createWorld(nome);
             
-            $(".gui .nome").text(world.playerPrincipal.name);
+            $(".gui .nome").text(pname);
             
             GUIAtualizarLife();
             
@@ -100,11 +100,11 @@
           
         function GUIAtualizarLife(){
 
-            $('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
+            //$('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
+
+            ('.gui .life .life-content').css({width: plife + "%"});
 
           }
-
-        
         
       </script>
   
