@@ -17,34 +17,51 @@ class quadFood {
     display(){
         noFill();
         stroke(255,0,0);
+        strokeWeight(10);
         rect(this.center.x,this.center.y,this.w,this.h)
     }
+    createLeftUp(){
+        const center = createVector(this.center.x - this.w / 4, this.center.y - this.h / 4);
+        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+    }
+    createLeftDown(){
+        const center = createVector(this.center.x - this.w / 4, this.center.y + this.h / 4);
+        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+    }
+
+    createRightUp(){
+        const center = createVector(this.center.x + this.w / 4, this.center.y - this.h / 4);
+        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+    }
+    createRightDown(){
+        const center = createVector(this.center.x + this.w / 4, this.center.y + this.h / 4);
+        this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
+    }
     createQuads() {
-        this.leftUp = new quadFood(p5.Vector(this.center.x - this.w / 2,
-            this.center.y - this.h / 2,
-            this.w / 2, this.h / 2));
-        //  this.leftDown = new quadFood();
-        // this.rightUp = new quadFood();
-        // this.rightDown = new quadFood();
+        this.createLeftUp();
+        this.createLeftDown();
+        this.createRightUp();
+        this.createRightDown();
 
         this.close = false;
     }
-    checkQuad(pos) {
+    checkQuad(fruit) {
         const w = world.size.width;
         const h = world.size.height;
         const center = createVector(0, 0);
+        const pos = fruit.pos.copy();
 
         if (pos.x <= this.center.x) {
             if (pos.y <= this.center.y) {
-                //leftUp
+                this.leftUp.insert(fruit)
             } else {
-                //leftDown
+                this.leftDown.insert(fruit)
             }
         } else {
             if (pos.y <= this.center.y) {
-                //rightUp
+                this.rightUp.insert(fruit)
             } else {
-                //rightDown
+                this.rightUp.insert(fruit)
 
             }
         }
@@ -54,7 +71,11 @@ class quadFood {
         if (this.fruits.lenght <= this.limit) {
             this.fruits.push(fruit);
         } else {
-
+            if(this.close){
+                this.close = false;
+                this.createQuads();
+                this.checkQuad(fruit);
+            }
         }
     }
 }

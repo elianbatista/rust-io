@@ -56,8 +56,8 @@ class arena {
 
         displayGui(this.getPlayer());
 
-
-        let a = new quadFood(p5.Vector(0,0),this.size.width,this.size.height);
+        const center = createVector(0,0)
+        let a = new quadFood(center,this.size.width*2,this.size.height*2);
         a.display();
         
     }
