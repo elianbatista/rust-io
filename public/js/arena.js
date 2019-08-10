@@ -53,17 +53,26 @@ class arena {
         this.oldTime = this.newTime;
         this.newTime = millis();
         
-        
-        let i = 0, j = 0;;
         const center = createVector(0,0);
         this.quadFruits = new quadFood(center,this.size.width*2,this.size.height*2);
+        
+        let i = 0
+        let j = 0;
         for (let fruit of this.fruits) {
             fruit.update();
+            j=0;
             for(let fruit2 of this.fruits){
                 const dist = fruit2.pos.dist(fruit.pos);
-                if (dist > fruit2.size+fruit.size && i!=j) {
-                    fill(0,255,255);
-                    circle(fruit.pos.x,fruit.pos.y,70);
+                if (dist < fruit2.size +fruit.size && i!=j) {
+                    const angle = fruit.pos.angleBetween(fruit2.pos);
+                    const mov = p5.Vector.fromAngle(angle).mult(10);
+                    fill(0,255,255)
+                    circle(fruit2.pos.x,fruit2.pos.y,70);
+                    stroke(0)
+                    line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
+                    
+                    
+            
                 }
                 j++;
             }
