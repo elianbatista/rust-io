@@ -117,17 +117,15 @@ io.on('connect', (socket) => {
 
        });
   
-      socket.on('updateFrutas', function(fruits){
-        console.log(fruits);
-       // for(let i = 0; i < fruits.lenght; i++){
-          
-          
-          
-        //}
+      socket.on('hostUpdateFrutas', function(fruits){
+
+         for(let i = 0; i < fruits.length; i++){
+
+            arrayFruitsObject[i] = fruits[i];
+            
+         }
         
-       // let fruta = new protFruit(x, y, size, angle, life);
-        
-        //arrayFruitsObject.push(fruta);
+         socket.emit('clientUpdateFrutas', )
         
       });
 

@@ -242,13 +242,11 @@ class food {
     }
 
 }
-class protFruit{
-  constructor(x,y,size,angle,life){
-    this.pos = createVector(x,y);
+let protFruit = function(x,y,size,angle,life){
+    this.x = x;
+    this.y =y;
     this.size = size;
     this.angle = angle;
-  }
-  display(){
-    
-  }
+    this.life = life;
 }
+  

@@ -128,7 +128,7 @@ class arena {
               i++;
           }
           
-          socket.emit('updateFrutas', pf);
+          socket.emit('hostUpdateFrutas', pf);
           
         }else{
           
