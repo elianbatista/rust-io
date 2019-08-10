@@ -43,19 +43,16 @@ socket.on('newSocket', (newSocket) => {
 
 });
 
-/*
-
 socket.on('disconectPlayer', (disconectedID) => {
 
     for (var i = 0; i < world.players.length; i++) {
 
-        if (players[i]['id'] == disconectedID) {
+        if (world.players[i]['id'] == disconectedID) {
 
-            players.splice(i, 1);
+            world.players.splice(i, 1);
 
         }
 
     }
 
 });
-*/

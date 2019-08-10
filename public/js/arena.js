@@ -29,6 +29,21 @@ class arena {
     setPlayer(player) {
         this.playerPrincipal = player;
         console.log('Player criado com sucesso',this.playerPrincipal);
+      
+        socket.on('host', (mensagem)=>{
+          
+          console.log('teste');
+          
+        });
+      
+//         socket.on('host', function(mensagem){
+//                   console.log("alo");
+//                   if(mensagem){
+//                     console.log("host");
+//                     setFruits(10);
+//                   }
+                  
+//         });
     }
     getDelta() {
         return this.deltaTime / 1000;

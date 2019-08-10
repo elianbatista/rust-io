@@ -38,8 +38,13 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.mousey = mousey;
        this.id = id;
 };
-let fruitProt = function(x, y, angle, zero, zeroRot, life){
-  
+let fruitProt = function(x, y, angle, sx, sy, sangle, life){
+       this.x = x;
+       this.y = y;
+       this.angle = angle;
+       this.sx = sx;
+       this.sy = sy;
+       this.life = life;
 }
 
 io.on('connect', (socket) => {
@@ -47,10 +52,14 @@ io.on('connect', (socket) => {
        socket.on('conectei', function(name){  
          
               quantidadePlayers++;
-         
+              
               if(quantidadePlayers == 1){
+      
+                socket.emit('host', true);
                 
+              } else {
                 
+                socket.emit('host', false);
                 
               }
           
