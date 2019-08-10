@@ -116,6 +116,9 @@ class player {
         } else {
             this.state = playerState.WALK;
         }
+        if(keyDown('h')){
+            debugMode = !debugMode;
+        }
         if (keyWentDown('q')) {
             this.life -= 10;
         }

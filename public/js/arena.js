@@ -110,9 +110,12 @@ class arena {
                 a.life -=10;
                 b.life -=10;
             }
-            //strokeWeight(10)
-            //stroke(0)
-            //line(b.pos.x,b.pos.y,b.pos.x+mov.x,b.pos.y+mov.y);
+            if(debugMode){
+                strokeWeight(10)
+                stroke(0)
+                line(b.pos.x,b.pos.y,b.pos.x+mov.x,b.pos.y+mov.y);
+            }
+            
             b.aplyForce(mov, dist * force)
         }
     }
@@ -139,8 +142,11 @@ class arena {
 
                         bullet.life = 0;
                     }
-                    //fill(0);
-                    //circle(food.pos.x, food.pos.y, 40);
+                    if(debugMode){
+                        fill(0);
+                        circle(food.pos.x, food.pos.y, 40);
+                    }
+                    
                 }
             }
         }
@@ -158,6 +164,9 @@ class arena {
 }
 
 function displayGui(player) {
+    if(player.life<=0){
+        return;
+    }
     fill(10, 10, 75, 100);
     push();
     translate(player.camera.x, player.camera.y)

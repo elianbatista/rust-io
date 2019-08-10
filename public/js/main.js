@@ -1,5 +1,5 @@
 let world;
-
+let debugMode = false;
 const playerState = {
   STOP: 0,
   WALK: 1,
