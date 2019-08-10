@@ -65,14 +65,21 @@ class arena {
                 const dist = fruit2.pos.dist(fruit.pos);
                 if (dist < fruit2.size +fruit.size && i!=j) {
                     const angle = fruit.pos.angleBetween(fruit2.pos);
-                    const mov = p5.Vector.fromAngle(angle).mult(10);
-                    fill(0,255,255)
-                    circle(fruit2.pos.x,fruit2.pos.y,70);
+                    console.log(angle);
+                    const mov = fruit2.pos.copy().sub(fruit.pos);
+                    //fill(0,255,255)
+                    //circle(fruit2.pos.x,fruit2.pos.y,70);
+                    strokeWeight(10)
                     stroke(0)
                     line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
+                    fruit2.aplyForce(mov,dist*0.001)
                     
-                    
-            
+                }
+                if(fruit.pos.x > world.size.width || fruit.pos.x < -world.size.width){
+                    this.life = -10;
+                }
+                if(fruit.pos.y > world.size.height || fruit.pos.y < -world.size.height){
+                    this.life = -10;
                 }
                 j++;
             }

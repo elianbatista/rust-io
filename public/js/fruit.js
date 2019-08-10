@@ -35,7 +35,7 @@ class quadFood {
         }
     }
     profundidade(){
-        
+
     }
     display() {
         noFill();
@@ -155,6 +155,9 @@ class food {
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
+    aplyForce(dir,force){
+        this.zero = dir.mult(force);
+    }
     display() {
         this.hit.runTimer()
 
@@ -169,7 +172,7 @@ class food {
             stroke(0);
 
             if (this.hit.checkTimer()) {
-                fill(50, 200, 50);
+                fill(50, 200, 50,50);
                 rect(0, 0, this.size, this.size);
             } else {
                 fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
