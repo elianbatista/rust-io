@@ -116,7 +116,7 @@ class player {
         } else {
             this.state = playerState.WALK;
         }
-        if(keyDown('h')){
+        if(keyWentDown('h')){
             debugMode = !debugMode;
         }
         if (keyWentDown('q')) {

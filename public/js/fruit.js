@@ -150,6 +150,28 @@ class food {
     checkLife() {
         return this.life >= 0;
     }
+    checkWalls() {
+        const quick = 1.5
+        let force = createVector(0,0)
+        if (this.pos.x >= this.size.width - 20 || this.pos.x <= -this.size.width + 20) {
+            if (this.pos.x < 0) {
+                const force = createVector(1, 0);
+                this.aplyForce(force, quick);
+            } else {
+                const force = createVector(-1, 0);
+                this.aplyForce(force, quick);
+            }
+        }
+        if (this.pos.y > this.size.height - 20 || this.pos.y <= -this.size.height + 20) {
+            if (this.pos.y < 0) {
+                const force = createVector(0, 1);
+                this.aplyForce(force, quick);
+            } else {
+                const force = createVector(0, -1);
+                this.aplyForce(force, quick);
+            }
+        }
+    }
     update() {
         if (this.zero.mag() > 0.1) {
             this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);

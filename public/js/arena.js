@@ -58,7 +58,7 @@ class arena {
 
         let i = 0
         let j = 0;
-        for (let fruit of this.fruits) {
+        for (let fruit of this.fruits){
             fruit.update();
             this.collideAndPush(0.05,this.playerPrincipal,fruit ,1,0);
             j = 0;
@@ -96,15 +96,11 @@ class arena {
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
 
-
-        displayGui(this.getPlayer());
     }
     collideAndPush(force, a, b, i, j) {
-        //fruit2 b
         const dist = b.pos.dist(a.pos);
         if (dist < b.size / 2 + a.size/2 && i != j) {
             const angle = a.pos.angleBetween(b.pos);
-
             const mov = b.pos.copy().sub(a.pos);
             if(a.type != 'fruit'){
                 a.life -=10;
@@ -115,7 +111,6 @@ class arena {
                 stroke(0)
                 line(b.pos.x,b.pos.y,b.pos.x+mov.x,b.pos.y+mov.y);
             }
-            
             b.aplyForce(mov, dist * force)
         }
     }
@@ -161,42 +156,4 @@ class arena {
 
         noStroke();
     }
-}
-
-function displayGui(player) {
-    if(player.life<=0){
-        return;
-    }
-    fill(10, 10, 75, 100);
-    push();
-    translate(player.camera.x, player.camera.y)
-    translate(0, height / 2)
-    rect(0, 0, width / 2, 200, 50);
-
-    fill(255, 0, 0);
-    rect(0, -125, width / 4, 50, 50)
-
-    fill(0, 255, 0);
-    rect(0, -125, map(player.life, 0, 100, 0, width / 4), 50, 50)
-
-    fill(255, 230, 230, 255);
-    textSize(52);
-    textAlign(CENTER);
-    textStyle(BOLD);
-    text(`${player.life}/100`, 0, -110);
-
-    fill(0, 0, 255);
-    rect(0, -155, width / 6, 10, 50)
-
-    fill(255, 255, 0);
-
-    rect(0, -155, map((player.xp % 100), 0, 100, 0, width / 6), 10, 50)
-
-    stroke(0)
-    fill(255, 230, 230, 200);
-    textSize(72);
-    textAlign(CENTER);
-    textStyle(BOLD);
-    text(`${parseInt(player.xp/100)}.   ${player.name.toUpperCase()}`, 0, -30);
-    pop();
 }
