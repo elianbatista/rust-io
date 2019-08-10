@@ -58,17 +58,17 @@ class arena {
 
         let i = 0
         let j = 0;
-        for (let fruit of this.fruits){
-            if(fruit.state == foodState.DEAD){
-                this.fruits.splice(i,1);
+        for (let fruit of this.fruits) {
+            if (fruit.state == foodState.DEAD) {
+                this.fruits.splice(i, 1);
                 continue;
             }
             fruit.update();
             fruit.display();
-            this.collideAndPush(0.05,this.playerPrincipal,fruit ,1,0);
+            this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
             j = 0;
             for (let fruit2 of this.fruits) {
-                this.collideAndPush(0.1,fruit, fruit2,i,j);
+                this.collideAndPush(0.1, fruit, fruit2, i, j);
                 j++;
             }
             const quick = 1.5
@@ -90,10 +90,10 @@ class arena {
                     fruit.aplyForce(force, quick);
                 }
             }
-            if(fruit.state != foodState.DYING){
+            if (fruit.state != foodState.DYING) {
                 this.quadFruits.insert(fruit)
             }
-            
+
             i++;
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
@@ -106,17 +106,17 @@ class arena {
     }
     collideAndPush(force, a, b, i, j) {
         const dist = b.pos.dist(a.pos);
-        if (dist < b.size / 2 + a.size/2 && i != j) {
+        if (dist < b.size / 2 + a.size / 2 && i != j) {
             const angle = a.pos.angleBetween(b.pos);
             const mov = b.pos.copy().sub(a.pos);
-            if(a.type != 'fruit'){
-                a.life -=10;
-                b.life -=10;
+            if (a.type != 'fruit') {
+                a.life -= 10;
+                b.life -= 10;
             }
-            if(debugMode){
+            if (debugMode) {
                 strokeWeight(10)
                 stroke(0)
-                line(b.pos.x,b.pos.y,b.pos.x+mov.x,b.pos.y+mov.y);
+                line(b.pos.x, b.pos.y, b.pos.x + mov.x, b.pos.y + mov.y);
             }
             b.aplyForce(mov, dist * force)
         }
@@ -144,23 +144,19 @@ class arena {
 
                         bullet.life = 0;
                     }
-                    if(debugMode){
+                    if (debugMode) {
                         fill(0);
                         circle(food.pos.x, food.pos.y, 40);
                     }
-                    
+
                 }
             }
         }
     }
     display() {
-        //fill(200, 150, 230);
         fill(255, 255, 255);
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
-
-
-
         noStroke();
     }
 }

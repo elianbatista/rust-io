@@ -1,5 +1,6 @@
 let world;
 let debugMode = false;
+let flag;
 
 const playerState = {
   STOP: 0,
@@ -16,39 +17,41 @@ const foodState = {
   DYING: 3,
   DEAD: 4,
 }
-let flag = false;
-function createWorld(playerName){
-  
+function createWorld(playerName) {
+
   console.log(playerName)
   world = new arena(400, 400);
   world.setPlayer(new player(0, 0, 12345))
   world.setFruits(30);
-  
+
   world.playerPrincipal.name = playerName;
   camera.position.x = 0;
   camera.position.y = 0;
   flag = true;
 }
 
-function preload(){
- 
+function preload() {
+
 }
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
-
+  flag = false;
   textFont('Dosis');
-  
+
 }
+
 function draw() {
- // frameRate(10)
- if(flag){
+  // frameRate(10)
+  //resizeCanvas(windowWidth, windowHeight);
+  if (flag) {
     background(170, 0, 255);
-    
+
     world.display();
     world.update();
 
 
     camera.off()
- }
+  }
 }

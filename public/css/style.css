@@ -5,6 +5,10 @@ body {
   overflow: hidden;
   
 }
+canvas {
+  
+  overflow: hidden;
+}
 
 .box {
   
