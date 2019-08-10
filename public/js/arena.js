@@ -17,7 +17,9 @@ class arena {
         const center = createVector(0,0);
 
         this.quadFruits = new quadFood(center,_width*2,_height*2);
-        
+        for(let i=0;i<50;i++){
+            this.quadFruits.insert(this.randomFruit())
+        }
 
     }
     randomFruit(){
@@ -65,11 +67,13 @@ class arena {
 
         displayGui(this.getPlayer());
 
-        if(mouseIsPressed){
-            this.quadFruits.insert(new food(camera.mouseX, camera.mouseY));
+        const quad = this.quadFruits.getQuadbyPos(camera.mouseX,camera.mouseY);
+        this.quadFruits.display();
+        for(let p of quad.fruits){
+            fill(255,255,0);
+            circle(p.pos.x,p.pos.y,20);
         }
         
-        this.quadFruits.display();
         
     }
     display() {

@@ -40,7 +40,7 @@ function setup() {
   
 }
 function draw() {
-  frameRate(10)
+ // frameRate(10)
  if(flag){
     background(170, 0, 255);
     

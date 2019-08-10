@@ -14,44 +14,64 @@ class quadFood {
 
         this.limit = 1;
     }
-    display(){
+    getQuadbyPos(x, y) {
+        if (!this.close) {
+            if (x <= this.center.x) {
+                if (y <= this.center.y) {
+                    return this.leftUp.getQuadbyPos(x, y);
+                } else {
+                    return this.leftDown.getQuadbyPos(x, y);
+                }
+            } else {
+                if (y <= this.center.y) {
+                    return this.rightUp.getQuadbyPos(x,y);
+                } else {
+                   return this.rightDown.getQuadbyPos(x,y);
+
+                }
+            }
+        } else {
+            return this;
+        }
+    }
+    display() {
         noFill();
-        stroke(255,0,0);
+        stroke(255, 0, 0);
         strokeWeight(2);
-        rect(this.center.x,this.center.y,this.w,this.h)
-       
-        if(this.fruits.length>0){
-            for(let food of this.fruits){
+        rect(this.center.x, this.center.y, this.w, this.h)
+
+        if (this.fruits.length > 0) {
+            for (let food of this.fruits) {
                 food.display();
             }
         }
-        if(this.leftUp){
+        if (this.leftUp) {
             this.leftUp.display();
         }
-        if(this.leftDown){
+        if (this.leftDown) {
             this.leftDown.display();
         }
-        if(this.rightUp){
+        if (this.rightUp) {
             this.rightUp.display();
         }
-        if(this.rightDown){
+        if (this.rightDown) {
             this.rightDown.display();
         }
     }
-    createLeftUp(){
+    createLeftUp() {
         const center = createVector(this.center.x - this.w / 4, this.center.y - this.h / 4);
         this.leftUp = new quadFood(center, this.w / 2, this.h / 2);
     }
-    createLeftDown(){
+    createLeftDown() {
         const center = createVector(this.center.x - this.w / 4, this.center.y + this.h / 4);
         this.leftDown = new quadFood(center, this.w / 2, this.h / 2);
     }
 
-    createRightUp(){
+    createRightUp() {
         const center = createVector(this.center.x + this.w / 4, this.center.y - this.h / 4);
         this.rightUp = new quadFood(center, this.w / 2, this.h / 2);
     }
-    createRightDown(){
+    createRightDown() {
         const center = createVector(this.center.x + this.w / 4, this.center.y + this.h / 4);
         this.rightDown = new quadFood(center, this.w / 2, this.h / 2);
     }
@@ -63,6 +83,7 @@ class quadFood {
 
         this.close = false;
     }
+
     checkQuad(fruit) {
         const pos = fruit.pos.copy();
 
@@ -86,17 +107,18 @@ class quadFood {
         if (this.fruits.length <= this.limit && this.close) {
             this.fruits.push(fruit);
         } else {
-            if(this.close){
+            if (this.close) {
                 this.close = false;
                 this.createQuads();
-                
+
             }
-            for(let i=this.fruits.length-1;i>=0;i--){
+            for (let i = this.fruits.length - 1; i >= 0; i--) {
                 this.checkQuad(this.fruits[i]);
-                this.fruits.splice(i,1);
+                this.fruits.splice(i, 1);
+                console.log('a');
             }
             this.checkQuad(fruit);
-            
+
         }
     }
 }
