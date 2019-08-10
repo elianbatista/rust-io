@@ -37,7 +37,7 @@
   
       <div class="informacoes right">BETA 1.0</div>
   
-      <div class="gui">
+      <div class="gui none">
         
         <div class="life">
         
@@ -77,6 +77,8 @@
         document.querySelector('body').addEventListener('keydown', function(event) {
           
           if(event.keyCode == 13){
+
+            $(".gui").removeClass("none");
             
             $(".box").fadeOut();
             
@@ -90,7 +92,7 @@
 
         function GUIAtualizarLife(){
 
-          //$('.gui .life .life-content').css({width: world.playerPrincipal.life});
+          $('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
           
         }
 

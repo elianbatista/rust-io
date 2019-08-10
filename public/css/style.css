@@ -1,3 +1,9 @@
+.none {
+
+  display: none !important;
+
+}
+
 body {
   
   background-color: #AA00FF;
