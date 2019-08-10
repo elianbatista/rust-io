@@ -58,9 +58,7 @@ class arena {
         return this.playerPrincipal;
     }
 
-    displayPlayers(protPlayers) {
-        //this.playerPrincipal.display();
-    }
+    
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
@@ -119,7 +117,6 @@ class arena {
         this.quadFruits.display();
       
         this.drawPlayers();
-
     }
    
     drawPlayers(){

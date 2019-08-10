@@ -175,11 +175,13 @@ class protPlayer {
         push()
 
         translate(this.pos.x, this.pos.y);
-
+        
         stroke(0)
         strokeWeight(8);
       
-
+        fill(255,150,150);
+        circle(0,0,this.size);
+      
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
         noStroke();
