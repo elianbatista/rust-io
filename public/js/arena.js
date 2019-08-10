@@ -80,7 +80,8 @@ class arena {
 
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
-        let pf= [];
+        let pf = [];
+       // if(frameCount % 100 ==0){
         if(this.host){
           let i = 0
           let j = 0;
@@ -125,9 +126,11 @@ class arena {
               }
 
               pf.push(new protFruit(fruit.pos.x, fruit.pos.y, fruit.size, fruit.rotate, fruit.life));
-            
+              
               i++;
           }
+          
+          console.log(pf.length);
           
           socket.emit('hostUpdateFrutas', pf);
           
@@ -136,8 +139,10 @@ class arena {
           //'clientUpdateFrutas'
           
           socket.on('clientUpdateFrutas', function(fruits){
+            
             console.log(fruits[0].x);
           
+            
             for(let fruit of fruits){
                 push();
                 translate(fruit.x, fruit.y);
@@ -156,6 +161,7 @@ class arena {
           
           
         }
+        //}
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();

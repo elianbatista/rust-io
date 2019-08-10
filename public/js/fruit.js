@@ -249,9 +249,5 @@ let protFruit = function(x,y,size,angle,life){
     this.angle = angle;
     this.life = life;
 }
-function simpleFruitDisplay(f){
- 
-            
-}
 
   

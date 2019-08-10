@@ -125,6 +125,8 @@ io.on('connect', (socket) => {
             
 //          }
         
+         console.log(fruits.lenght);
+        
          socket.broadcast.emit('clientUpdateFrutas', fruits);
         
       });
