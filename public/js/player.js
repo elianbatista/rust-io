@@ -25,17 +25,21 @@ class player {
 
         this.bulletTimer = new spellTimer(200);
 
-
+        this.hitTimer = new spellTimer(700);
     }
 
     display() {
         for (let bullet of this.bullets) {
             bullet.display();
             bullet.update();
-            
-
         }
-
+        
+        if(!this.hitTimer.checkTimer()){
+            fill(0,0,255);
+         
+            circle(this.target.x,this.target.y,map(this.hitTimer.remainTime(),0,this.hitTimer.cd,
+            30,0));
+        }
         push()
 
        // fill(0, 0, 255);
@@ -45,7 +49,7 @@ class player {
        // strokeWeight(5);
        // line(this.pos.x, this.pos.y, this.target.x, this.target.y);
 
-
+        strokeWeight(8);
         noStroke();
         //------
 
@@ -55,11 +59,12 @@ class player {
         // textAlign(CENTER);
         // textStyle(BOLD);
         // text(this.name.toUpperCase(), 0,this.size + 12);
+        stroke(0)
+        strokeWeight(8);
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
-        stroke(0)
-        strokeWeight(8);
+        
 
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
@@ -74,7 +79,10 @@ class player {
         pop()
 
     }
-    takeDamege(amount)
+    takeDamage(amount){
+        this.life -= amount;
+        GUIAtualizarLife();
+    }
     lookAt(x, y) {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
@@ -102,6 +110,7 @@ class player {
 
                 case RIGHT:
                     this.state = playerState.WALK;
+                    this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
                     break;
             }
@@ -114,6 +123,7 @@ class player {
         }
         if (keyDown('s')) {
             this.state = playerState.STOP;
+            this.hitTimer.forceStop();
         } 
         if(keyWentDown('h')){
             debugMode = !debugMode;
@@ -144,6 +154,7 @@ class player {
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
         this.bulletTimer.runTimer();
+        this.hitTimer.runTimer();
 
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();

@@ -8,6 +8,9 @@ class spellTimer {
         this.start = millis();
         this.end = this.start + this.cd;
     }
+    forceStop(){
+        this.start = this.end;
+    }
     remainTime(){
         return this.end - this.start;
     }

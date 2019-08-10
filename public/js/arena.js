@@ -112,9 +112,9 @@ class arena {
             const angle = a.pos.angleBetween(b.pos);
             const mov = b.pos.copy().sub(a.pos);
             if (a.type != 'fruit') {
-                a.life -= 10;
+                a.takeDamage(10);
                 b.life -= 10;
-                GUIAtualizarLife();
+                
             }
             if (debugMode) {
                 strokeWeight(10)
