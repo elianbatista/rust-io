@@ -92,6 +92,44 @@ canvas {
   
 }
 
+.gui {
+
+  position: absolute;
+
+  width: 100%;
+
+  bottom: 0;
+
+  text-align: center;
+
+}
+
+.gui .life {
+
+  width: 300px;
+
+  height: 22px;
+
+  background-color: rgb(75, 75, 75);
+
+  display: inline-block;
+
+  border-radius: 30px;
+
+  padding: 5px;
+
+}
+
+.gui .life .life-content {
+
+  height: 17px;
+
+  width: 100%;
+
+  background-color: red;
+
+}
+
 @keyframes intro {
   
   0%{
