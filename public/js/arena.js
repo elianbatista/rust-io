@@ -54,13 +54,21 @@ class arena {
         this.newTime = millis();
         
         
-        let i = 0;
+        let i = 0, j = 0;;
         const center = createVector(0,0);
         this.quadFruits = new quadFood(center,this.size.width*2,this.size.height*2);
         for (let fruit of this.fruits) {
             fruit.update();
-
+            for(let fruit2 of this.fruits){
+                const dist = fruit2.pos.dist(fruit.pos);
+                if (dist > fruit2.size+fruit.size && i!=j) {
+                    fill(0,255,255);
+                    circle(fruit.pos.x,fruit.pos.y,70);
+                }
+                j++;
+            }
             this.quadFruits.insert(fruit)
+            i++;
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();

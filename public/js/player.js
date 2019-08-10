@@ -19,7 +19,7 @@ class player {
         this.bullets = [];
         this.bulletDamage = 50;
         this.bulletLife = 16000
-        this.bulletAcurac = 0.9
+        this.bulletAcurac = 1
         this.bulletSpeed = 200
         this.bulletSize = 16;
 
@@ -137,9 +137,7 @@ class player {
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
     update(mousex, mousey) {
-        if(this.pos.x > world.size.width){
-            
-        }
+        
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);

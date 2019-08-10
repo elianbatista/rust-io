@@ -29,7 +29,7 @@ class spell {
         this.speed = speed;
         this.dir = createVector(target.x, target.y);
 
-        const angle = map(acurac, 0, 1, -PI / 4, PI/4);
+        const angle = map(acurac, 0, 1, -PI / 4, 0);
         this.dir.rotate(random(angle, -angle));
         this.dir.normalize();
         this.dir.mult(speed);
@@ -49,6 +49,12 @@ class spell {
         return this.life >= 0;
     }
     update() {
+        if(this.pos.x > world.size.width || this.pos.x < -world.size.width){
+            this.life = -10;
+        }
+        if(this.pos.y > world.size.height || this.pos.y < -world.size.height){
+            this.life = -10;
+        }
         const dir = this.dir.copy().mult(world.getDelta());
         this.pos.add(dir)
         this.life -= world.deltaTime;
