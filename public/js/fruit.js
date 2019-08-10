@@ -151,7 +151,7 @@ class food {
     checkWalls() {
         const quick = 1.5;
         let force = createVector(0,0);
-        if (this.pos.x >= this.size.width - 20 || this.pos.x <= -this.size.width + 20) {
+        if (this.pos.x >= world.size.width - 20 || this.pos.x <= -world.size.width + 20) {
             if (this.pos.x < 0) {
                 force.add(p5.Vector(1,0));
                 
@@ -159,7 +159,7 @@ class food {
                 force.add(p5.Vector(-1,0));
             }
         }
-        if (this.pos.y > this.size.height - 20 || this.pos.y <= -this.size.height + 20) {
+        if (this.pos.y > world.size.height - 20 || this.pos.y <= -world.size.height + 20) {
             if (this.pos.y < 0) {
                 force.add(p5.Vector(0,1));
             } else {
