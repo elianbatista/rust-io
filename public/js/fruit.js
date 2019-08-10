@@ -115,7 +115,7 @@ class quadFood {
             for (let i = this.fruits.length - 1; i >= 0; i--) {
                 this.checkQuad(this.fruits[i]);
                 this.fruits.splice(i, 1);
-                console.log('a');
+              //  console.log('a');
             }
             this.checkQuad(fruit);
 
@@ -149,6 +149,8 @@ class food {
         this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
         this.rotate += this.dirAng;
         this.pos.add(this.dir);
+        this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
+        this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
     display() {
         this.hit.runTimer()

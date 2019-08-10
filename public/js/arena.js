@@ -17,9 +17,6 @@ class arena {
         const center = createVector(0,0);
 
         this.quadFruits = new quadFood(center,_width*2,_height*2);
-        for(let i=0;i<50;i++){
-            this.quadFruits.insert(this.randomFruit())
-        }
 
     }
     randomFruit(){
@@ -58,9 +55,12 @@ class arena {
         
         
         let i = 0;
+        const center = createVector(0,0);
+        this.quadFruits = new quadFood(center,this.size.width*2,this.size.height*2);
         for (let fruit of this.fruits) {
-            //fruit.update();
-           // fruit.display();
+            fruit.update();
+
+            this.quadFruits.insert(fruit)
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
