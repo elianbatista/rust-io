@@ -83,7 +83,7 @@ io.on('connect', (socket) => {
 
               }
          
-               console.log("Player: " + socket.id + "PosX: " + playerX + "PosY: " + playerY);
+               //console.log("Player: " + socket.id + "PosX: " + playerX + "PosY: " + playerY);
 
        });
 

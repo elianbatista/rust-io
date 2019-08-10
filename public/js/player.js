@@ -175,10 +175,11 @@ class player {
     }
 }
 class protPlayer {
-    constructor(x, y, size, angle) {
+    constructor(x, y, id) {
         this.pos = createVector(x,y);
-        this.size = size;
-        this.angle = angle;
+        this.id = id;
+        //this.size = size;
+        //this.angle = angle;
     }
     display() {
     
@@ -186,7 +187,7 @@ class protPlayer {
 
         translate(this.pos.x, this.pos.y);
         fill(255, 0, 0);
-        circle(0, 0, this.size);
+        circle(0, 0, 40);
        
         //
         pop()

@@ -43,7 +43,7 @@ class arena {
         for(let p of protPlayers){
             console.log(p);
             if(p.id != socket.id){
-                this.players.push(new protPlayer(p.x,p.x,p.size,p.angle))
+                this.players.push(new protPlayer(p.x,p.x,p.id))
             }else{
                 this.setPlayer(new player(p.x,p.y,p.id));
             }
@@ -123,10 +123,11 @@ class arena {
       
       for(let p of this.players){
         push()
-        //console.log(p.pos.x, p.pos.y);
+        console.log(p.pos.x, p.pos.y);
         translate(p.pos.x, p.pos.y);
+        
         fill(255, 0, 0);
-        circle(0, 0, this.size);
+        circle(0,0,40);
        
         //
         pop()
