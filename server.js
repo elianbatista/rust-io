@@ -14,6 +14,7 @@ var io = require('socket.io').listen(server);
 
 server.listen(3000);
 const path = require('path');
+const port = process.env.PORT || 3000;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'public'));

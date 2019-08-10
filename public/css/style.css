@@ -128,6 +128,8 @@ canvas {
 
   background-color: red;
 
+  border-radius: 30px;
+
 }
 
 @keyframes intro {
