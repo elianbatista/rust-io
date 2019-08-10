@@ -59,6 +59,10 @@ class arena {
         let i = 0
         let j = 0;
         for (let fruit of this.fruits){
+            if(fruit.state == foodState.DEAD){
+                this.fruits.splice(i,1);
+                continue;
+            }
             fruit.update();
             fruit.display();
             this.collideAndPush(0.05,this.playerPrincipal,fruit ,1,0);

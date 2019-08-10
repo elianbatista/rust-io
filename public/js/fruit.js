@@ -220,7 +220,8 @@ class food {
             }
 
             if (this.hit.checkTimer()) {
-                world.fruits.splice(world.fruits.indexOf(this), 1);
+               // world.fruits.splice(world.fruits.indexOf(this), 1);
+                this.state = foodState.DEAD;
                 world.setRandomFruit();
 
             } else {
