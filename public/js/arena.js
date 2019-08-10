@@ -31,7 +31,7 @@ class arena {
       socket.on('host', function(mensagem){
           
           if(mensagem){                    
-            world.setFruits(10);
+            world.setFruits(1);
             world.host = true;
           }
 
@@ -134,10 +134,11 @@ class arena {
         }else{
           //console.log("Clienteando");
           //'clientUpdateFrutas'
+          
           socket.on('clientUpdateFrutas', function(fruits){
+            console.log(fruits[0].x);
           
             for(let fruit of fruits){
-                
                 push();
                 translate(fruit.x, fruit.y);
                 rotate(fruit.angle * PI / 180)
@@ -150,7 +151,9 @@ class arena {
               
             }
             
+            
           });
+          
           
         }
         

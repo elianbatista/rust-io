@@ -119,13 +119,13 @@ io.on('connect', (socket) => {
   
       socket.on('hostUpdateFrutas', function(fruits){
 
-         for(let i = 0; i < fruits.length; i++){
+//          for(let i = 0; i < fruits.length; i++){
 
-            arrayFruitsObject[i] = fruits[i];
+//             arrayFruitsObject[i] = fruits[i];
             
-         }
+//          }
         
-         socket.broadcast.emit('clientUpdateFrutas', arrayFruitsObject);
+         socket.broadcast.emit('clientUpdateFrutas', fruits);
         
       });
 
