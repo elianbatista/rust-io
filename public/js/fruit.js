@@ -14,11 +14,18 @@ class food {
 
         this.hit = new spellTimer(600);
         this.flag = true;
+        this.state = foodState
     }
     checkLife() {
         return this.life >= 0;
     }
-   
+    update(){
+        this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
+
+        this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+        this.rotate += this.dirAng;
+        this.pos.add(this.dir);
+    }
     display() {
         this.hit.runTimer()
         
@@ -27,33 +34,25 @@ class food {
                 this.lifeD.display(this.life, this.pos, 35);
             }
 
-            this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
-
-            this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
-            this.rotate += this.dirAng;
-            this.pos.add(this.dir);
-
             push();
-
             translate(this.pos.x, this.pos.y);
             rotate(this.rotate * PI / 180)
             stroke(0);
+
             if (this.hit.checkTimer()) {
                 fill(50, 200, 50);
                 rect(0, 0, this.size, this.size);
             } else {
-
                 fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
                 const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, this.size * 1.2)
                 rect(0, 0, anim, anim);
             }
 
 
-            //console.log("b")
             pop();
 
         } else {
-            //console.log("a")
+           
             if(this.flag){
                 this.flag = false;
                 this.hit.startTimer();
@@ -62,13 +61,8 @@ class food {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
                 world.setRandomFruit();
                 
-                
             } else {
-                this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
-
-                this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
-                this.rotate += this.dirAng;
-                this.pos.add(this.dir);
+               
                 push()
                 translate(this.pos.x, this.pos.y);
                 

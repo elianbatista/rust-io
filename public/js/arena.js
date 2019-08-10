@@ -48,6 +48,7 @@ class arena {
         
         let i = 0;
         for (let fruit of this.fruits) {
+            fruit.update();
             fruit.display();
         }
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
@@ -62,9 +63,7 @@ class arena {
         stroke(0);
         rect(0, 0, this.size.width * 2, this.size.height * 2)
 
-        
 
-    
         noStroke();
     }
 }
@@ -91,7 +90,7 @@ function displayGui(player){
     rect(0,-155,width/6,10,50)
 
     fill(255,255,0);
-    console.log(player.xp,player.xp%100 )
+    
     rect(0,-155,map((player.xp%100),0,100,0,width/6),10,50)
     
     stroke(0)

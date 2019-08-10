@@ -40,9 +40,9 @@ class player {
         fill(0, 0, 255);
         circle(this.target.x, this.target.y, 20);
         //----
-        // stroke(0, 0, 255);
-        //strokeWeight(5);
-        //line(this.pos.x, this.pos.y, this.target.x, this.target.y);
+        stroke(0, 0, 255);
+        strokeWeight(5);
+        line(this.pos.x, this.pos.y, this.target.x, this.target.y);
 
 
         noStroke();
