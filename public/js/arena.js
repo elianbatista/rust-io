@@ -60,19 +60,10 @@ class arena {
         let j = 0;
         for (let fruit of this.fruits) {
             fruit.update();
+            this.collideAndPush(0.05,this.playerPrincipal,fruit ,1,0);
             j = 0;
             for (let fruit2 of this.fruits) {
-                const dist = fruit2.pos.dist(fruit.pos);
-                if (dist < fruit2.size / 2 + fruit.size / 2 && i != j) {
-                    const angle = fruit.pos.angleBetween(fruit2.pos);
-
-                    const mov = fruit2.pos.copy().sub(fruit.pos);
-
-                    //strokeWeight(10)
-                    //stroke(0)
-                    //line(fruit2.pos.x,fruit2.pos.y,fruit2.pos.x+mov.x,fruit2.pos.y+mov.y);
-                    fruit2.aplyForce(mov, dist * 0.001)
-                }
+                this.collideAndPush(0.1,fruit, fruit2,i,j);
                 j++;
             }
             const quick = 1.5
@@ -108,8 +99,22 @@ class arena {
 
         displayGui(this.getPlayer());
     }
-    collideAndPush(){
-        
+    collideAndPush(force, a, b, i, j) {
+        //fruit2 b
+        const dist = b.pos.dist(a.pos);
+        if (dist < b.size / 2 + a.size/2 && i != j) {
+            const angle = a.pos.angleBetween(b.pos);
+
+            const mov = b.pos.copy().sub(a.pos);
+            if(a.type != 'fruit'){
+                a.life -=10;
+                b.life -=10;
+            }
+            //strokeWeight(10)
+            //stroke(0)
+            //line(b.pos.x,b.pos.y,b.pos.x+mov.x,b.pos.y+mov.y);
+            b.aplyForce(mov, dist * force)
+        }
     }
     collideBullets() {
         for (let bullet of this.playerPrincipal.bullets) {
@@ -117,7 +122,7 @@ class arena {
             if (bullet.checkLife()) {
                 for (let food of quad.fruits) {
                     if (bullet.pos.dist(food.pos) < food.size) {
-                        if(food.type == 'fruit'){
+                        if (food.type == 'fruit') {
                             const dir = bullet.dir.copy().mult(world.getDelta());
                             food.life -= bullet.damage;
                             food.aplyMovement(dir, 2)
@@ -128,10 +133,10 @@ class arena {
                             } else {
                                 food.dirAng = food.dir.y * random(10);
                             }
-                        }else{
+                        } else {
 
                         }
-                        
+
                         bullet.life = 0;
                     }
                     //fill(0);
