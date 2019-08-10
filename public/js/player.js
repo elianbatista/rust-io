@@ -164,8 +164,9 @@ class player {
     }
 }
 class protPlayer {
-    constructor(x, y, id, size, tx, ty) {
+    constructor(name, x, y, id, size, tx, ty) {
         this.pos = createVector(x,y);
+        this.name = name;
         this.id = id;
         this.size = size;
         this.mira = createVector(tx,ty);
@@ -186,13 +187,14 @@ class protPlayer {
         //console.log(this.mira.x,this.mira.y);
         fill(0);
         circle(this.mira.x / 2, this.mira.y / 2, 20);
+        textSize(24);
+        textAlign(CENTER);
+        textStyle(BOLD);
+        text(this.name.toUpperCase(), 0,this.size + 12);
         pop()
      
       
-      //  textSize(24);
-        // textAlign(CENTER);
-        // textStyle(BOLD);
-        // text(this.name.toUpperCase(), 0,this.size + 12);
+        
        
     }
     update(x, y) {

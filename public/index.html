@@ -93,7 +93,7 @@
             
             createWorld(nome);
 
-            socket.emit('conectei', socket.id);
+            socket.emit('conectei', nome);
             
             $(".gui .nome").text(world.name);
             

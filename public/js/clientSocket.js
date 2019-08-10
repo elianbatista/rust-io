@@ -3,13 +3,12 @@ socket.on('mensagem', function (mensagem) {
     world.createPlayers(mensagem);
 
 });
-//this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
+
 socket.on('updatePositions', (id, playerX, playerY, size, mousex, mousey) => {
   
     if(world){
-      for (let p of world.players) {
       
-     // console.log(p.id, id);
+      for (let p of world.players) {
 
         if (p.id == id) {
 
@@ -34,7 +33,8 @@ socket.on('updatePositions', (id, playerX, playerY, size, mousex, mousey) => {
 
 socket.on('newSocket', (newSocket) => {
 
-    world.players.push(new protPlayer(newSocket.x,
+    world.players.push(new protPlayer(newSocket.name,
+                                      newSocket.x,
                                       newSocket.y,
                                       newSocket.id, 
                                       newSocket.size,

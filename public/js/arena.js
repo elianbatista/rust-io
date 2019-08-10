@@ -46,7 +46,7 @@ class arena {
         for(let p of protPlayers){
             
             if(p.id != socket.id){
-                this.players.push(new protPlayer(p.x,p.x,p.id,p.size,p.mousex,p.mousey))
+                this.players.push(new protPlayer(p.name,p.x,p.x,p.id,p.size,p.mousex,p.mousey))
             }else{
                 this.setPlayer(new player(p.x,p.y,p.id));
             }

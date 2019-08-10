@@ -25,8 +25,8 @@ app.set('view engine', 'html');
 var arrayPlayersObject = [];
 
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
-var playerProt = function (id, x, y, size, mousex, mousey) {
-
+var playerProt = function (name, id, x, y, size, mousex, mousey) {
+       this.name = name;
        this.x = x;
        this.y = y;
        this.size = size;
@@ -38,10 +38,10 @@ var playerProt = function (id, x, y, size, mousex, mousey) {
 
 io.on('connect', (socket) => {
 
-       socket.on('conectei', function(){  
-
-              var newSocket = new playerProt(socket.id, 0, 0, 40, 0, 0);
-
+       socket.on('conectei', function(name){  
+          
+              var newSocket = new playerProt(name ,socket.id, 0, 0, 40, 0, 0);
+         
               socket.broadcast.emit('newSocket', newSocket);
 
               arrayPlayersObject.push(newSocket);
