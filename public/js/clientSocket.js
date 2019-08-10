@@ -3,12 +3,8 @@ socket.on('mensagem', function (mensagem) {
     world.createPlayers(mensagem);
 
 });
-
+//this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 socket.on('updatePositions', (id, playerX, playerY, angulo) => {
-  
-    //console.log("Player: " + id + "PosX: " + playerX + "PosY: " + playerY);
-  
-    
   
     for (let p of world.players) {
       
@@ -30,12 +26,14 @@ socket.on('updatePositions', (id, playerX, playerY, angulo) => {
 
 });
 
-/*
+
 socket.on('newSocket', (newSocket) => {
 
-    world.players.push(new protoPlayer(newSocket.x, newSocket.y, newSocket.id));
+    world.players.push(new protPlayer(newSocket.x, newSocket.y, newSocket.id));
 
 });
+
+/*
 
 socket.on('disconectPlayer', (disconectedID) => {
 

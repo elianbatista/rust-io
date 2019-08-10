@@ -33,7 +33,6 @@ class player {
             bullet.display();
             bullet.update();
         }
-        
         if(!this.hitTimer.checkTimer()){
             fill(0,0,255);
          
@@ -42,17 +41,9 @@ class player {
         }
         push()
 
-       // fill(0, 0, 255);
-       // circle(this.target.x, this.target.y, 20);
-        //----
-       // stroke(0, 0, 255);
-       // strokeWeight(5);
-       // line(this.pos.x, this.pos.y, this.target.x, this.target.y);
-
         strokeWeight(8);
         noStroke();
-        //------
-
+    
         translate(this.pos.x, this.pos.y);
 
         //  textSize(24);
@@ -64,7 +55,6 @@ class player {
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
-        
 
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
@@ -72,10 +62,6 @@ class player {
         //
         fill(0);
         circle(this.mira.x / 2, this.mira.y / 2, 20);
-        //------
-
-        noStroke();
-        //
         pop()
 
     }
@@ -112,7 +98,7 @@ class player {
                     this.state = playerState.WALK;
                     this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
-                    socket.emit('update', this.pos.x,this.pos.y,0);
+                    socket.emit('update', this.pos.x,this.pos.y,this.size, this.mousex, this.mousey);
                     break;
             }
         }
@@ -175,22 +161,41 @@ class player {
     }
 }
 class protPlayer {
-    constructor(x, y, id) {
+    constructor(x, y, id, size, tx, ty) {
         this.pos = createVector(x,y);
         this.id = id;
-        //this.size = size;
-        //this.angle = angle;
+        this.size = size;
+        this.mira = createVector(tx,ty);
     }
     display() {
     
+      
+
         push()
 
+        strokeWeight(8);
+        noStroke();
+    
         translate(this.pos.x, this.pos.y);
+
+        //  textSize(24);
+        // textAlign(CENTER);
+        // textStyle(BOLD);
+        // text(this.name.toUpperCase(), 0,this.size + 12);
+        stroke(0)
+        strokeWeight(8);
         fill(255, 0, 0);
-        circle(0, 0, 40);
-       
+        circle(0, 0, this.size);
+
+
+        line(0, 0, this.mira.x / 2, this.mira.y / 2);
+
+        noStroke();
         //
+        fill(0);
+        circle(this.mira.x / 2, this.mira.y / 2, 20);
         pop()
+       
     }
     update(x, y) {
         this.x = x;

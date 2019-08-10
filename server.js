@@ -24,13 +24,14 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 
-var playerProt = function (x, y, angle, size, id) {
+//this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
+var playerProt = function (id, x, y, size, mousex, mousey) {
 
        this.x = x;
        this.y = y;
-       this.angle = angle;
        this.size = size;
-
+       this.mousex = mousex;
+       this.mousey = mousey;
        this.id = id;
 
 };
@@ -39,7 +40,7 @@ io.on('connect', (socket) => {
 
        socket.on('conectei', function(){  
 
-              var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, 0, 40, socket.id);
+              var newSocket = new playerProt(socket.id, 0, 0, 40, 0, 0);
 
               socket.broadcast.emit('newSocket', newSocket);
 
@@ -65,7 +66,7 @@ io.on('connect', (socket) => {
 
        });
 
-       socket.on('update', (playerX, playerY, angulo) => {
+       socket.on('update', (playerX, playerY, size, mousex, mousey) => {
 
               for (var i = 0; i < arrayPlayersObject.length; i++) {
 
@@ -75,15 +76,17 @@ io.on('connect', (socket) => {
 
                             arrayPlayersObject[i]['y'] = playerY;
                        
-                            arrayPlayersObject[i]['angle'] = angulo;
+                            arrayPlayersObject[i]['size'] = size;
+                       
+                            arrayPlayersObject[i]['mousex'] = mousex;
+
+                            arrayPlayersObject[i]['mousey'] = size;
 
                      }
 
-                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, angulo);
+                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, size,);
 
               }
-         
-               //console.log("Player: " + socket.id + "PosX: " + playerX + "PosY: " + playerY);
 
        });
 
