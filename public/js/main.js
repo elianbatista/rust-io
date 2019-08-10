@@ -46,7 +46,7 @@ function setup() {
 }
 
 function draw() {
-  // frameRate(10)
+   //frameRate(2)
   //resizeCanvas(windowWidth, windowHeight);
   if (flag) {
     if(world.playerPrincipal){

@@ -124,7 +124,7 @@ class arena {
                   this.quadFruits.insert(fruit)
               }
 
-              pf.push(new protFruit(fruit.x, fruit.y, fruit.size, fruit.rotate, fruit.life));
+              pf.push(new protFruit(fruit.pos.x, fruit.pos.y, fruit.size, fruit.rotate, fruit.life));
             
               i++;
           }
@@ -135,11 +135,18 @@ class arena {
           //console.log("Clienteando");
           //'clientUpdateFrutas'
           socket.on('clientUpdateFrutas', function(fruits){
-            
-            
+          
             for(let fruit of fruits){
-              //console.log(fruit.life);
-              simpleFruitDisplay(fruit);
+                
+                push();
+                translate(fruit.x, fruit.y);
+                rotate(fruit.angle * PI / 180)
+                stroke(0);
+
+
+                fill(50, 200, 50);
+                rect(0,0, fruit.size, fruit.size);
+              pop();
               
             }
             
