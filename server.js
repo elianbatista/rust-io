@@ -65,7 +65,7 @@ io.on('connect', (socket) => {
 
        });
 
-       socket.on('update', (playerX, playerY) => {
+       socket.on('update', (playerX, playerY, angulo) => {
 
               for (var i = 0; i < arrayPlayersObject.length; i++) {
 
@@ -74,6 +74,8 @@ io.on('connect', (socket) => {
                             arrayPlayersObject[i]['x'] = playerX;
 
                             arrayPlayersObject[i]['y'] = playerY;
+                       
+                            arrayPlayersObject[i]['angle']
 
                      }
 

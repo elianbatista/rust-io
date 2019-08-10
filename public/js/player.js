@@ -112,6 +112,7 @@ class player {
                     this.state = playerState.WALK;
                     this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
+                    socket.emit('update', this.pos.x,this.pos.y,this.))
                     break;
             }
         }
@@ -173,7 +174,7 @@ class player {
 
     }
 }
-class protoPlayer {
+class protPlayer {
     constructor(x, y, size, angle) {
         this.x = x;
         this.y = y;

@@ -25,6 +25,7 @@ class arena {
     }
     setPlayer(player) {
         this.playerPrincipal = player;
+        console.log('Player criado com sucesso',this.playerPrincipal);
     }
     getDelta() {
         return this.deltaTime / 1000;
@@ -42,7 +43,7 @@ class arena {
         for(let p of protPlayers){
             console.log(p);
             if(p.id != socket.id){
-                this.players.push(new protPlayers(p.x,p.x,p.size,p.angle))
+                this.players.push(new protPlayer(p.x,p.x,p.size,p.angle))
             }else{
                 this.setPlayer(new player(p.x,p.y,p.id));
             }

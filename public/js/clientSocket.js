@@ -1,6 +1,6 @@
 socket.on('mensagem', function (mensagem) {
 
-    createPlayers(mensagem);
+    world.createPlayers(mensagem);
 
 });
 
@@ -20,15 +20,16 @@ socket.on('updatePositions', (id, playerX, playerY) => {
 
 });
 
+/*
 socket.on('newSocket', (newSocket) => {
 
-    players.push(new protoPlayer(newSocket.x, newSocket.y, newSocket.id));
+    world.players.push(new protoPlayer(newSocket.x, newSocket.y, newSocket.id));
 
 });
 
 socket.on('disconectPlayer', (disconectedID) => {
 
-    for (var i = 0; i < players.length; i++) {
+    for (var i = 0; i < world.players.length; i++) {
 
         if (players[i]['id'] == disconectedID) {
 
@@ -39,7 +40,4 @@ socket.on('disconectPlayer', (disconectedID) => {
     }
 
 });
-
-class clientSocket {
-
-}
+*/
