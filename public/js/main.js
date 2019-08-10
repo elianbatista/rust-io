@@ -20,7 +20,7 @@ const foodState = {
 }
 function createWorld(playerName) {
 
-  console.log(playerName)
+  //console.log(playerName)
   world = new arena(400, 400);
  // world.setPlayer(new player(0, 0, 12345))
   world.setFruits(30);
@@ -49,12 +49,15 @@ function draw() {
   // frameRate(10)
   //resizeCanvas(windowWidth, windowHeight);
   if (flag) {
-    background(170, 0, 255);
+    if(world.playerPrincipal){
+      background(170, 0, 255);
 
     world.display();
     world.update();
 
 
     camera.off()
+    }
+    
   }
 }

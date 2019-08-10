@@ -37,13 +37,17 @@ var playerProt = function (x, y, angle, size, id) {
 
 io.on('connect', (socket) => {
 
-       var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, 0, 40, socket.id);
+       socket.on('conectei', function(){  
 
-       socket.broadcast.emit('newSocket', newSocket);
+              var newSocket = new playerProt(Math.random() * 500, Math.random() * 500, 0, 40, socket.id);
 
-       arrayPlayersObject.push(newSocket);
+              socket.broadcast.emit('newSocket', newSocket);
 
-       socket.emit('mensagem', arrayPlayersObject);
+              arrayPlayersObject.push(newSocket);
+
+              socket.emit('mensagem', arrayPlayersObject);
+
+       });
 
        socket.on('disconnect', function () {
 
@@ -82,5 +86,7 @@ io.on('connect', (socket) => {
 });
 
 server.listen(port, function () {
+
        console.log('Server listening at port %d', port);
+
 });

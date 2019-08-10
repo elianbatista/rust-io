@@ -69,13 +69,15 @@
 
         </script>
 
+       
+       <script src="/js/clientSocket.js"></script>
        <script src="/js/arena.js"></script>
        <script src="/js/fruit.js"></script>
        <script src="/js/player.js"></script>
        <script src="/js/spell.js"></script>
        <script src="/js/main.js"></script>
        <script src="/js/life.js"></script>
-  
+      
         <script>
   
         document.querySelector('body').addEventListener('keydown', function(event) {
@@ -89,6 +91,8 @@
             var nome = $(".box .nome").val();
             
             createWorld(nome);
+
+            socket.emit('conectei', socket.id);
             
             $(".gui .nome").text(pname);
             
@@ -102,7 +106,7 @@
 
             //$('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
 
-            ('.gui .life .life-content').css({width: plife + "%"});
+            $('.gui .life .life-content').css({width: plife + "%"});
 
           }
         
