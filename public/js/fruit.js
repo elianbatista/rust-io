@@ -147,6 +147,9 @@ class food {
         return this.life >= 0;
     }
     update() {
+        if(this.zero.mag()>0.1){
+            this.zero = p5.Vector.lerp(this.zero,this.zero.copy().mult(0.1),0.5);
+        }
         this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
 
         this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
@@ -154,6 +157,9 @@ class food {
         this.pos.add(this.dir);
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
+    }
+    aplyMovement(dir,force){
+        this.dir = dir.mult(force);
     }
     aplyForce(dir,force){
         this.zero = dir.mult(force);

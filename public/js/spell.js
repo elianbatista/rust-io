@@ -60,22 +60,7 @@ class spell {
         this.life -= world.deltaTime;
 
         if (this.checkLife()) {
-            const quad = world.quadFruits.getQuadbyPos(this.pos.x,this.pos.y);
-            for (let food of quad.fruits) {
-                if (this.pos.dist(food.pos) < food.size) {
-                    food.life -= this.damage;
-                    food.aplyForce(dir,1)
-                    food.hit.startTimer();
-                    if (food.dir.x > food.dir.y) {
-                        food.dirAng = food.dir.x * random(10);
-                    } else {
-                        food.dirAng = food.dir.y * random(10);
-                    }
-                    this.life = 0;
-                }
-                fill(0);
-                circle(food.pos.x,food.pos.y,40);
-            }
+            
             
         } else {
             world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
