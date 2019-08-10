@@ -1,33 +1,84 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-       <head>
+<head>
 
-              <meta charset="UTF-8">
+       <meta charset="UTF-8">
 
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-              <meta http-equiv="X-UA-Compatible" content="ie=edge">
+       <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-              <!-- Includes do CSS -->
+       <!-- Includes do CSS -->
 
-              <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+       <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
 
-              <link rel="stylesheet" href="css/style.css">
+       <link rel="stylesheet" href="css/style.css">
+  
+       <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700,800&display=swap" rel="stylesheet">
 
-              <!-- Fim dos Includes do CSS -->
+       <!-- Fim dos Includes do CSS -->
 
-              <title>Rust.io</title>
+       <title>Rust.io</title>
 
-       </head>
+</head>
 
-       <body>
-              
-              <script >
+<body oncontextmenu="return false;">
+  
+       <div class="box">
+      
+         <h1>Rust.io</h1>
+         
+         <input type="text" class="nome" placeholder="Digite seu Apelido" autofocus>
+         
+       </div>
+  
+      <div class="informacoes left">Desenvolvido por Elian Batista e Lucas Gobbi - 2019</div>
+  
+      <div class="informacoes right">BETA 1.0</div>
+  
+      </div> 
+  
+      <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+  
+       <script src="/socket.io/socket.io.js"></script>
+       <script src="/js/p5/p5.min.js"></script>
+       <script src="/js/p5/p5.play.js"></script>
+  
+        <script>
                      
-                     var socket = io('http://localhost:3000/');
-       
-              </script>
-              
-       </body>
+               var socket = io('http://localhost:3000/');
+
+        </script>
+
+       <script src="/js/arena.js"></script>
+       <script src="/js/fruit.js"></script>
+       <script src="/js/player.js"></script>
+       <script src="/js/spell.js"></script>
+       <script src="/js/main.js"></script>
+       <script src="/js/life.js"></script>
+  
+        <script>
+  
+        document.querySelector('body').addEventListener('keydown', function(event) {
+          
+          if(event.keyCode == 13){
+            
+            $(".box").fadeOut();
+            
+            var nome = $(".box .nome").val();
+            
+            createWorld(nome);
+            
+          }
+          
+        });
+        
+      </script>
+  
+</body>
+
 </html>
