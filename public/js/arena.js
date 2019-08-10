@@ -1,6 +1,7 @@
 class arena {
     constructor(_width, _height) {
         this.playerPrincipal;
+        this.host = false;
         this.players = [];
         this.name;
         this.fruits = [];
@@ -26,24 +27,21 @@ class arena {
         return new food(random(-this.size.width, this.size.width),
             random(-this.size.height, this.size.height))
     }
+    setHost(){
+      socket.on('host', function(mensagem){
+          
+          if(mensagem){                    
+            world.setFruits(10);
+            world.host = true;
+          }
+
+          
+      });
+    }
     setPlayer(player) {
         this.playerPrincipal = player;
         console.log('Player criado com sucesso',this.playerPrincipal);
       
-        socket.on('host', (mensagem)=>{
-          
-          console.log('teste');
-          
-        });
-      
-//         socket.on('host', function(mensagem){
-//                   console.log("alo");
-//                   if(mensagem){
-//                     console.log("host");
-//                     setFruits(10);
-//                   }
-                  
-//         });
     }
     getDelta() {
         return this.deltaTime / 1000;
@@ -67,6 +65,7 @@ class arena {
             }
             
         }
+      
       this.drawPlayers();
     }
     getPlayer() {
@@ -81,6 +80,12 @@ class arena {
 
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
+        if(this.host){
+          console.log("Mandando as frutas");
+        }else{
+          console.log("Recebendo as frutas");
+        }
+        
 
         let i = 0
         let j = 0;

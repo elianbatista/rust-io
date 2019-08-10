@@ -24,6 +24,7 @@ function createWorld(playerName) {
   
   //world.setFruits(30);
   world.setName( playerName ) ;
+  world.setHost();
   
   camera.position.x = 0;
   camera.position.y = 0;
