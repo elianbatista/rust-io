@@ -17,27 +17,9 @@ class arena {
         const center = createVector(0,0);
 
         this.quadFruits = new quadFood(center,_width*2,_height*2);
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
-        this.quadFruits.insert(this.randomFruit());
+        for(let i=0;i<55;i++){
+            this.quadFruits.insert(this.randomFruit());
+        }
 
     }
     randomFruit(){

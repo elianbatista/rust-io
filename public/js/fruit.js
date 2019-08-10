@@ -12,15 +12,15 @@ class quadFood {
         this.h = h;
 
 
-        this.limit = 2;
+        this.limit = 3;
     }
     display(){
         noFill();
         stroke(255,0,0);
-        strokeWeight(10);
+        strokeWeight(2);
         rect(this.center.x,this.center.y,this.w,this.h)
-        if(this.fruits>0){
-            console.log("a")
+       
+        if(this.fruits.length>0){
             for(let food of this.fruits){
                 food.display();
             }
@@ -76,7 +76,7 @@ class quadFood {
             if (pos.y <= this.center.y) {
                 this.rightUp.insert(fruit)
             } else {
-                this.rightUp.insert(fruit)
+                this.rightDown.insert(fruit)
 
             }
         }
