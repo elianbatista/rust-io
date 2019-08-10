@@ -74,18 +74,22 @@ class arena {
                     fruit2.aplyForce(mov,dist*0.001)
                     
                 }
-                console.log(fruit.pos.x >= this.size.width*2 - 40 || fruit.pos.x <= -this.size.width*2+40)
-                if(fruit.pos.x >= this.size.width*2 - 40 || fruit.pos.x <= -this.size.width*2+40){
-                    fruit.zero.x = -fruit.zero.x;
-                     fill(0)
-                    circle(fruit.pos.x,fruit.pos.y,70)
-            
-                }
-                if(fruit.pos.y > this.size.height*2- 20 || fruit.pos.y <= -this.size.height*2+20){
-                    fruit.zero.y = -fruit.zero.y;
-                }
                 j++;
             }
+            
+            if(fruit.pos.x >= this.size.width - 30 || fruit.pos.x <= -this.size.width+30){
+                
+                fruit.dir.x = -fruit.dir.x*1.05;
+                fill(0)
+                circle(fruit.pos.x,fruit.pos.y,70)
+        
+            }
+            if(fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height+20){
+                fruit.zero.y = -fruit.zero.y;
+                fill(0)
+                circle(fruit.pos.x,fruit.pos.y,70)
+            }
+           
             this.quadFruits.insert(fruit)
             i++;
         }
