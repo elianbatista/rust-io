@@ -14,7 +14,7 @@ class food {
 
         this.hit = new spellTimer(600);
         this.flag = true;
-        this.state = foodState
+        this.state = foodState.WALK;
     }
     checkLife() {
         return this.life >= 0;
@@ -53,10 +53,10 @@ class food {
 
         } else {
            
-            if(this.flag){
-                this.flag = false;
-                this.hit.startTimer();
-            }
+        //    if(this.flag){//this.state = foodState.
+         //       this.flag = false;
+          //      this.hit.startTimer();
+           // }
             if (this.hit.checkTimer()) {
                 world.fruits.splice(world.fruits.indexOf(this), 1);
                 world.setRandomFruit();
