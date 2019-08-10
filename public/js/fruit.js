@@ -243,7 +243,7 @@ class food {
 
 }
 class protFruit{
-  constructor(x,y,size,angle){
+  constructor(x,y,size,angle,life){
     this.pos = createVector(x,y);
     this.size = size;
     this.angle = angle;

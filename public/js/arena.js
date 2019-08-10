@@ -80,11 +80,11 @@ class arena {
 
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
-      
+        let pf= [];
         if(this.host){
           let i = 0
           let j = 0;
-          let protFruit;
+          
           for (let fruit of this.fruits) {
               if (fruit.state == foodState.DEAD) {
                   this.fruits.splice(i, 1);
@@ -123,11 +123,12 @@ class arena {
                   this.quadFruits.insert(fruit)
               }
 
-              socket.emit('updateFrutas', fruit.x, fruit.y, fruit.size, fruit.rotate, fruit.life);
+              pf.push(new protFruit(fruit.x, fruit.y, fruit.size, fruit.rotate, fruit.life));
+            
               i++;
           }
           
-          
+          socket.emit('updateFrutas', pf);
           
         }else{
           

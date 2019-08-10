@@ -41,7 +41,7 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.id = id;
 };
 
-let fruitProt = function(x, y, size, angle, life){
+let protFruit = function(x, y, size, angle, life){
   
        this.x = x;
        this.y = y;
@@ -117,9 +117,17 @@ io.on('connect', (socket) => {
 
        });
   
-      socket.on('updateFrutas', (x, y, size, angle, life) => {
+      socket.on('updateFrutas', function(fruits){
+        console.log(fruits);
+       // for(let i = 0; i < fruits.lenght; i++){
+          
+          
+          
+        //}
         
+       // let fruta = new protFruit(x, y, size, angle, life);
         
+        //arrayFruitsObject.push(fruta);
         
       });
 
