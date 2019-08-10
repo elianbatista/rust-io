@@ -118,9 +118,18 @@ class arena {
         this.drawPlayers();
 
     }
+   
     drawPlayers(){
+      
       for(let p of this.players){
-        p.display();
+        push()
+        //console.log(p.pos.x, p.pos.y);
+        translate(p.pos.x, p.pos.y);
+        fill(255, 0, 0);
+        circle(0, 0, this.size);
+       
+        //
+        pop()
       }
     }
     collideAndPush(force, a, b, i, j) {

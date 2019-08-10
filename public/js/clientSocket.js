@@ -5,6 +5,8 @@ socket.on('mensagem', function (mensagem) {
 });
 
 socket.on('updatePositions', (id, playerX, playerY, angulo) => {
+  
+    //console.log("Player: " + id + "PosX: " + playerX + "PosY: " + playerY);
 
     for (let p of world.players) {
 
@@ -14,7 +16,7 @@ socket.on('updatePositions', (id, playerX, playerY, angulo) => {
 
             p.pos.y = playerY;
             
-            p.angle = angulo;
+            //p.angle = angulo;
 
         }
 
