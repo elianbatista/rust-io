@@ -75,13 +75,15 @@ io.on('connect', (socket) => {
 
                             arrayPlayersObject[i]['y'] = playerY;
                        
-                            arrayPlayersObject[i]['angle']
+                            arrayPlayersObject[i]['angle'] = angulo;
 
                      }
 
-                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY);
+                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, angulo);
 
               }
+         
+               console.log("Player: " + socket.id + "PosX: " + playerX + "PosY: " + playerY);
 
        });
 

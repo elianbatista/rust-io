@@ -112,7 +112,7 @@ class player {
                     this.state = playerState.WALK;
                     this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
-                    socket.emit('update', this.pos.x,this.pos.y,this.))
+                    socket.emit('update', this.pos.x,this.pos.y,0);
                     break;
             }
         }
@@ -176,32 +176,18 @@ class player {
 }
 class protPlayer {
     constructor(x, y, size, angle) {
-        this.x = x;
-        this.y = y;
+        this.pos = createVector(x,y);
         this.size = size;
         this.angle = angle;
     }
     display() {
-        let mira = p5.Vector.fromAngle(angle);
-        mira.mult(this.size);
+    
         push()
 
         translate(this.pos.x, this.pos.y);
         fill(255, 0, 0);
         circle(0, 0, this.size);
-        //
-        stroke(0)
-        strokeWeight(8);
-
-        line(0, 0, this.mira.x / 2, this.mira.y / 2);
-
-        noStroke();
-        //
-        fill(0);
-        circle(mira.x / 2, mira.y / 2, 20);
-        //------
-
-        noStroke();
+       
         //
         pop()
     }

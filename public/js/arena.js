@@ -49,6 +49,7 @@ class arena {
             }
             
         }
+      this.drawPlayers();
     }
     getPlayer() {
         return this.playerPrincipal;
@@ -113,7 +114,14 @@ class arena {
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
+      
+        this.drawPlayers();
 
+    }
+    drawPlayers(){
+      for(let p of this.players){
+        p.display();
+      }
     }
     collideAndPush(force, a, b, i, j) {
         const dist = b.pos.dist(a.pos);
