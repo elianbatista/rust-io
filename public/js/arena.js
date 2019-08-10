@@ -73,22 +73,25 @@ class arena {
             }
             const quick = 1.5;
             let force = createVector(0, 0);
-            if (fruit.pos.x >= world.size.width - 20 || this.pos.x <= -world.size.width + 20) {
-                if (this.pos.x < 0) {
-                    force.add(p5.Vector(1, 0));
-
+            if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
+                if (fruit.pos.x < 0) {
+                    force = createVector(1,0);
+                    fruit.aplyForce(force, quick);
                 } else {
-                    force.add(p5.Vector(-1, 0));
+                    force = createVector(-1,0);
+                    fruit.aplyForce(force, quick);
                 }
             }
-            if (this.pos.y > world.size.height - 20 || this.pos.y <= -world.size.height + 20) {
-                if (this.pos.y < 0) {
-                    force.add(p5.Vector(0, 1));
+            if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
+                if (fruit.pos.y < 0) {
+                    force = createVector(0,1);
+                    fruit.aplyForce(force, quick);
                 } else {
-                    force.add(p5.Vector(1, 0));
+                    force = createVector(0,-1);
+                    fruit.aplyForce(force, quick);
                 }
             }
-            this.aplyForce(force, quick);
+           // fruit.aplyForce(force, quick);
             if (fruit.state != foodState.DYING) {
                 this.quadFruits.insert(fruit)
             }
@@ -111,6 +114,7 @@ class arena {
             if (a.type != 'fruit') {
                 a.life -= 10;
                 b.life -= 10;
+                GUIAtualizarLife();
             }
             if (debugMode) {
                 strokeWeight(10)

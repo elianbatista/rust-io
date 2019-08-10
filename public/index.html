@@ -38,6 +38,8 @@
       <div class="informacoes right">BETA 1.0</div>
   
       <div class="gui none">
+
+        <div class="nome"></div>
         
         <div class="life">
         
@@ -79,24 +81,28 @@
           if(event.keyCode == 13){
 
             $(".gui").removeClass("none");
-            
+
             $(".box").fadeOut();
             
             var nome = $(".box .nome").val();
             
             createWorld(nome);
             
+            $(".gui .nome").text(world.playerPrincipal.name);
+            
+            GUIAtualizarLife();
+            
           }
           
         });
-
+          
         function GUIAtualizarLife(){
 
-          $('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
-          
-        }
+            $('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
 
-        GUIAtualizarLife();
+          }
+
+        
         
       </script>
   

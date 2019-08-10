@@ -1,6 +1,8 @@
 .none {
 
-  opacity:
+  opacity: 0;
+
+  visibility: hidden;
 
 }
 
@@ -112,6 +114,8 @@ canvas {
   
   opacity: 0.9;
 
+  transition: all .2s ease-in-out;
+
 }
 
 .gui .life {
@@ -143,6 +147,12 @@ canvas {
   background-color: red;
 
   border-radius: 30px;
+
+}
+
+.gui .nome {
+
+  
 
 }
 

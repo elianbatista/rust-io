@@ -74,6 +74,7 @@ class player {
         pop()
 
     }
+    takeDamege(amount)
     lookAt(x, y) {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
