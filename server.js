@@ -109,7 +109,7 @@ io.on('connect', (socket) => {
 
                      }
 
-                     socket.broadcast.emit('updatePositions', socket.id, playerX, playerY, size, mousex, mousey);
+                     socket.volatile.broadcast.emit('updatePositions', socket.id, playerX, playerY, size, mousex, mousey);
 
               }
 
@@ -119,7 +119,7 @@ io.on('connect', (socket) => {
           
           let prot = new protBullet(x, y, mx, my, damage, speed, life);
          
-          socket.broadcast.emit('spawnBullet', prot);
+          socket.volatile.broadcast.emit('spawnBullet', prot);
       
     
         });
