@@ -122,10 +122,13 @@ function ServerGameLoop() {
        let d = new Date();
        serverDeltaTime = serverNewTime - serverOldTime;
        serverOldTime = serverNewTime;
-       serverNewTime = d.getMilliseconds();
-
+       serverNewTime = d.getHours() + d.getSeconds() + d.getMilliseconds()/1000;
+       //console.log(serverDeltaTime, serverOldTime, serverNewTime);
        for (let i = 0; i < arrayBulletsObject.length; i++) {
               let bullet = arrayBulletsObject[i];
+              if(bullet.life <= 0){
+                     arrayBulletsObject.splice(i,1);
+              }
 
               const dirx = bullet.speed*Math.cos(bullet.angle)
               const diry = bullet.speed*Math.sin(bullet.angle)
@@ -133,7 +136,8 @@ function ServerGameLoop() {
               bullet.x += dirx * serverDeltaTime;
               bullet.y += diry * serverDeltaTime;
 
-              console.log(bullet.x, bullet.y, serverDeltaTime);
+              bullet.life -= serverDeltaTime;
+              console.log(bullet.x, bullet.y,bullet.life, serverDeltaTime);
 
               /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
