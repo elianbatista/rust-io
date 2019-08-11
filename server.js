@@ -12,7 +12,8 @@ var express = require('express'),
     http = require('http');
 var app = express();
 var server = http.createServer(app);
-var io = require('socket.io').listen(server);
+//var io = require('socket.io')(httpServer, { wsEngine: 'ws' })//.listen(server);
+var io = require('socket.io').listen(server)//({ wsEngine: 'ws' });
 //(httpServer, { wsEngine: 'ws' })
 
 
