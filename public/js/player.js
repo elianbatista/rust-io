@@ -73,6 +73,7 @@ class player {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
     }
+    
     shoot() {
         if (this.bulletTimer.checkTimer()) {
             const bullet = new spell(this.pos,
