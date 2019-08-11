@@ -18,11 +18,10 @@ app.set('view engine', 'html');
 var arrayPlayersObject = [];
 
 var arrayBulletsObject = [];
-let d = new Date();
-       let n = d.getSeconds();
-let serverDeltaTime;
-let serverNewTime;
-let serverOldTime;
+
+let serverDeltaTime = 0;
+let serverNewTime = 0;
+let serverOldTime = 0;
 
 
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
@@ -37,10 +36,10 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
 };
 
 
-let protBullet = function (x, y, angle, speed, life, damagee) {
+let protBullet = function (x, y, angle, speed, life, damage) {
        this.x = x
        this.y = y;
-       this.angle;
+       this.angle = angle;
        this.speed = speed;
        this.life = life;
        this.damage = damage;
@@ -112,7 +111,7 @@ io.on('connect', (socket) => {
 
 
        socket.on('newBullet', function (x, y, angle, speed, life, damage) {
-              let prot = new protBullet(x, y, angle, speed, life, damag);
+              let prot = new protBullet(x, y, angle, speed, life, damage);
               arrayBulletsObject.push(prot);
               //socket.volatile.broadcast.emit('spawnBullet', prot);
        });
@@ -120,13 +119,23 @@ io.on('connect', (socket) => {
 });
 
 function ServerGameLoop() {
-            
-       for (var i = 0; i < bullet_array.length; i++) {
-              var bullet = bullet_array[i];
-              bullet.x += bullet.speed_x;
-              bullet.y += bullet.speed_y;
+       let d = new Date();
+       serverDeltaTime = serverNewTime - serverOldTime;
+       serverOldTime = serverNewTime;
+       serverNewTime = d.getMilliseconds();
 
-              // Check if this bullet is close enough to hit any player 
+       for (let i = 0; i < arrayBulletsObject.length; i++) {
+              let bullet = arrayBulletsObject[i];
+
+              const dirx = bullet.speed*Math.cos(bullet.angle)
+              const diry = bullet.speed*Math.sin(bullet.angle)
+             
+              bullet.x += dirx * serverDeltaTime;
+              bullet.y += diry * serverDeltaTime;
+
+              console.log(bullet.x, bullet.y, serverDeltaTime);
+
+              /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
                      if (bullet.owner_id != id) {
                             // And your own bullet shouldn't kill you
@@ -138,13 +147,14 @@ function ServerGameLoop() {
                             }
                      }
               }
+              */
 
        }
        // Tell everyone where all the bullets are by sending the whole array
        //io.emit("bullets-update", bullet_array);
 }
 
-setInterval(ServerGameLoop, 16);
+setInterval(ServerGameLoop, 200);
 
 
 
