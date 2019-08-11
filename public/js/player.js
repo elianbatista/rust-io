@@ -104,7 +104,14 @@ class player {
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
-                    this.shoot();
+                    if(window.mobilecheck){
+                      this.state = playerState.WALK;
+                      this.hitTimer.startTimer();
+                      this.target = createVector(mousex, mousey);
+                    }else{
+                      this.shoot();
+                    }
+                    
                     break;
 
                 case RIGHT:
@@ -152,7 +159,10 @@ class player {
     update(mousex, mousey) {
       
         const newMira = this.lookAt(mousex, mousey).mult(this.size);
-        if(this.mira.x != newMira.x || this.mira.y != newMira.y){
+        if(parseInt(this.mira.x) != parseInt(newMira.x) ||
+           parseInt(this.mira.y) != parseInt(newMira.y) ||
+           this.dir.x != 0 || this.dir.y !=0){
+          
           socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
         }
         
