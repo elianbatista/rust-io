@@ -116,12 +116,15 @@ io.on('connect', (socket) => {
         socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
           
           let prot = new protBullet(x, y, mx, my, damage, speed, life);
-         // console.log(x, y, mx, my, damage, speed, life);
+         
           socket.broadcast.emit('spawnBullet', prot);
-          //console.log(damage);
-          
+      
+    
         });
     
+});
+socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
+          socket.broadcast.emit('spawnBullet', x, y, mx, my, damage, speed, life);
 });
 
 server.listen(port, function () {

@@ -175,6 +175,8 @@ class player {
           world.playerPrincipal.bullets.push(bul);
         });
       
+        
+      
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade
         if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
