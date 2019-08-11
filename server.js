@@ -53,8 +53,8 @@ let protBullet = function (x, y, angle, speed, life, damage) {
 }
 class vec2d {
        constructor(x, y) {
-              this.x = x || 0;
-              this.y = y || 0;
+              this.x = x;
+              this.y = y;
        }
        add(b) {
               this.x += b.x;
@@ -133,6 +133,7 @@ function lerpN(a, b, n){
 class food {
        constructor(posx, posy) {
               this.pos = new vec2d(posx, posy);
+              this.pos.print();
               this.dir = new vec2d(0, 0);
               this.dirAng = 0;
               this.rotate = randomInterval(360,0);
@@ -177,8 +178,10 @@ class food {
 
               this.rotate += this.dirAng;
               this.pos.add(this.dir);
-
+              //this.pos.print()
               this.pos.constrain(-world.width, world.height);
+              this.x = this.pos.x;
+              this.y = this.pos.y;
        }
        aplyMovement(dir, force) {
               this.dir = dir.mult(force);
@@ -310,6 +313,7 @@ function ServerGameLoop() {
        updateFruits();
        updateBullets()
        // Tell everyone where all the bullets are by sending the whole array
+       //console.log(arrayFruitsObject);
        io.emit("spawnBullets", arrayBulletsObject);
        io.emit("spawnFruits", arrayFruitsObject);
 }
