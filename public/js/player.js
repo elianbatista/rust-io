@@ -161,7 +161,7 @@ class player {
         const newMira = this.lookAt(mousex, mousey).mult(this.size);
         if(parseInt(this.mira.x) != parseInt(newMira.x) ||
            parseInt(this.mira.y) != parseInt(newMira.y) ||
-           this.dir.x != 0 || this.dir.y !=0){
+           this.state != playerState.STOP){
           
           socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
         }
@@ -196,6 +196,7 @@ class player {
         if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
             this.seekTarget();
         } else {
+            this.state = playerState.STOP
             this.dir.x = lerp(this.dir.x, 0, 0.3);
             this.dir.y = lerp(this.dir.y, 0, 0.3);
         }
