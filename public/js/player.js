@@ -76,14 +76,28 @@ class player {
     produceBullet(){
         const pos = this.pos;
         const xAxis = createVector(1,0);
+    
+      
+        
         let angle = this.mira.angleBetween(xAxis);
         const angleError = map(this.bulletAcurac,0,1,-PI/4, 0);
         angle += random(-angleError, angleError);
         const speed = this.bulletSpeed
         const damage = this.bulletDamage
         const life = this.bulletLife
+
+        fill(0);
+        circle(this.mira.x / 2, this.mira.y / 2, 20);
+        textSize(24);
+        textAlign(CENTER);
+        textStyle(BOLD);
+        text(angle, 0, this.size + 12);
+        if(this.pos.y + this.mira.y > this.pos.y){
+            return new spell(pos, angle, speed, life, damage);
+        }else{
+            return new spell(pos, -angle, speed, life, damage);
+        }
         
-        return new spell(pos, angle, speed, life, damage);
         
     }
     shoot() {
