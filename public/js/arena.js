@@ -131,23 +131,35 @@ class arena {
             
               i++;
           }
-          if(frameCount % 500 == 0){
-            socket.emit('hostUpdateFrutas', pf);
-          }
+          
+          socket.emit('updateFrutas', pf);
+          
         }else{
           //console.log("Clienteando");
           //'clientUpdateFrutas'
-          if(frameCount % 500 == 0){
-          socket.on('clientUpdateFrutas', function(fruits){
-            
-           // console.log(fruits[0].x);
-          
-            console.log(fruits)
-            for(let fruit of fruits){
+           //if(frameCount % 500 == 0){
+            socket.on('updateFrutas', function(fruits){
+              
+              console.log(fruits);
+
+             // console.log(fruits[0].x);
+
+    /*
+              for(let fruit of fruits){
+
+                  this.fruits = [];
+                  this.fruits.push(fruit)
+                  console.log(this.fruits)
+
+
+              }
+*/
+
+            });
+        //  }
+          for(let fruit of this.fruits){
                           
-            
-    console.log('a');
-                push();
+              push();
                 translate(fruit.x, fruit.y);
                 rotate(fruit.angle * PI / 180)
                 stroke(0);
@@ -158,12 +170,10 @@ class arena {
               pop();
               
             }
-            
-            
-          });
-          }
           
         }
+      
+      
         
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
