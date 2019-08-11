@@ -106,6 +106,7 @@ class arena {
             }
         });
         this.drawBullets();
+        /*
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
 
@@ -160,7 +161,9 @@ class arena {
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
-
+        */
+        this.playerPrincipal.update(camera.mouseX, camera.mouseY);
+        this.playerPrincipal.display();
         this.drawPlayers();
     }
 

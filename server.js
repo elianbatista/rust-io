@@ -71,7 +71,7 @@ class vec2d {
               return new vec2d(this.x, this.y);
        }
        print(){
-              console.log("X: " +this.x+ "");
+              console.log("X: " +this.x+ "\t|Y: "+this.y);
        }
        dist(b){
               return Math.sqrt(this.x * b.x + this.y * b.y); 
@@ -229,19 +229,7 @@ io.on('connect', (socket) => {
        });
 
 });
-
-function ServerGameLoop() {
-       let d = new Date();
-
-       if (serverOldTime > serverNewTime) {
-              serverDeltaTime = serverNewTime - serverOldTime + 60;
-       } else {
-              serverDeltaTime = serverNewTime - serverOldTime;
-       }
-
-       serverOldTime = serverNewTime;
-       serverNewTime = d.getSeconds() + d.getMilliseconds() / 1000;
-       //console.log(serverDeltaTime, serverOldTime, serverNewTime);
+function updateBullets(){
        for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
               let bullet = arrayBulletsObject[i];
               if (bullet.life <= 0) {
@@ -257,28 +245,27 @@ function ServerGameLoop() {
               dir.fromAngle(bullet.angle, bullet.speed * serverDeltaTime);
               
               pos.add(dir);
-              pos.print();
+              //pos.print();
               bullet.x = pos.x;
               bullet.y = pos.y;
 
               bullet.life -= serverDeltaTime * 1000;
-
-              // console.log(bullet.x, bullet.y);
-              /* Check if this bullet is close enough to hit any player 
-              for (var id in players) {
-                     if (bullet.owner_id != id) {
-                            // And your own bullet shouldn't kill you
-                            var dx = players[id].x - bullet.x;
-                            var dy = players[id].y - bullet.y;
-                            var dist = Math.sqrt(dx * dx + dy * dy);
-                            if (dist < 70) {
-                                   io.emit('player-hit', id); // Tell everyone this player got hit
-                            }
-                     }
-              }
-              */
-
        }
+}
+function runClock(){
+       let d = new Date();
+       if (serverOldTime > serverNewTime) {
+              serverDeltaTime = serverNewTime - serverOldTime + 60;
+       } else {
+              serverDeltaTime = serverNewTime - serverOldTime;
+       }
+       serverOldTime = serverNewTime;
+       serverNewTime = d.getSeconds() + d.getMilliseconds() / 1000;
+}
+function ServerGameLoop() {
+       runClock();
+       
+       updateBullets()
        // Tell everyone where all the bullets are by sending the whole array
        io.emit("spawnBullets", arrayBulletsObject);
 }
