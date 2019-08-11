@@ -60,13 +60,18 @@ io.on('connect', (socket) => {
        socket.on('conectei', function (name) {
 
               var newSocket = new playerProt(name, socket.id, 0, 0, 40, 0, 0);
-
-              socket.broadcast.emit('newSocket', newSocket);
               arrayPlayersObject.push(newSocket);
              
               if(arrayPlayersObject.length == 1){
-                     socket.emit('criarSala', 400,400)
+                     socket.emit('criarSala',true, name, 200, 200)
+              }else{
+                     socket.emit('criarSala',false, name, 200, 200)
               }
+
+              
+
+              socket.broadcast.emit('newSocket', newSocket);
+              
 
               socket.emit('mensagem', arrayPlayersObject);
 

@@ -21,22 +21,29 @@ const foodState = {
   DYING: 3,
   DEAD: 4,
 }
-socket.emit('criarSala', function(width, height){
-
+socket.on('criarSala', function(alreadyExists, name, width, height){
+  if(alreadyExists){
+    world = new arena(width, height);
+    world.setName( name ) ;
+  }else{
+    world = new arena(width, height);
+    world.setName( name ) ;
+    world.setFruits(30);
+  
+    world.setHost();
+ 
+  }
+  
+  
+  world.setFruits(30);
+  
+  world.setHost();
+ 
+  flag = true;
 });
 
 function createWorld(playerName) {
-
-  //console.log(playerName)
-  world = new arena(400, 400);
   
-  world.setFruits(30);
-  world.setName( playerName ) ;
-  world.setHost();
-  
-  camera.position.x = 0;
-  camera.position.y = 0;
-  flag = true;
 }
 
 function preload() {
@@ -60,11 +67,11 @@ function draw() {
     if(world.playerPrincipal){
       background(170, 0, 255);
 
-    world.display();
-    world.update();
+      world.display();
+      world.update();
 
 
-    camera.off()
+      camera.off()
     }
     
   }

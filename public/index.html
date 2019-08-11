@@ -96,7 +96,10 @@
 
             socket.emit('conectei', nome);
             
-            $(".gui .nome").text(world.name);
+            if(world){
+              $(".gui .nome").text(world.name);
+            }
+            
             
             GUIAtualizarLife();
             
@@ -105,7 +108,7 @@
         });
           
         function GUIAtualizarLife(){
-            if(world.playerPrincipal){
+            if(world && world.playerPrincipal){
               $('.gui .life .life-content').css({width: (world.playerPrincipal.life) + "%"});
             }
           }
