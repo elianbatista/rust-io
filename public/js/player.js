@@ -148,7 +148,7 @@ class player {
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
     update(mousex, mousey) {
-        
+        socket.emit('update',this.pos.y,this.pos.y,this.size,this.mira.x,this.mira.y);
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
@@ -158,10 +158,10 @@ class player {
 
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();
-      
+        
         socket.on('spawnBullet', function(protBullet){
           const pos = createVector(protBullet.x, protBullet.y);
-          let bul = new spell(pos,pos);
+          let bul = new spell(pos,pos,0,0,0,0,0);
           
           bul.pos = createVector(protBullet.x, protBullet.y);
           bul.dir = createVector(protBullet.mx, protBullet.my);
@@ -171,7 +171,7 @@ class player {
           
           world.playerPrincipal.bullets.push(bul);
         });
-
+      
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade
         if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
