@@ -106,9 +106,11 @@ class arena {
         socket.on("spawnFruits", function (arrayFruits) {
             
             for (let i = 0; i < arrayFruits.length; i++) {
-                if (world.Fruits[i] == undefined) {
+                if (world.fruits[i] == undefined) {
                     let pos = createVector(arrayFruits[i].x, arrayFruits[i].y)
-                    world.fruits[i] = new createVector(arrayFruits[i].x, arrayFruits[i].y);
+                    world.fruits[i] = new protFruit(arrayFruits[i].pos.x, arrayFruits[i].pos.y,
+                        );
+                    
                 } else {
                     world.fruits[i].x = arrayFruits[i].x;
                     world.fruits[i].y = arrayFruits[i].y;
@@ -185,7 +187,14 @@ class arena {
     drawFruits() {
         for (let f of this.fruits) {
             push()
-            f.display();
+            console.log(this.fruits);
+            translate(f.pos.x, f.pos.y);
+            rotate(f.rotate * PI / 180)
+            stroke(0);
+
+           
+            fill(50, 200, 50);
+            rect(0, 0, f.size, f.size);
             pop()
 
         }

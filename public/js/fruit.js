@@ -244,7 +244,7 @@ class food {
 }
 let protFruit = function(x,y,size,angle,life){
     this.x = x;
-    this.y =y;
+    this.y = y;
     this.size = size;
     this.angle = angle;
     this.life = life;

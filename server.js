@@ -18,7 +18,7 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 var arrayBulletsObject = [];
-var arrayFoodObject = [];
+var arrayFruitsObject = [];
 
 let serverDeltaTime = 0;
 let serverNewTime = 0;
@@ -49,6 +49,7 @@ let protBullet = function (x, y, angle, speed, life, damage) {
        this.speed = speed;
        this.life = life;
        this.damage = damage;
+       
 }
 class vec2d {
        constructor(x, y) {
@@ -260,7 +261,7 @@ io.on('connect', (socket) => {
                      let fruit = new food(randomInterval(-world.width,world.width),
                                           randomInterval(-world.height,world.height));
 
-                     arrayFoodObject.push(fruit);
+                     arrayFruitsObject.push(fruit);
                      //console.log(fruit.pos.x, fruit.pos.y);
               }
        });
@@ -290,7 +291,7 @@ function updateBullets(){
        }
 }
 function updateFruits(){
-       for(let f of arrayFoodObject){
+       for(let f of arrayFruitsObject){
               f.update();
        }
 }
