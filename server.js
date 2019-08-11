@@ -17,7 +17,13 @@ app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
 
-var arrayFruitsObject = [];
+var arrayBulletsObject = [];
+let d = new Date();
+       let n = d.getSeconds();
+let serverDeltaTime;
+let serverNewTime;
+let serverOldTime;
+
 
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 var playerProt = function (name, id, x, y, size, mousex, mousey) {
@@ -31,14 +37,13 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
 };
 
 
-let protBullet = function (x, y, mx, my, damage, speed, life) {
+let protBullet = function (x, y, angle, speed, life, damagee) {
        this.x = x
        this.y = y;
-       this.mx = mx;
-       this.my = my;
-       this.damage = damage;
+       this.angle;
        this.speed = speed;
        this.life = life;
+       this.damage = damage;
 }
 
 let protFruit = function (x, y, size, angle, life) {
@@ -106,16 +111,41 @@ io.on('connect', (socket) => {
        });
 
 
-       socket.on('newBullet', function (x, y, mx, my, damage, speed, life) {
-
-              let prot = new protBullet(x, y, mx, my, damage, speed, life);
-
-              socket.volatile.broadcast.emit('spawnBullet', prot);
-
-
+       socket.on('newBullet', function (x, y, angle, speed, life, damage) {
+              let prot = new protBullet(x, y, angle, speed, life, damag);
+              arrayBulletsObject.push(prot);
+              //socket.volatile.broadcast.emit('spawnBullet', prot);
        });
 
 });
+
+function ServerGameLoop() {
+            
+       for (var i = 0; i < bullet_array.length; i++) {
+              var bullet = bullet_array[i];
+              bullet.x += bullet.speed_x;
+              bullet.y += bullet.speed_y;
+
+              // Check if this bullet is close enough to hit any player 
+              for (var id in players) {
+                     if (bullet.owner_id != id) {
+                            // And your own bullet shouldn't kill you
+                            var dx = players[id].x - bullet.x;
+                            var dy = players[id].y - bullet.y;
+                            var dist = Math.sqrt(dx * dx + dy * dy);
+                            if (dist < 70) {
+                                   io.emit('player-hit', id); // Tell everyone this player got hit
+                            }
+                     }
+              }
+
+       }
+       // Tell everyone where all the bullets are by sending the whole array
+       //io.emit("bullets-update", bullet_array);
+}
+
+setInterval(ServerGameLoop, 16);
+
 
 
 server.listen(port, function () {

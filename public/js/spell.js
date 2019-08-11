@@ -30,7 +30,6 @@ class spell {
         this.life = life;
         this.damage = damage;
        
-       
         //MUDAR
         this.size = 10;
     }

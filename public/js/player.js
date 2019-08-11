@@ -95,15 +95,15 @@ class player {
             this.bullets.push(bullet);
 
             this.bulletTimer.startTimer();
-            /*
+            
             socket.emit('newBullet', bullet.pos.x,
                               bullet.pos.y,
-                              bullet.dir.x,
-                              bullet.dir.y,
-                              bullet.damage,
+                              bullet.angle,
                               bullet.speed,
-                              bullet.life);
-          */
+                              bullet.life,
+                              bullet.damage
+                              );
+          
         }
     }
     handleMouseInput(mousex, mousey) {
