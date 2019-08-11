@@ -81,13 +81,14 @@ class arena {
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
         let pf = [];
-       // if(frameCount % 100 ==0){
+        
         if(this.host){
           let i = 0
           let j = 0;
           console.log("hosteando");
           
           for (let fruit of this.fruits) {
+            
               if (fruit.state == foodState.DEAD) {
                   this.fruits.splice(i, 1);
                   continue;
@@ -124,26 +125,28 @@ class arena {
               if (fruit.state != foodState.DYING) {
                   this.quadFruits.insert(fruit)
               }
-
-              pf.push(new protFruit(fruit.pos.x, fruit.pos.y, fruit.size, fruit.rotate, fruit.life));
               
+          
+              pf.push(new protFruit(fruit.pos.x, fruit.pos.y, fruit.size, fruit.rotate, fruit.life));
+            
               i++;
           }
-          
-          console.log(pf.length);
-          
-          socket.emit('hostUpdateFrutas', pf);
-          
+          if(frameCount % 500 == 0){
+            socket.emit('hostUpdateFrutas', pf);
+          }
         }else{
           //console.log("Clienteando");
           //'clientUpdateFrutas'
-          
+          if(frameCount % 500 == 0){
           socket.on('clientUpdateFrutas', function(fruits){
             
-            console.log(fruits[0].x);
+           // console.log(fruits[0].x);
           
-            
+            console.log(fruits)
             for(let fruit of fruits){
+                          
+            
+    console.log('a');
                 push();
                 translate(fruit.x, fruit.y);
                 rotate(fruit.angle * PI / 180)
@@ -158,10 +161,10 @@ class arena {
             
             
           });
-          
+          }
           
         }
-        //}
+        
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
