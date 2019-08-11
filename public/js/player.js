@@ -152,7 +152,7 @@ class player {
     update(mousex, mousey) {
       
         const newMira = this.lookAt(mousex, mousey).mult(this.size);
-        if(compareVectors(newMira, this.mira, 50)){
+        if(this.mira.x != newMira.x || this.mira.y != newMira.y){
           socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
         }
         
@@ -234,7 +234,4 @@ class protPlayer {
         this.x = x;
         this.y = y;
     }
-}
-function compareVectors(a, b, n){
-  return(abs(a.x-b.y)>n || abs(a.y-b.y)>n);
 }

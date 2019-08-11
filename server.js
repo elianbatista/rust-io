@@ -1,23 +1,11 @@
-/*
-const express = require('express');
-const app = express();
-const server = require('http').createServer(app);
-
-const io = require('socket.io')(server);
-const port = process.env.PORT || 3000;
-const path = require('path');
-
-*/
 var express = require('express'),
     http = require('http');
+const uws = require('uws');
 var app = express();
 var server = http.createServer(app);
-//var io = require('socket.io')(httpServer, { wsEngine: 'ws' })//.listen(server);
+
 var io = require('socket.io').listen(server)//({ wsEngine: 'ws' });
-//(httpServer, { wsEngine: 'ws' })
-
-
-//server.listen(3000);
+io.ws = new uws.Server({ perMessageDeflate: false });
 const path = require('path');
 const port = process.env.PORT || 3000;
 
