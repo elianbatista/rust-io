@@ -83,8 +83,18 @@ class player {
                 this.bulletDamage,
                 this.bulletSize);
 
-            this.bullets.push(bullet)
+            this.bullets.push(bullet);
+              
             this.bulletTimer.startTimer();
+          
+            socket.emit('newBullet', bullet.pos.x,
+                              bullet.pos.y,
+                              bullet.mira.x,
+                              bullet.mira.y,
+                              bullet.damage,
+                              bullet.speed,
+                              bullet.life);
+          
         }
     }
     handleMouseInput(mousex, mousey) {
@@ -148,6 +158,15 @@ class player {
 
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();
+      
+        socket.on('spawnBullet', function(protBullet){
+          let bul = new bullet();
+          bul.pos.x = protBullet.x;
+          bul.pos.y = protBullet.y;
+          bul.dir.x = protBullet
+          
+          
+        });
 
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade

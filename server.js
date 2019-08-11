@@ -39,6 +39,16 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.id = id;
 };
 
+let protBullet = function(x, y, mx, my, damage, speed, life){
+  this.x = x
+  this.y = y;
+  this.mx = mx;
+  this.my = my;           
+  this.damage = damage;
+  this.speed = speed;
+  this.life = life;
+}
+
 let protFruit = function(x, y, size, angle, life){
   
        this.x = x;
@@ -102,8 +112,14 @@ io.on('connect', (socket) => {
               }
 
        });
-  
-        socket.on('')
+                              
+        socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
+          
+          let protBullet = new protBullet(x, y, mx, my, damage, speed, life);
+          
+          socket.broadcast.emit('spawnBullet', protBullet);
+          
+        });
     
 });
 
