@@ -17,7 +17,7 @@ class player {
 
 
         this.bullets = [];
-        this.bulletDamage = 50;
+        this.bulletDamage = 25;
         this.bulletLife = 16000
         this.bulletAcurac = 1
         this.bulletSpeed = 500
@@ -161,6 +161,7 @@ class player {
         this.handleKeyboardInput();
         
         socket.on('spawnBullet', function(protBullet){
+          console.log("a");
           const pos = createVector(protBullet.x, protBullet.y);
           let bul = new spell(pos,pos,0,0,0,protBullet.damage,0);
           
@@ -169,7 +170,7 @@ class player {
           bul.damage = protBullet.damage;
           bul.life = protBullet.life;
           console.log(bul.damage);
-          
+         
           world.playerPrincipal.bullets.push(bul);
         });
       
