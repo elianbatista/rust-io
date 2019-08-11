@@ -141,9 +141,9 @@ class arena {
     drawPlayers(){
       
       for(let p of this.players){
-      
+        push()
         p.display();
-       
+       pop()
 
       }
     }

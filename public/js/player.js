@@ -148,7 +148,8 @@ class player {
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
     update(mousex, mousey) {
-        socket.emit('update',this.pos.y,this.pos.y,this.size,this.mira.x,this.mira.y);
+        socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
+      
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
@@ -161,13 +162,13 @@ class player {
         
         socket.on('spawnBullet', function(protBullet){
           const pos = createVector(protBullet.x, protBullet.y);
-          let bul = new spell(pos,pos,0,0,0,0,0);
+          let bul = new spell(pos,pos,0,0,0,protBullet.damage,0);
           
           bul.pos = createVector(protBullet.x, protBullet.y);
           bul.dir = createVector(protBullet.mx, protBullet.my);
           bul.damage = protBullet.damage;
           bul.life = protBullet.life;
-          
+          console.log(bul.damage);
           
           world.playerPrincipal.bullets.push(bul);
         });

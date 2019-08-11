@@ -118,6 +118,7 @@ io.on('connect', (socket) => {
           let prot = new protBullet(x, y, mx, my, damage, speed, life);
           
           socket.broadcast.emit('spawnBullet', prot);
+          console.log(damage);
           
         });
     
