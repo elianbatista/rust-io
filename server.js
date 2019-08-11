@@ -62,8 +62,11 @@ io.on('connect', (socket) => {
               var newSocket = new playerProt(name, socket.id, 0, 0, 40, 0, 0);
 
               socket.broadcast.emit('newSocket', newSocket);
-
               arrayPlayersObject.push(newSocket);
+             
+              if(arrayPlayersObject.length == 1){
+                     socket.emit('criarSala', 400,400)
+              }
 
               socket.emit('mensagem', arrayPlayersObject);
 
@@ -120,6 +123,7 @@ io.on('connect', (socket) => {
 
 function ServerGameLoop() {
        let d = new Date();
+       
        if(serverOldTime > serverNewTime){
               serverDeltaTime = serverNewTime - serverOldTime + 60;
        }else{

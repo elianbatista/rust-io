@@ -84,10 +84,7 @@ class arena {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
-        if(this.buffer){
-           // console.log(this.buffer);
-        }
-        
+     
         socket.on('spawnBullets', function (arrayBullets) {
            // console.log(arrayBullets);
             // If there's not enough bullets on the client, create them
@@ -102,8 +99,8 @@ class arena {
                 }
             }
             // Otherwise if there's too many, delete the extra 
-            for(let i=arrayBullets.length; i<world.bullets;i++){
-                world.bullets[i].destroy();
+            for(let i=arrayBullets.length; i<world.bullets.length;i++){
+                world.bullets.splice(i,1);
                 world.bullets.splice(i,1);
                 i--;
             }

@@ -21,6 +21,10 @@ const foodState = {
   DYING: 3,
   DEAD: 4,
 }
+socket.emit('criarSala', function(width, height){
+
+});
+
 function createWorld(playerName) {
 
   //console.log(playerName)
