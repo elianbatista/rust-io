@@ -163,7 +163,12 @@ class player {
            parseInt(this.mira.y) != parseInt(newMira.y) ||
            this.state != playerState.STOP){
           
-          socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
+          socket.emit('update',
+                      parseInt(this.pos.x),
+                      parseInt(this.pos.y),
+                      parseInt(this.size),
+                      parseInt(this.mira.x),
+                      parseInt(this.mira.y));
         }
         
         this.camera = createVector(this.pos.x, this.pos.y)
