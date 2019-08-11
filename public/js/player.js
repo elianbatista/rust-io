@@ -142,7 +142,7 @@ class player {
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = this.lookAt(mousex, mousey).mult(this.size);
-        socket.emit('update', this.pos.x,this.pos.y,this.size, this.mira.x, this.mira.y);
+        
         this.bulletTimer.runTimer();
         this.hitTimer.runTimer();
 

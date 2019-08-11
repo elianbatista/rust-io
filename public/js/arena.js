@@ -3,6 +3,7 @@ class arena {
         this.playerPrincipal;
         this.host = false;
         this.players = [];
+        this.bullets = [];
         this.name;
         this.fruits = [];
 
@@ -54,6 +55,7 @@ class arena {
         for (var i = 0; i < n; i++) {
             this.setRandomFruit();
         }
+      randomSeed(random(1000000));
     }
     createPlayers(protPlayers) {
         for(let p of protPlayers){
@@ -78,6 +80,7 @@ class arena {
         this.oldTime = this.newTime;
         this.newTime = millis();
 
+        
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
        
@@ -201,6 +204,17 @@ class arena {
         rect(0, 0, this.size.width * 2, this.size.height * 2)
         noStroke();
     }
+  
+    socket.on('connect', func)
+  
+    socket.broadcast.emit('teste', 'teste');
+
+    socket.on('teste', function(teste){
+      
+      console.log(teste);
+      
+    });
+  
 }
 /*
 update() {
