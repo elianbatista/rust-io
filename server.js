@@ -13,6 +13,7 @@ var express = require('express'),
 var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
+//(httpServer, { wsEngine: 'ws' })
 
 
 //server.listen(3000);
@@ -123,9 +124,7 @@ io.on('connect', (socket) => {
         });
     
 });
-socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
-          socket.broadcast.emit('spawnBullet', x, y, mx, my, damage, speed, life);
-});
+
 
 server.listen(port, function () {
 
