@@ -66,8 +66,15 @@ class vec2d {
               this.x /= n;
               this.y /= NaN;
        }
+       
        clone(){
-              return new vec2d()
+              return new vec2d(this.x, this.y);
+       }
+       print(){
+              console.log("X: " +this.x+ "");
+       }
+       dist(b){
+              return Math.sqrt(this.x * b.x + this.y * b.y); 
        }
        mag(){
               return Math.sqrt(this.x * this.x + this.y * this.y);
@@ -247,10 +254,12 @@ function ServerGameLoop() {
               }
               let pos = new vec2d(bullet.x, bullet.y);
               let dir = new vec2d(0,0);
-              dir.fromAngle(bullet.angle, bullet.speed);
-
-              bullet.x += dirx * serverDeltaTime;
-              bullet.y += diry * serverDeltaTime;
+              dir.fromAngle(bullet.angle, bullet.speed * serverDeltaTime);
+              
+              pos.add(dir);
+              pos.print();
+              bullet.x = pos.x;
+              bullet.y = pos.y;
 
               bullet.life -= serverDeltaTime * 1000;
 
