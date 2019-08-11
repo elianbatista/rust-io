@@ -89,8 +89,8 @@ class player {
           
             socket.emit('newBullet', bullet.pos.x,
                               bullet.pos.y,
-                              bullet.mira.x,
-                              bullet.mira.y,
+                              bullet.dir.x,
+                              bullet.dir.y,
                               bullet.damage,
                               bullet.speed,
                               bullet.life);
@@ -160,12 +160,16 @@ class player {
         this.handleKeyboardInput();
       
         socket.on('spawnBullet', function(protBullet){
-          let bul = new bullet();
-          bul.pos.x = protBullet.x;
-          bul.pos.y = protBullet.y;
-          bul.dir.x = protBullet
+          const pos = createVector(protBullet.x, protBullet.y);
+          let bul = new spell(pos,pos);
+          
+          bul.pos = createVector(protBullet.x, protBullet.y);
+          bul.dir = createVector(protBullet.mx, protBullet.my);
+          bul.damage = protBullet.damage;
+          bul.life = protBullet.life;
           
           
+          world.playerPrincipal.bullets.push(bul);
         });
 
         //Se tiver clicado vai até o target

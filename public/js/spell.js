@@ -27,8 +27,9 @@ class spell {
     constructor(pos, target, acurac, speed, life, damage, size) {
         this.pos = createVector(pos.x, pos.y);
         
-
-        this.size = size;
+//MUDAR
+        this.size = 10;
+      
         this.speed = speed;
         this.dir = createVector(target.x, target.y);
 

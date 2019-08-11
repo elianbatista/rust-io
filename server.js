@@ -115,9 +115,9 @@ io.on('connect', (socket) => {
                               
         socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
           
-          let protBullet = new protBullet(x, y, mx, my, damage, speed, life);
+          let prot = new protBullet(x, y, mx, my, damage, speed, life);
           
-          socket.broadcast.emit('spawnBullet', protBullet);
+          socket.broadcast.emit('spawnBullet', prot);
           
         });
     
