@@ -19,11 +19,11 @@ class player {
         this.bullets = [];
         this.bulletDamage = 25;
         this.bulletLife = 16000
-        this.bulletAcurac = 1
+        this.bulletAcurac = 0.4
         this.bulletSpeed = 1000
         this.bulletSize = 16;
 
-        this.bulletTimer = new spellTimer(200);
+        this.bulletTimer = new spellTimer(100);
 
         this.hitTimer = new spellTimer(700);
     }

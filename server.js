@@ -17,8 +17,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 var arrayPlayersObject = [];
-
 var arrayBulletsObject = [];
+var arrayFoodObject = [];
 
 let serverDeltaTime = 0;
 let serverNewTime = 0;
@@ -253,6 +253,11 @@ io.on('connect', (socket) => {
               let prot = new protBullet(x, y, angle, speed, life, damage);
               arrayBulletsObject.push(prot);
               //socket.volatile.broadcast.emit('spawnBullet', prot);
+       });
+       socket.on('createFruits',function(n){
+              for(let i=0;i<=n;i++){
+                     let fruit = new food(randomInterval(world.widthworld.width,))
+              }
        });
 
 });

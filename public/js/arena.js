@@ -52,10 +52,12 @@ class arena {
             random(-this.size.height, this.size.height)));
     }
     setFruits(n) {
+        /*
         for (var i = 0; i < n; i++) {
             this.setRandomFruit();
         }
-        randomSeed(random(1000000));
+        */
+        socket.emit('createFruits',n);
     }
     createPlayers(protPlayers) {
         for (let p of protPlayers) {
