@@ -120,9 +120,14 @@ io.on('connect', (socket) => {
 
 function ServerGameLoop() {
        let d = new Date();
-       serverDeltaTime = serverNewTime - serverOldTime;
+       if(serverOldTime > serverNewTime){
+              serverDeltaTime = serverNewTime - serverOldTime + 60;
+       }else{
+              serverDeltaTime = serverNewTime - serverOldTime;
+       }
+       
        serverOldTime = serverNewTime;
-       serverNewTime = d.getHours() + d.getSeconds() + d.getMilliseconds()/1000;
+       serverNewTime = d.getSeconds() + d.getMilliseconds()/1000;
        //console.log(serverDeltaTime, serverOldTime, serverNewTime);
        for (let i = 0; i < arrayBulletsObject.length; i++) {
               let bullet = arrayBulletsObject[i];
@@ -133,11 +138,11 @@ function ServerGameLoop() {
               const dirx = bullet.speed*Math.cos(bullet.angle)
               const diry = bullet.speed*Math.sin(bullet.angle)
              
-              bullet.x += dirx * serverDeltaTime;
-              bullet.y += diry * serverDeltaTime;
+              bullet.x += dirx * serverDeltaTime*1000;
+              bullet.y += diry * serverDeltaTime*1000;
 
-              bullet.life -= serverDeltaTime;
-              console.log(bullet.x, bullet.y,bullet.life, serverDeltaTime);
+              bullet.life -= serverDeltaTime*1000;
+              console.log(bullet.x,diry);
 
               /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
@@ -158,7 +163,7 @@ function ServerGameLoop() {
        //io.emit("bullets-update", bullet_array);
 }
 
-setInterval(ServerGameLoop, 200);
+setInterval(ServerGameLoop, 16);
 
 
 
