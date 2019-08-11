@@ -21,7 +21,7 @@ var arrayPlayersObject = [];
 var arrayBulletsObject = [];
 
 let serverDeltaTime = 0;
-let serverPPNewTime = 0;
+let serverNewTime = 0;
 let serverOldTime = 0;
 
 
@@ -58,16 +58,40 @@ class vec2d {
               this.x -= b.x;
               this.y -= b.y;
        }
-       mult(b) {
-              this.x *= b.x;
-              this.y *= b.y;
+       mult(n) {
+              this.x *= n;
+              this.y *= n;
        }
-       div(b) {}
-              this.x /= b.x;
-              this.y /= b.y;
+       div(n) {
+              this.x /= n;
+              this.y /= NaN;
+       }
+       clone(){
+              return new vec2d()
+       }
+       mag(){
+              return Math.sqrt(this.x * this.x + this.y * this.y);
+       }
+       magSq(){
+              return (this.x * this.x + this.y * this.y);
+       }
+       fromAngle(angle, mag){
+              this.x = mag * Math.cos(angle)
+              this.y = mag * Math.sin(angle)
+       }
+       lerp(b, n){
+              this.x = (1-n)*this.x + n*b.x;
+              this.y = (1-n)*this.y + n*b.y;
+       }
+       object(){
+              return {x: this.x, y: this.y};
+       }
+       normalize(){
+              const mg = this.mag();
+              this.div(mg);
        }
 }
-
+/*
 class food {
        constructor(posx, posy) {
               this.pos = Victor(posx, posy);
@@ -125,61 +149,9 @@ class food {
        aplyForce(dir, force) {
               this.zero = dir.mult(force);
        }
-       display() {
-              this.hit.runTimer()
-
-              if (this.checkLife()) {
-                     if (this.life < 100) {
-                            this.lifeD.display(this.life, this.pos, 35);
-                     }
-
-                     push();
-                     translate(this.pos.x, this.pos.y);
-                     rotate(this.rotate * PI / 180)
-                     stroke(0);
-
-                     if (this.hit.checkTimer()) {
-                            fill(50, 200, 50);
-                            rect(0, 0, this.size, this.size);
-                     } else {
-                            fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
-                            const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, this.size * 1.2)
-                            rect(0, 0, anim, anim);
-                     }
-
-
-                     pop();
-
-              } else {
-
-                     if (this.state == foodState.WALK) { //
-                            this.state = foodState.DYING;
-                            this.hit.startTimer();
-                     }
-
-                     if (this.hit.checkTimer()) {
-                            // world.fruits.splice(world.fruits.indexOf(this), 1);
-                            this.state = foodState.DEAD;
-                            world.setRandomFruit();
-
-                     } else {
-
-                            push()
-                            translate(this.pos.x, this.pos.y);
-
-                            rotate(this.rotate * PI / 180)
-                            stroke(0, 0, 0, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
-                            fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
-
-                            rect(0, 0, this.size, this.size);
-                            pop()
-
-                     }
-              }
-
-       }
 
 }
+*/
 io.on('connect', (socket) => {
 
        socket.on('conectei', function (name) {
@@ -273,9 +245,9 @@ function ServerGameLoop() {
                      arrayBulletsObject.splice(i, 1);
                      continue;
               }
-
-              const dirx = bullet.speed * Math.cos(bullet.angle)
-              const diry = bullet.speed * Math.sin(bullet.angle)
+              let pos = new vec2d(bullet.x, bullet.y);
+              let dir = new vec2d(0,0);
+              dir.fromAngle(bullet.angle, bullet.speed);
 
               bullet.x += dirx * serverDeltaTime;
               bullet.y += diry * serverDeltaTime;
