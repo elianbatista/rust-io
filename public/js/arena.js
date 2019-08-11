@@ -28,17 +28,6 @@ class arena {
         return new food(random(-this.size.width, this.size.width),
             random(-this.size.height, this.size.height))
     }
-    setHost() {
-        socket.on('host', function (mensagem) {
-
-            if (mensagem) {
-                world.setFruits(50);
-                world.host = true;
-            }
-
-
-        });
-    }
     setPlayer(player) {
 
         this.playerPrincipal = player;
@@ -105,11 +94,11 @@ class arena {
         });
         socket.on("spawnFruits", function (arrayFruits) {
            // console.log(arrayFruits);
-            noLoop();
+            //noLoop();
             for (let i = 0; i < arrayFruits.length; i++) {
                 if (world.fruits[i] == undefined) {
                     let pos = createVector(arrayFruits[i].x, arrayFruits[i].y)
-                    world.fruits[i] = new protFruit(arrayFruits[i].x, arrayFruits[i].y,
+                    world.fruits[i] = new protFruit(arrayFruits[i].pos.x, arrayFruits[i].pos.y,
                         arrayFruits[i].size,arrayFruits[i].rotate,arrayFruits[i].life);
                         
                     
@@ -189,9 +178,9 @@ class arena {
     drawFruits() {
         for (let f of this.fruits) {
             push()
-            console.log(f);
+           
             translate(f.x, f.y);
-            rotate(f.rotate * PI / 180)
+            rotate(f.angle * PI / 180)
             stroke(0);
 
            

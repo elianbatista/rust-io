@@ -25,19 +25,14 @@ socket.on('criarSala', function(alreadyExists, name, width, height){
   if(alreadyExists){
     world = new arena(width, height);
     world.setName( name ) ;
+    
   }else{
     world = new arena(width, height);
     world.setName( name ) ;
-    world.setFruits(30);
-  
-    world.setHost();
+    
  
   }
-  
-  
-  world.setFruits(30);
-  
-  world.setHost();
+
  
   flag = true;
 });

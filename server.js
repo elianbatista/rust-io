@@ -133,7 +133,6 @@ function lerpN(a, b, n){
 class food {
        constructor(posx, posy) {
               this.pos = new vec2d(posx, posy);
-              this.pos.print();
               this.dir = new vec2d(0, 0);
               this.dirAng = 0;
               this.rotate = randomInterval(360,0);
@@ -171,14 +170,14 @@ class food {
        }
        update() {
               if (this.zero.magSq() > 0.1) {
-                     this.zero.lerp(this.zero, this.zero.clone().mult(0.1), 0.5);
+                     this.zero.lerp(this.zero.clone().mult(0.1), 0.5);
               }
-              this.dir.lerp(this.dir, this.zero, 0.15);
+              this.dir.lerp(this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
               this.rotate += this.dirAng;
               this.pos.add(this.dir);
-              //this.pos.print()
+              
               this.pos.constrain(-world.width, world.height);
               this.x = this.pos.x;
               this.y = this.pos.y;
