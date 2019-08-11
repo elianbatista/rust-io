@@ -131,7 +131,7 @@ io.on('connect', (socket) => {
         
          io.sockets.emit('heartbeat', arrayFruitsObject);
         
-      }, 1000);
+      }, 150);
     
 });
 

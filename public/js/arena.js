@@ -31,7 +31,7 @@ class arena {
       socket.on('host', function(mensagem){
           
           if(mensagem){                    
-            world.setFruits(1);
+            world.setFruits(50);
             world.host = true;
           }
 
@@ -85,7 +85,6 @@ class arena {
         if(this.host){
           let i = 0
           let j = 0;
-          console.log("hosteando");
           
           for (let fruit of this.fruits) {
             
@@ -138,15 +137,13 @@ class arena {
           //console.log("Clienteando");
           //'clientUpdateFrutas'
            //if(frameCount % 500 == 0){
-          
             socket.on('heartbeat', function(fruits){
               world.fruits = []
               for(let fruit of fruits){
                           
-                world.fruits.push(fruit);
-
+                world.quadFruits.insert(new food(fruit.x, fruit.y));
+                
               }
-              
             });
           for(let fruit of this.fruits){
             
@@ -163,13 +160,10 @@ class arena {
           }
           
         }
-      
-
-        console.log(this.fruits.length);
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
-        //this.collideBullets();
+        this.collideBullets();
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
