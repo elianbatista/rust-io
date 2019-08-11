@@ -74,11 +74,33 @@ class arena {
         return this.playerPrincipal;
     }
 
+    drawBullets(){
 
+    }
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
+
+        socket.on('spawnBullet', function (arrayBullets) {
+
+            // If there's not enough bullets on the client, create them
+            for(var i=0;i<arrayBullets;i++){
+                if(world.bullets[i] == undefined){
+                    world.bullets[i] = new speel(bullet.x, bullet.y)
+                } else {
+                    //Otherwise, just update it! 
+                    bullet_array[i].x = server_bullet_array[i].x; 
+                    bullet_array[i].y = server_bullet_array[i].y;
+                }
+            }
+            // Otherwise if there's too many, delete the extra 
+            for(var i=server_bullet_array.length;i<bullet_array.length;i++){
+                bullet_array[i].destroy();
+                bullet_array.splice(i,1);
+                i--;
+            }
+        });
 
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
@@ -137,6 +159,7 @@ class arena {
 
         this.drawPlayers();
     }
+
 
     drawPlayers() {
 

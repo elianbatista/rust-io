@@ -129,21 +129,26 @@ function ServerGameLoop() {
        serverOldTime = serverNewTime;
        serverNewTime = d.getSeconds() + d.getMilliseconds()/1000;
        //console.log(serverDeltaTime, serverOldTime, serverNewTime);
-       for (let i = 0; i < arrayBulletsObject.length; i++) {
+       for (let i = arrayBulletsObject.length - 1; i >= 0 ; i--) {
               let bullet = arrayBulletsObject[i];
               if(bullet.life <= 0){
                      arrayBulletsObject.splice(i,1);
+                     continue;
               }
-
+              if(bullet.x <= -400 || bullet.x >= 400 || bullet.y <= -400 || bullet.y >=400){
+                     arrayBulletsObject.splice(i,1);
+                     continue;
+              }
+              
               const dirx = bullet.speed*Math.cos(bullet.angle)
               const diry = bullet.speed*Math.sin(bullet.angle)
              
-              bullet.x += dirx * serverDeltaTime*1000;
-              bullet.y += diry * serverDeltaTime*1000;
+              bullet.x += dirx * serverDeltaTime;
+              bullet.y += diry * serverDeltaTime;
 
               bullet.life -= serverDeltaTime*1000;
-              console.log(bullet.x,diry);
-
+       
+              console.log(bullet.x, bullet.y);
               /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
                      if (bullet.owner_id != id) {
@@ -160,10 +165,10 @@ function ServerGameLoop() {
 
        }
        // Tell everyone where all the bullets are by sending the whole array
-       //io.emit("bullets-update", bullet_array);
+       io.emit("spawnBullets", arrayBulletsObject);
 }
 
-setInterval(ServerGameLoop, 16);
+setInterval(ServerGameLoop, 300);
 
 
 

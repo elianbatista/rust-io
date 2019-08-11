@@ -27,7 +27,9 @@ class spell {
     constructor(pos, angle, speed, life, damage) {
         this.pos = createVector(pos.x, pos.y);
         //this.dir = p5.Vector.fromAngle(angle).mult(speed);
+        this.angle = angle;
         this.dir = createVector(speed*cos(angle),speed*sin(angle));
+        this.speed = speed;
         this.life = life;
         this.damage = damage;
        

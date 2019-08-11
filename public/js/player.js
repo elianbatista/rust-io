@@ -92,7 +92,7 @@ class player {
         if (this.bulletTimer.checkTimer()) {
             const bullet = this.produceBullet(this);
 
-            this.bullets.push(bullet);
+            //this.bullets.push(bullet);
 
             this.bulletTimer.startTimer();
             
@@ -183,18 +183,7 @@ class player {
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();
 
-        socket.on('spawnBullet', function (protBullet) {
-
-            const pos = createVector(protBullet.x, protBullet.y);
-            let bul = new spell(pos, pos, 0, 0, 0, protBullet.damage, 0);
-
-            bul.pos = createVector(protBullet.x, protBullet.y);
-            bul.dir = createVector(protBullet.mx, protBullet.my);
-            bul.damage = protBullet.damage;
-            bul.life = protBullet.life;
-
-            world.playerPrincipal.bullets.push(bul);
-        });
+       
 
 
 
