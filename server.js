@@ -28,8 +28,6 @@ var arrayPlayersObject = [];
 
 var arrayFruitsObject = [];
 
-var quantidadePlayers = 0;
-
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.name = name;
@@ -53,19 +51,7 @@ let protFruit = function(x, y, size, angle, life){
 
 io.on('connect', (socket) => {
 
-       socket.on('conectei', function(name){  
-         
-              quantidadePlayers++;
-              
-              if(quantidadePlayers == 1){
-      
-                socket.emit('host', true);
-                
-              } else {
-                
-                socket.emit('host', false);
-                
-              }
+       socket.on('conectei', function(name){
           
               var newSocket = new playerProt(name ,socket.id, 0, 0, 40, 0, 0);
          
@@ -116,22 +102,6 @@ io.on('connect', (socket) => {
               }
 
        });
-  
-      socket.on('hostUpdateFrutas', function(fruits){
-
-          for(let i = 0; i < fruits.length; i++){
-
-             arrayFruitsObject[i] = fruits[i];
-            
-          }
-        
-      });
-  
-      setInterval(function(){
-        
-         io.sockets.emit('heartbeat', arrayFruitsObject);
-        
-      }, 150);
     
 });
 

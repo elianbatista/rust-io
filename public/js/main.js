@@ -22,7 +22,7 @@ function createWorld(playerName) {
   //console.log(playerName)
   world = new arena(400, 400);
   
-  //world.setFruits(30);
+  world.setFruits(30);
   world.setName( playerName ) ;
   world.setHost();
   
@@ -38,8 +38,8 @@ function preload() {
 function setup() {
   createCanvas(windowWidth, windowHeight);
   rectMode(CENTER);
-  pname = 'douglas';
-  plife = 100;
+
+  randomSeed(0);
   flag = false;
   textFont('Dosis');
 

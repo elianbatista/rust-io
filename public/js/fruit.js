@@ -189,7 +189,7 @@ class food {
     }
     display() {
         this.hit.runTimer()
-
+        console.log("a");
         if (this.checkLife()) {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 35);

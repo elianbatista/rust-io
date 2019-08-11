@@ -39,8 +39,8 @@ class arena {
       });
     }
     setPlayer(player) {
+      
         this.playerPrincipal = player;
-        console.log('Player criado com sucesso',this.playerPrincipal);
       
     }
     getDelta() {
@@ -80,85 +80,50 @@ class arena {
 
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
-        let pf = [];
+       
         
-        if(this.host){
-          let i = 0
-          let j = 0;
-          
-          for (let fruit of this.fruits) {
-            
-              if (fruit.state == foodState.DEAD) {
-                  this.fruits.splice(i, 1);
-                  continue;
-              }
-              fruit.update();
-              fruit.display();
-              this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
-              j = 0;
-              for (let fruit2 of this.fruits) {
-                  this.collideAndPush(0.1, fruit, fruit2, i, j);
-                  j++;
-              }
-              const quick = 1.5;
-              let force = createVector(0, 0);
-              if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
-                  if (fruit.pos.x < 0) {
-                      force = createVector(1,0);
-                      fruit.aplyForce(force, quick);
-                  } else {
-                      force = createVector(-1,0);
-                      fruit.aplyForce(force, quick);
-                  }
-              }
-              if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
-                  if (fruit.pos.y < 0) {
-                      force = createVector(0,1);
-                      fruit.aplyForce(force, quick);
-                  } else {
-                      force = createVector(0,-1);
-                      fruit.aplyForce(force, quick);
-                  }
-              }
-             // fruit.aplyForce(force, quick);
-              if (fruit.state != foodState.DYING) {
-                  this.quadFruits.insert(fruit)
-              }
-              
-          
-              pf.push(new protFruit(fruit.pos.x, fruit.pos.y, fruit.size, fruit.rotate, fruit.life));
-            
-              i++;
-          }
-          
-            socket.emit('hostUpdateFrutas', pf);
-          
-        }else{
-          //console.log("Clienteando");
-          //'clientUpdateFrutas'
-           //if(frameCount % 500 == 0){
-            socket.on('heartbeat', function(fruits){
-              world.fruits = []
-              for(let fruit of fruits){
-                          
-                world.quadFruits.insert(new food(fruit.x, fruit.y));
-                
-              }
-            });
-          for(let fruit of this.fruits){
-            
-            push();
-                  translate(fruit.x, fruit.y);
-                  rotate(fruit.angle * PI / 180)
-                  stroke(0);
+        let i = 0
+        let j = 0;
+        
+        for (let fruit of this.fruits) {
+            if (fruit.state == foodState.DEAD) {
+                this.fruits.splice(i, 1);
+                continue;
+            }
+            fruit.update();
+            fruit.display();
+            this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
+            j = 0;
+            for (let fruit2 of this.fruits) {
+                this.collideAndPush(0.1, fruit, fruit2, i, j);
+                j++;
+            }
+            const quick = 1.5;
+            let force = createVector(0, 0);
+            if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
+                if (fruit.pos.x < 0) {
+                    force = createVector(1,0);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(-1,0);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+            if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
+                if (fruit.pos.y < 0) {
+                    force = createVector(0,1);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(0,-1);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+           // fruit.aplyForce(force, quick);
+            if (fruit.state != foodState.DYING) {
+                this.quadFruits.insert(fruit)
+            }
 
-
-                  fill(50, 200, 50);
-                  rect(0,0, fruit.size, fruit.size);
-                pop();
-      
-          }
-          
+            i++;
         }
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
