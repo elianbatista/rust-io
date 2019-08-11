@@ -9,7 +9,7 @@ var io = require('socket.io').listen(server) //({ wsEngine: 'ws' });
 
 const path = require('path');
 const port = process.env.PORT || 3000;
-
+//localStorage.debug = '*';
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
@@ -148,7 +148,7 @@ function ServerGameLoop() {
 
               bullet.life -= serverDeltaTime*1000;
        
-              console.log(bullet.x, bullet.y);
+             // console.log(bullet.x, bullet.y);
               /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
                      if (bullet.owner_id != id) {
@@ -168,7 +168,7 @@ function ServerGameLoop() {
        io.emit("spawnBullets", arrayBulletsObject);
 }
 
-setInterval(ServerGameLoop, 300);
+setInterval(ServerGameLoop, 16);
 
 
 

@@ -11,7 +11,7 @@ class arena {
             width: _width,
             height: _height
         }
-
+        this.buffer;
         this.oldTime = 0;
         this.newTime = millis();
         this.deltaTime;
@@ -75,33 +75,40 @@ class arena {
     }
 
     drawBullets(){
-
+        for(let p of this.bullets){
+            fill(0,0,255);
+            circle(p.x, p.y, 20);
+        }
     }
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
-
-        socket.on('spawnBullet', function (arrayBullets) {
-
+        if(this.buffer){
+           // console.log(this.buffer);
+        }
+        
+        socket.on('spawnBullets', function (arrayBullets) {
+           // console.log(arrayBullets);
             // If there's not enough bullets on the client, create them
-            for(var i=0;i<arrayBullets;i++){
+            for(let i=0;i<arrayBullets.length;i++){
                 if(world.bullets[i] == undefined){
-                    world.bullets[i] = new speel(bullet.x, bullet.y)
+                    let pos = createVector(arrayBullets[i].x, arrayBullets[i].y)
+                    world.bullets[i] = new createVector(arrayBullets[i].x, arrayBullets[i].y);
                 } else {
                     //Otherwise, just update it! 
-                    bullet_array[i].x = server_bullet_array[i].x; 
-                    bullet_array[i].y = server_bullet_array[i].y;
+                    world.bullets[i].x = arrayBullets[i].x; 
+                    world.bullets[i].y = arrayBullets[i].y;
                 }
             }
             // Otherwise if there's too many, delete the extra 
-            for(var i=server_bullet_array.length;i<bullet_array.length;i++){
-                bullet_array[i].destroy();
-                bullet_array.splice(i,1);
+            for(let i=arrayBullets.length; i<world.bullets;i++){
+                world.bullets[i].destroy();
+                world.bullets.splice(i,1);
                 i--;
             }
         });
-
+        this.drawBullets();
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
 
@@ -228,6 +235,7 @@ class arena {
     }
 
 }
+
 
 /*
 update() {
