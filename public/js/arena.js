@@ -139,45 +139,33 @@ class arena {
           //'clientUpdateFrutas'
            //if(frameCount % 500 == 0){
           
-            socket.emit('request');
-          
-            socket.on('clientUpdateFrutas', function(fruits){
-                
-              console.log(fruits);
-             // console.log(fruits[0].x);
-
-    /*
+            socket.on('heartbeat', function(fruits){
+              world.fruits = []
               for(let fruit of fruits){
-
-                  this.fruits = [];
-                  this.fruits.push(fruit)
-                  console.log(this.fruits)
-
+                          
+                world.fruits.push(fruit);
 
               }
-*/
-
-            });
-        //  }
-          /*
-          for(let fruit of this.fruits){
-                          
-              push();
-                translate(fruit.x, fruit.y);
-                rotate(fruit.angle * PI / 180)
-                stroke(0);
-
-
-                fill(50, 200, 50);
-                rect(0,0, fruit.size, fruit.size);
-              pop();
               
-            }
-                  */
+            });
+          for(let fruit of this.fruits){
+            
+            push();
+                  translate(fruit.x, fruit.y);
+                  rotate(fruit.angle * PI / 180)
+                  stroke(0);
+
+
+                  fill(50, 200, 50);
+                  rect(0,0, fruit.size, fruit.size);
+                pop();
+      
+          }
+          
         }
       
 
-        
+        console.log(this.fruits.length);
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();

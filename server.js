@@ -125,14 +125,14 @@ io.on('connect', (socket) => {
             
           }
         
-  
-        
       });
-    socket.on('request',function(){
-      socket.broadcast.emit('clientUpdateFrutas', arrayFruitsObject);
-    })
+  
+      setInterval(function(){
+        
+         io.sockets.emit('heartbeat', arrayFruitsObject);
+        
+      }, 1000);
     
-
 });
 
 server.listen(port, function () {
@@ -140,3 +140,4 @@ server.listen(port, function () {
        console.log('Server listening at port %d', port);
 
 });
+
