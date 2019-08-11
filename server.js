@@ -1,11 +1,11 @@
 var express = require('express'),
     http = require('http');
-var uws = require('uws');
+
 var app = express();
 var server = http.createServer(app);
 
 var io = require('socket.io').listen(server)//({ wsEngine: 'ws' });
-io.ws = new uws.Server({ perMessageDeflate: false });
+
 
 const path = require('path');
 const port = process.env.PORT || 3000;
