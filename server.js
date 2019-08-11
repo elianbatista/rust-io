@@ -1,6 +1,6 @@
 var express = require('express'),
        http = require('http');
-
+var fruits = require('fruits');
 var app = express();
 var server = http.createServer(app);
 
