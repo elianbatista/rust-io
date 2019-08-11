@@ -148,17 +148,17 @@ class player {
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
-    emitPosition(){
-      console.log("Emiting position");
-      setTimeout(this.emitPosition, 20);
-      socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
-    }
+    
     update(mousex, mousey) {
-        
       
+        const newMira = this.lookAt(mousex, mousey).mult(this.size);
+        if(compareVectors(newMira, this.mira, 50)){
+          socket.emit('update',this.pos.x,this.pos.y,this.size,this.mira.x,this.mira.y);
+        }
+        
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
-        this.mira = this.lookAt(mousex, mousey).mult(this.size);
+        this.mira = newMira;
         
         this.bulletTimer.runTimer();
         this.hitTimer.runTimer();
@@ -234,4 +234,7 @@ class protPlayer {
         this.x = x;
         this.y = y;
     }
+}
+function compareVectors(a, b, n){
+  return(abs(a.x-b.y)>n || abs(a.y-b.y)>n);
 }
