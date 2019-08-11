@@ -74,17 +74,21 @@ class player {
         return a.normalize()
     }
     produceBullet(){
+        const pos = this.pos;
+        const xAxis = createVector(1,0);
+        let angle = this.mira.angleBetween(xAxis);
+        const angleError = map(this.bulletAcurac,0,1,-PI/4, 0);
+        angle += random(-angleError, angleError);
+        const speed = this.bulletSpeed
+        const damage = this.bulletDamage
+        const life = this.bulletLife
+        
+        return new spell(pos, angle, speed, life, damage);
         
     }
     shoot() {
         if (this.bulletTimer.checkTimer()) {
-            const bullet = new spell(this.pos,
-                this.mira,
-                this.bulletAcurac,
-                this.bulletSpeed,
-                this.bulletLife,
-                this.bulletDamage,
-                this.bulletSize);
+            const bullet = this.produceBullet();
 
             this.bullets.push(bullet);
 

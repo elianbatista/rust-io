@@ -24,24 +24,15 @@ class spellTimer {
     }
 }
 class spell {
-    constructor(pos, target, acurac, speed, life, damage, size) {
+    constructor(pos, angle, speed, life, damage) {
         this.pos = createVector(pos.x, pos.y);
-
+        this.dir = p5.Vector.fromAngle(angle).mult(speed);
+        this.life = life;
+        this.damage = damage;
+       
+       
         //MUDAR
         this.size = 10;
-
-        this.speed = speed;
-        this.dir = createVector(target.x, target.y);
-
-        const angle = map(acurac, 0, 1, -PI / 4, 0);
-        this.dir.rotate(random(angle, -angle));
-        this.dir.normalize();
-        this.dir.mult(speed);
-
-        this.damage = damage;
-
-        this.life = life;
-
     }
     display() {
         if (this.checkLife()) {
