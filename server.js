@@ -1,10 +1,11 @@
 var express = require('express'),
        http = require('http');
 
+
 var app = express();
 var server = http.createServer(app);
 
-var io = require('socket.io').listen(server) //({ wsEngine: 'ws' });
+var io = require('socket.io').listen(server)
 
 
 const path = require('path');
@@ -20,7 +21,7 @@ var arrayPlayersObject = [];
 var arrayBulletsObject = [];
 
 let serverDeltaTime = 0;
-let serverNewTime = 0;
+let serverPPNewTime = 0;
 let serverOldTime = 0;
 
 
@@ -44,34 +45,158 @@ let protBullet = function (x, y, angle, speed, life, damage) {
        this.life = life;
        this.damage = damage;
 }
-
-let protFruit = function (x, y, size, angle, life) {
-
-       this.x = x;
-       this.y = y;
-       this.size = size;
-       this.angle = angle;
-       this.life = life;
-
+class vec2d {
+       constructor(x, y) {
+              this.x = x || 0;
+              this.y = y || 0;
+       }
+       add(b) {
+              this.x += b.x;
+              this.y += b.y;
+       }
+       sub(b) {
+              this.x -= b.x;
+              this.y -= b.y;
+       }
+       mult(b) {
+              this.x *= b.x;
+              this.y *= b.y;
+       }
+       div(b) {}
+              this.x /= b.x;
+              this.y /= b.y;
+       }
 }
 
+class food {
+       constructor(posx, posy) {
+              this.pos = Victor(posx, posy);
+              this.dir = createVector(0, 0);
+              this.dirAng = 0;
+              this.rotate = random(360);
+              this.size = 20;
+
+              this.life = 100;
+              this.lifeD = new life(100);
+              this.zero = createVector(random(-10, 10), random(-10, 10));
+              this.zero.normalize().mult(0.1);
+              this.zeroRot = random(-1, 1) * (PI / 8);
+
+       }
+       checkLife() {
+              return this.life >= 0;
+       }
+       checkWalls() {
+              const quick = 1.5;
+              let force = createVector(0, 0);
+              if (this.pos.x >= world.size.width - 20 || this.pos.x <= -world.size.width + 20) {
+                     if (this.pos.x < 0) {
+                            force.add(p5.Vector(1, 0));
+
+                     } else {
+                            force.add(p5.Vector(-1, 0));
+                     }
+              }
+              if (this.pos.y > world.size.height - 20 || this.pos.y <= -world.size.height + 20) {
+                     if (this.pos.y < 0) {
+                            force.add(p5.Vector(0, 1));
+                     } else {
+                            force.add(p5.Vector(1, 0));
+                     }
+              }
+              this.aplyForce(force, quick);
+       }
+       update() {
+              if (this.zero.magSq() > 0.1) {
+                     this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);
+              }
+              this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
+              this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+
+              this.rotate += this.dirAng;
+              this.pos.add(this.dir);
+
+              this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
+              this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
+       }
+       aplyMovement(dir, force) {
+              this.dir = dir.mult(force);
+       }
+       aplyForce(dir, force) {
+              this.zero = dir.mult(force);
+       }
+       display() {
+              this.hit.runTimer()
+
+              if (this.checkLife()) {
+                     if (this.life < 100) {
+                            this.lifeD.display(this.life, this.pos, 35);
+                     }
+
+                     push();
+                     translate(this.pos.x, this.pos.y);
+                     rotate(this.rotate * PI / 180)
+                     stroke(0);
+
+                     if (this.hit.checkTimer()) {
+                            fill(50, 200, 50);
+                            rect(0, 0, this.size, this.size);
+                     } else {
+                            fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100);
+                            const anim = map(this.hit.remainTime(), 0, this.hit.cd, this.size, this.size * 1.2)
+                            rect(0, 0, anim, anim);
+                     }
+
+
+                     pop();
+
+              } else {
+
+                     if (this.state == foodState.WALK) { //
+                            this.state = foodState.DYING;
+                            this.hit.startTimer();
+                     }
+
+                     if (this.hit.checkTimer()) {
+                            // world.fruits.splice(world.fruits.indexOf(this), 1);
+                            this.state = foodState.DEAD;
+                            world.setRandomFruit();
+
+                     } else {
+
+                            push()
+                            translate(this.pos.x, this.pos.y);
+
+                            rotate(this.rotate * PI / 180)
+                            stroke(0, 0, 0, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
+                            fill(map(this.hit.remainTime(), 0, this.hit.cd, 255, 50), 60, 100, map(this.hit.remainTime(), this.hit.cd, 0, 255, 0));
+
+                            rect(0, 0, this.size, this.size);
+                            pop()
+
+                     }
+              }
+
+       }
+
+}
 io.on('connect', (socket) => {
 
        socket.on('conectei', function (name) {
 
               var newSocket = new playerProt(name, socket.id, 0, 0, 40, 0, 0);
               arrayPlayersObject.push(newSocket);
-             
-              if(arrayPlayersObject.length == 1){
-                     socket.emit('criarSala',true, name, 200, 200)
-              }else{
-                     socket.emit('criarSala',false, name, 200, 200)
+
+              if (arrayPlayersObject.length == 1) {
+                     socket.emit('criarSala', true, name, 200, 200)
+              } else {
+                     socket.emit('criarSala', false, name, 200, 200)
               }
 
-              
+
 
               socket.broadcast.emit('newSocket', newSocket);
-              
+
 
               socket.emit('mensagem', arrayPlayersObject);
 
@@ -128,36 +253,36 @@ io.on('connect', (socket) => {
 
 function ServerGameLoop() {
        let d = new Date();
-       
-       if(serverOldTime > serverNewTime){
+
+       if (serverOldTime > serverNewTime) {
               serverDeltaTime = serverNewTime - serverOldTime + 60;
-       }else{
+       } else {
               serverDeltaTime = serverNewTime - serverOldTime;
        }
-       
+
        serverOldTime = serverNewTime;
-       serverNewTime = d.getSeconds() + d.getMilliseconds()/1000;
+       serverNewTime = d.getSeconds() + d.getMilliseconds() / 1000;
        //console.log(serverDeltaTime, serverOldTime, serverNewTime);
-       for (let i = arrayBulletsObject.length - 1; i >= 0 ; i--) {
+       for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
               let bullet = arrayBulletsObject[i];
-              if(bullet.life <= 0){
-                     arrayBulletsObject.splice(i,1);
+              if (bullet.life <= 0) {
+                     arrayBulletsObject.splice(i, 1);
                      continue;
               }
-              if(bullet.x <= -400 || bullet.x >= 400 || bullet.y <= -400 || bullet.y >=400){
-                     arrayBulletsObject.splice(i,1);
+              if (bullet.x <= -400 || bullet.x >= 400 || bullet.y <= -400 || bullet.y >= 400) {
+                     arrayBulletsObject.splice(i, 1);
                      continue;
               }
-              
-              const dirx = bullet.speed*Math.cos(bullet.angle)
-              const diry = bullet.speed*Math.sin(bullet.angle)
-             
+
+              const dirx = bullet.speed * Math.cos(bullet.angle)
+              const diry = bullet.speed * Math.sin(bullet.angle)
+
               bullet.x += dirx * serverDeltaTime;
               bullet.y += diry * serverDeltaTime;
 
-              bullet.life -= serverDeltaTime*1000;
-       
-             // console.log(bullet.x, bullet.y);
+              bullet.life -= serverDeltaTime * 1000;
+
+              // console.log(bullet.x, bullet.y);
               /* Check if this bullet is close enough to hit any player 
               for (var id in players) {
                      if (bullet.owner_id != id) {
