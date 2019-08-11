@@ -116,6 +116,22 @@ io.on('connect', (socket) => {
               }
 
        });
+  
+      socket.on('hostUpdateFrutas', function(fruits){
+
+          for(let i = 0; i < fruits.length; i++){
+
+             arrayFruitsObject[i] = fruits[i];
+            
+          }
+        
+  
+        
+      });
+    socket.on('request',function(){
+      socket.broadcast.emit('clientUpdateFrutas', arrayFruitsObject);
+    })
+    
 
 });
 

@@ -132,16 +132,18 @@ class arena {
               i++;
           }
           
-          socket.emit('updateFrutas', pf);
+            socket.emit('hostUpdateFrutas', pf);
           
         }else{
           //console.log("Clienteando");
           //'clientUpdateFrutas'
            //if(frameCount % 500 == 0){
-            socket.on('updateFrutas', function(fruits){
-              
+          
+            socket.emit('request');
+          
+            socket.on('clientUpdateFrutas', function(fruits){
+                
               console.log(fruits);
-
              // console.log(fruits[0].x);
 
     /*
@@ -157,6 +159,7 @@ class arena {
 
             });
         //  }
+          /*
           for(let fruit of this.fruits){
                           
               push();
@@ -170,10 +173,10 @@ class arena {
               pop();
               
             }
-          
+                  */
         }
       
-      
+
         
         
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
