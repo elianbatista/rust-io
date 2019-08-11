@@ -1,7 +1,7 @@
 class arena {
     constructor(_width, _height) {
         this.playerPrincipal;
-        this.host = false;
+        this.haveNewSocket = false;
         this.players = [];
         this.bullets = [];
         this.name;
@@ -67,7 +67,7 @@ class arena {
             }
             
         }
-      
+      this.haveNewSocket = true;
       this.drawPlayers();
     }
     getPlayer() {

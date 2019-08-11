@@ -104,20 +104,16 @@ class player {
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
-                    if(window.mobilecheck){
                       this.state = playerState.WALK;
-                      this.hitTimer.startTimer();
-                      this.target = createVector(mousex, mousey);
-                    }else{
-                      this.shoot();
-                    }
+                    this.hitTimer.startTimer();
+                    this.target = createVector(mousex, mousey);
+                      
+                    
                     
                     break;
 
                 case RIGHT:
-                    this.state = playerState.WALK;
-                    this.hitTimer.startTimer();
-                    this.target = createVector(mousex, mousey);
+                    this.shoot();
                     
                     break;
             }
@@ -161,8 +157,10 @@ class player {
         const newMira = this.lookAt(mousex, mousey).mult(this.size);
         if(parseInt(this.mira.x) != parseInt(newMira.x) ||
            parseInt(this.mira.y) != parseInt(newMira.y) ||
-           this.state != playerState.STOP){
+           this.state != playerState.STOP||
+           world.haveNewSocket){
           
+          world.haveNewSocket = false;
           socket.emit('update',
                       parseInt(this.pos.x),
                       parseInt(this.pos.y),

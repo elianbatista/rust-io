@@ -105,9 +105,9 @@
         });
           
         function GUIAtualizarLife(){
-
-            $('.gui .life .life-content').css({width: world.playerPrincipal.life + "%"});
-
+            if(world.playerPrincipal){
+              $('.gui .life .life-content').css({width: (world.playerPrincipal.life) + "%"});
+            }
           }
         
       </script>
