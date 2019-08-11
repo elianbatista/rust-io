@@ -79,7 +79,6 @@ class arena {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
-
         
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
@@ -205,17 +204,8 @@ class arena {
         noStroke();
     }
   
-    socket.on('connect', func)
-  
-    socket.broadcast.emit('teste', 'teste');
-
-    socket.on('teste', function(teste){
-      
-      console.log(teste);
-      
-    });
-  
 }
+
 /*
 update() {
         this.deltaTime = this.newTime - this.oldTime;
