@@ -30,6 +30,7 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.id = id;
 };
 
+
 let protBullet = function (x, y, mx, my, damage, speed, life) {
        this.x = x
        this.y = y;
