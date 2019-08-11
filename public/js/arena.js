@@ -166,7 +166,14 @@ class arena {
         this.playerPrincipal.display();
         this.drawPlayers();
     }
+    drawFruits(){
+        for (let f of this.fruits) {
+            push()
+            f.display();
+            pop()
 
+        }
+    }
 
     drawPlayers() {
 

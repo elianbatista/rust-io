@@ -26,9 +26,9 @@ let serverOldTime = 0;
 
 let world = {
        width: 400,
-       height: 400,
-       zero: vec2d(0,0),
-       xAxis: vec2d(1,0)
+       height: 400
+      // zero: vec2d(0,0),
+      // xAxis: vec2d(1,0)
 }
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 var playerProt = function (name, id, x, y, size, mousex, mousey) {
@@ -84,6 +84,26 @@ class vec2d {
        mag(){
               return Math.sqrt(this.x * this.x + this.y * this.y);
        }
+       constrain(min, max){
+              this.constrainX(min,max);
+              this.constrainY(min,max);
+       }
+       constrainX(min, max){
+              if(this.x <= min){
+                     this.x = min;
+              }
+              if(this.x >= max){
+                     this.x = max;
+              }
+       }
+       constrainY(min, max){
+              if(this.y <= min){
+                     this.y = min;
+              }
+              if(this.y >= max){
+                     this.y = max;
+              }
+       }
        magSq(){
               return (this.x * this.x + this.y * this.y);
        }
@@ -105,6 +125,9 @@ class vec2d {
 }
 function randominterval(min, max) {
        return Math.random() * (max - min) + min;
+}
+function lerpN(a, b, n){
+       return (1-n)*a + n*b;
 }
 class food {
        constructor(posx, posy) {
@@ -147,14 +170,13 @@ class food {
               if (this.zero.magSq() > 0.1) {
                      this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);
               }
-              this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
-              this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+              this.dir.lerp(this.dir, this.zero, 0.15);
+              this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
               this.rotate += this.dirAng;
               this.pos.add(this.dir);
 
-              this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
-              this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
+              this.pos = constrain(-world.width, world.height);
        }
        aplyMovement(dir, force) {
               this.dir = dir.mult(force);
@@ -162,9 +184,8 @@ class food {
        aplyForce(dir, force) {
               this.zero = dir.mult(force);
        }
-
 }
-*/
+
 io.on('connect', (socket) => {
 
        socket.on('conectei', function (name) {
