@@ -8,14 +8,14 @@ class spellTimer {
         this.start = millis();
         this.end = this.start + this.cd;
     }
-    forceStop(){
+    forceStop() {
         this.start = this.end;
     }
-    remainTime(){
+    remainTime() {
         return this.end - this.start;
     }
     runTimer() {
-        if(this.start <= this.end){
+        if (this.start <= this.end) {
             this.start += world.deltaTime;
         }
     }
@@ -26,10 +26,10 @@ class spellTimer {
 class spell {
     constructor(pos, target, acurac, speed, life, damage, size) {
         this.pos = createVector(pos.x, pos.y);
-        
-//MUDAR
+
+        //MUDAR
         this.size = 10;
-      
+
         this.speed = speed;
         this.dir = createVector(target.x, target.y);
 
@@ -53,10 +53,10 @@ class spell {
         return this.life >= 0;
     }
     update() {
-        if(this.pos.x > world.size.width || this.pos.x < -world.size.width){
+        if (this.pos.x > world.size.width || this.pos.x < -world.size.width) {
             this.life = -10;
         }
-        if(this.pos.y > world.size.height || this.pos.y < -world.size.height){
+        if (this.pos.y > world.size.height || this.pos.y < -world.size.height) {
             this.life = -10;
         }
         const dir = this.dir.copy().mult(world.getDelta());
@@ -64,7 +64,7 @@ class spell {
         this.life -= world.deltaTime;
 
         if (!this.checkLife()) {
-            world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1); 
-        } 
+            world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
+        }
     }
 }

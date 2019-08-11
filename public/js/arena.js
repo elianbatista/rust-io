@@ -21,28 +21,28 @@ class arena {
         this.quadFruits = new quadFood(center, _width * 2, _height * 2);
 
     }
-    setName(name){
-      this.name = name;
+    setName(name) {
+        this.name = name;
     }
     randomFruit() {
         return new food(random(-this.size.width, this.size.width),
             random(-this.size.height, this.size.height))
     }
-    setHost(){
-      socket.on('host', function(mensagem){
-          
-          if(mensagem){                    
-            world.setFruits(50);
-            world.host = true;
-          }
+    setHost() {
+        socket.on('host', function (mensagem) {
 
-          
-      });
+            if (mensagem) {
+                world.setFruits(50);
+                world.host = true;
+            }
+
+
+        });
     }
     setPlayer(player) {
-      
+
         this.playerPrincipal = player;
-      
+
     }
     getDelta() {
         return this.deltaTime / 1000;
@@ -55,38 +55,38 @@ class arena {
         for (var i = 0; i < n; i++) {
             this.setRandomFruit();
         }
-      randomSeed(random(1000000));
+        randomSeed(random(1000000));
     }
     createPlayers(protPlayers) {
-        for(let p of protPlayers){
-            
-            if(p.id != socket.id){
-                this.players.push(new protPlayer(p.name,p.x,p.x,p.id,p.size,p.mousex,p.mousey))
-            }else{
-                this.setPlayer(new player(p.x,p.y,p.id));
+        for (let p of protPlayers) {
+
+            if (p.id != socket.id) {
+                this.players.push(new protPlayer(p.name, p.x, p.x, p.id, p.size, p.mousex, p.mousey))
+            } else {
+                this.setPlayer(new player(p.x, p.y, p.id));
             }
-            
+
         }
-      this.haveNewSocket = true;
-      this.drawPlayers();
+        this.haveNewSocket = true;
+        this.drawPlayers();
     }
     getPlayer() {
         return this.playerPrincipal;
     }
 
-    
+
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
-        
+
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
-       
-        
+
+
         let i = 0
         let j = 0;
-        
+
         for (let fruit of this.fruits) {
             if (fruit.state == foodState.DEAD) {
                 this.fruits.splice(i, 1);
@@ -104,48 +104,48 @@ class arena {
             let force = createVector(0, 0);
             if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
                 if (fruit.pos.x < 0) {
-                    force = createVector(1,0);
+                    force = createVector(1, 0);
                     fruit.aplyForce(force, quick);
                 } else {
-                    force = createVector(-1,0);
+                    force = createVector(-1, 0);
                     fruit.aplyForce(force, quick);
                 }
             }
             if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
                 if (fruit.pos.y < 0) {
-                    force = createVector(0,1);
+                    force = createVector(0, 1);
                     fruit.aplyForce(force, quick);
                 } else {
-                    force = createVector(0,-1);
+                    force = createVector(0, -1);
                     fruit.aplyForce(force, quick);
                 }
             }
-           // fruit.aplyForce(force, quick);
+            // fruit.aplyForce(force, quick);
             if (fruit.state != foodState.DYING) {
                 this.quadFruits.insert(fruit)
             }
 
             i++;
         }
-        
+
         this.playerPrincipal.update(camera.mouseX, camera.mouseY);
         this.playerPrincipal.display();
         this.collideBullets();
 
         const quad = this.quadFruits.getQuadbyPos(camera.mouseX, camera.mouseY);
         this.quadFruits.display();
-      
+
         this.drawPlayers();
     }
-   
-    drawPlayers(){
-      
-      for(let p of this.players){
-        push()
-        p.display();
-       pop()
 
-      }
+    drawPlayers() {
+
+        for (let p of this.players) {
+            push()
+            p.display();
+            pop()
+
+        }
     }
     collideAndPush(force, a, b, i, j) {
         const dist = b.pos.dist(a.pos);
@@ -155,7 +155,7 @@ class arena {
             if (a.type != 'fruit') {
                 a.takeDamage(10);
                 b.life -= 10;
-                
+
             }
             if (debugMode) {
                 strokeWeight(10)
@@ -203,7 +203,7 @@ class arena {
         rect(0, 0, this.size.width * 2, this.size.height * 2)
         noStroke();
     }
-  
+
 }
 
 /*

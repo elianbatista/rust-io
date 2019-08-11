@@ -1,10 +1,10 @@
 var express = require('express'),
-    http = require('http');
+       http = require('http');
 
 var app = express();
 var server = http.createServer(app);
 
-var io = require('socket.io').listen(server)//({ wsEngine: 'ws' });
+var io = require('socket.io').listen(server) //({ wsEngine: 'ws' });
 
 
 const path = require('path');
@@ -30,32 +30,32 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.id = id;
 };
 
-let protBullet = function(x, y, mx, my, damage, speed, life){
-  this.x = x
-  this.y = y;
-  this.mx = mx;
-  this.my = my;           
-  this.damage = damage;
-  this.speed = speed;
-  this.life = life;
+let protBullet = function (x, y, mx, my, damage, speed, life) {
+       this.x = x
+       this.y = y;
+       this.mx = mx;
+       this.my = my;
+       this.damage = damage;
+       this.speed = speed;
+       this.life = life;
 }
 
-let protFruit = function(x, y, size, angle, life){
-  
+let protFruit = function (x, y, size, angle, life) {
+
        this.x = x;
        this.y = y;
        this.size = size;
        this.angle = angle;
        this.life = life;
-  
+
 }
 
 io.on('connect', (socket) => {
 
-       socket.on('conectei', function(name){
-          
-              var newSocket = new playerProt(name ,socket.id, 0, 0, 40, 0, 0);
-         
+       socket.on('conectei', function (name) {
+
+              var newSocket = new playerProt(name, socket.id, 0, 0, 40, 0, 0);
+
               socket.broadcast.emit('newSocket', newSocket);
 
               arrayPlayersObject.push(newSocket);
@@ -89,9 +89,9 @@ io.on('connect', (socket) => {
                             arrayPlayersObject[i]['x'] = playerX;
 
                             arrayPlayersObject[i]['y'] = playerY;
-                       
+
                             arrayPlayersObject[i]['size'] = size;
-                       
+
                             arrayPlayersObject[i]['mousex'] = mousex;
 
                             arrayPlayersObject[i]['mousey'] = mousey;
@@ -103,17 +103,17 @@ io.on('connect', (socket) => {
               }
 
        });
-             
-        
-        socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
-          
-          let prot = new protBullet(x, y, mx, my, damage, speed, life);
-         
-          socket.volatile.broadcast.emit('spawnBullet', prot);
-      
-    
-        });
-      
+
+
+       socket.on('newBullet', function (x, y, mx, my, damage, speed, life) {
+
+              let prot = new protBullet(x, y, mx, my, damage, speed, life);
+
+              socket.volatile.broadcast.emit('spawnBullet', prot);
+
+
+       });
+
 });
 
 
@@ -122,4 +122,3 @@ server.listen(port, function () {
        console.log('Server listening at port %d', port);
 
 });
-

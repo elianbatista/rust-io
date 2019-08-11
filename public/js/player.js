@@ -33,17 +33,17 @@ class player {
             bullet.display();
             bullet.update();
         }
-        if(!this.hitTimer.checkTimer()){
-            fill(0,0,255);
-         
-            circle(this.target.x,this.target.y,map(this.hitTimer.remainTime(),0,this.hitTimer.cd,
-            30,0));
+        if (!this.hitTimer.checkTimer()) {
+            fill(0, 0, 255);
+
+            circle(this.target.x, this.target.y, map(this.hitTimer.remainTime(), 0, this.hitTimer.cd,
+                30, 0));
         }
         push()
 
         strokeWeight(8);
         noStroke();
-    
+
         translate(this.pos.x, this.pos.y);
 
         //  textSize(24);
@@ -65,7 +65,7 @@ class player {
         pop()
 
     }
-    takeDamage(amount){
+    takeDamage(amount) {
         this.life -= amount;
         GUIAtualizarLife();
     }
@@ -73,7 +73,9 @@ class player {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
     }
-    
+    produceBullet(){
+        
+    }
     shoot() {
         if (this.bulletTimer.checkTimer()) {
             const bullet = new spell(this.pos,
@@ -85,7 +87,7 @@ class player {
                 this.bulletSize);
 
             this.bullets.push(bullet);
-              
+
             this.bulletTimer.startTimer();
             /*
             socket.emit('newBullet', bullet.pos.x,
@@ -99,22 +101,18 @@ class player {
         }
     }
     handleMouseInput(mousex, mousey) {
-      
-      
+
+
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
-                      this.state = playerState.WALK;
+                    this.state = playerState.WALK;
                     this.hitTimer.startTimer();
                     this.target = createVector(mousex, mousey);
-                      
-                    
-                    
                     break;
 
                 case RIGHT:
                     this.shoot();
-                    
                     break;
             }
         }
@@ -127,8 +125,8 @@ class player {
         if (keyDown('s')) {
             this.state = playerState.STOP;
             this.hitTimer.forceStop();
-        } 
-        if(keyWentDown('h')){
+        }
+        if (keyWentDown('h')) {
             debugMode = !debugMode;
         }
         if (keyWentDown('q')) {
@@ -151,49 +149,49 @@ class player {
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
-    
+
     update(mousex, mousey) {
-      
+
         const newMira = this.lookAt(mousex, mousey).mult(this.size);
-        if(parseInt(this.mira.x) != parseInt(newMira.x) ||
-           parseInt(this.mira.y) != parseInt(newMira.y) ||
-           this.state != playerState.STOP||
-           world.haveNewSocket){
-          
-          world.haveNewSocket = false;
-          socket.emit('update',
-                      parseInt(this.pos.x),
-                      parseInt(this.pos.y),
-                      parseInt(this.size),
-                      parseInt(this.mira.x),
-                      parseInt(this.mira.y));
+        if (parseInt(this.mira.x) != parseInt(newMira.x) ||
+            parseInt(this.mira.y) != parseInt(newMira.y) ||
+            this.state != playerState.STOP ||
+            world.haveNewSocket) {
+
+            world.haveNewSocket = false;
+            socket.emit('update',
+                parseInt(this.pos.x),
+                parseInt(this.pos.y),
+                parseInt(this.size),
+                parseInt(this.mira.x),
+                parseInt(this.mira.y));
         }
-        
+
         this.camera = createVector(this.pos.x, this.pos.y)
         camera.position = this.camera;
         this.mira = newMira;
-        
+
         this.bulletTimer.runTimer();
         this.hitTimer.runTimer();
 
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();
-        
-        socket.on('spawnBullet', function(protBullet){
-  
-          const pos = createVector(protBullet.x, protBullet.y);
-          let bul = new spell(pos,pos,0,0,0,protBullet.damage,0);
-          
-          bul.pos = createVector(protBullet.x, protBullet.y);
-          bul.dir = createVector(protBullet.mx, protBullet.my);
-          bul.damage = protBullet.damage;
-          bul.life = protBullet.life;
-          
-          world.playerPrincipal.bullets.push(bul);
+
+        socket.on('spawnBullet', function (protBullet) {
+
+            const pos = createVector(protBullet.x, protBullet.y);
+            let bul = new spell(pos, pos, 0, 0, 0, protBullet.damage, 0);
+
+            bul.pos = createVector(protBullet.x, protBullet.y);
+            bul.dir = createVector(protBullet.mx, protBullet.my);
+            bul.damage = protBullet.damage;
+            bul.life = protBullet.life;
+
+            world.playerPrincipal.bullets.push(bul);
         });
-      
-        
-      
+
+
+
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade
         if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
@@ -211,23 +209,23 @@ class player {
 }
 class protPlayer {
     constructor(name, x, y, id, size, tx, ty) {
-        this.pos = createVector(x,y);
+        this.pos = createVector(x, y);
         this.name = name;
         this.id = id;
         this.size = size;
-        this.mira = createVector(tx,ty);
+        this.mira = createVector(tx, ty);
     }
     display() {
         push()
 
         translate(this.pos.x, this.pos.y);
-        
+
         stroke(0)
         strokeWeight(8);
-      
-        fill(255,150,150);
-        circle(0,0,this.size);
-      
+
+        fill(255, 150, 150);
+        circle(0, 0, this.size);
+
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
         noStroke();
@@ -237,12 +235,12 @@ class protPlayer {
         textSize(24);
         textAlign(CENTER);
         textStyle(BOLD);
-        text(this.name.toUpperCase(), 0,this.size + 12);
+        text(this.name.toUpperCase(), 0, this.size + 12);
         pop()
-     
-      
-        
-       
+
+
+
+
     }
     update(x, y) {
         this.x = x;
