@@ -24,7 +24,12 @@ let serverDeltaTime = 0;
 let serverNewTime = 0;
 let serverOldTime = 0;
 
-
+let world = {
+       width: 400,
+       height: 400,
+       zero: vec2d(0,0),
+       xAxis: vec2d(1,0)
+}
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.name = name;
@@ -98,20 +103,21 @@ class vec2d {
               this.div(mg);
        }
 }
-/*
+function randominterval(min, max) {
+       return Math.random() * (max - min) + min;
+}
 class food {
        constructor(posx, posy) {
-              this.pos = Victor(posx, posy);
-              this.dir = createVector(0, 0);
+              this.pos = new vec2d(posx, posy);
+              this.dir = new vec2d(0, 0);
               this.dirAng = 0;
-              this.rotate = random(360);
+              this.rotate = randomInterval(360,0);
               this.size = 20;
-
               this.life = 100;
-              this.lifeD = new life(100);
-              this.zero = createVector(random(-10, 10), random(-10, 10));
+
+              this.zero = new vec2d(randomInterval(10,-10), randomInterval(-10, 10));
               this.zero.normalize().mult(0.1);
-              this.zeroRot = random(-1, 1) * (PI / 8);
+              this.zeroRot = randomInterval(-1, 1) * (Math.PI / 8);
 
        }
        checkLife() {
@@ -119,8 +125,8 @@ class food {
        }
        checkWalls() {
               const quick = 1.5;
-              let force = createVector(0, 0);
-              if (this.pos.x >= world.size.width - 20 || this.pos.x <= -world.size.width + 20) {
+              let force = vec2d(0, 0);
+              if (this.pos.x >= world.width - 20 || this.pos.x <= -world.width + 20) {
                      if (this.pos.x < 0) {
                             force.add(p5.Vector(1, 0));
 
@@ -128,7 +134,7 @@ class food {
                             force.add(p5.Vector(-1, 0));
                      }
               }
-              if (this.pos.y > world.size.height - 20 || this.pos.y <= -world.size.height + 20) {
+              if (this.pos.y > world.height - 20 || this.pos.y <= -world.height + 20) {
                      if (this.pos.y < 0) {
                             force.add(p5.Vector(0, 1));
                      } else {
@@ -167,9 +173,9 @@ io.on('connect', (socket) => {
               arrayPlayersObject.push(newSocket);
 
               if (arrayPlayersObject.length == 1) {
-                     socket.emit('criarSala', true, name, 200, 200)
+                     socket.emit('criarSala', true, name, world.width, world.height)
               } else {
-                     socket.emit('criarSala', false, name, 200, 200)
+                     socket.emit('criarSala', false, name, world.width, world.height)
               }
 
 
