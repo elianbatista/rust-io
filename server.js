@@ -69,7 +69,7 @@ class vec2d {
        }
        div(n) {
               this.x /= n;
-              this.y /= NaN;
+              this.y /= n;
        }
        
        clone(){
@@ -123,7 +123,7 @@ class vec2d {
               this.div(mg);
        }
 }
-function randominterval(min, max) {
+function randomInterval(min, max) {
        return Math.random() * (max - min) + min;
 }
 function lerpN(a, b, n){
@@ -139,7 +139,8 @@ class food {
               this.life = 100;
 
               this.zero = new vec2d(randomInterval(10,-10), randomInterval(-10, 10));
-              this.zero.normalize().mult(0.1);
+              this.zero.normalize();
+              this.zero.mult(0.1);
               this.zeroRot = randomInterval(-1, 1) * (Math.PI / 8);
 
        }
@@ -168,7 +169,7 @@ class food {
        }
        update() {
               if (this.zero.magSq() > 0.1) {
-                     this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);
+                     this.zero.lerp(this.zero, this.zero.clone().mult(0.1), 0.5);
               }
               this.dir.lerp(this.dir, this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
@@ -176,7 +177,7 @@ class food {
               this.rotate += this.dirAng;
               this.pos.add(this.dir);
 
-              this.pos = constrain(-world.width, world.height);
+              this.pos.constrain(-world.width, world.height);
        }
        aplyMovement(dir, force) {
               this.dir = dir.mult(force);
@@ -256,7 +257,11 @@ io.on('connect', (socket) => {
        });
        socket.on('createFruits',function(n){
               for(let i=0;i<=n;i++){
-                     let fruit = new food(randomInterval(world.widthworld.width,))
+                     let fruit = new food(randomInterval(-world.width,world.width),
+                                          randomInterval(-world.height,world.height));
+
+                     arrayFoodObject.push(fruit);
+                     //console.log(fruit.pos.x, fruit.pos.y);
               }
        });
 
@@ -284,6 +289,11 @@ function updateBullets(){
               bullet.life -= serverDeltaTime * 1000;
        }
 }
+function updateFruits(){
+       for(let f of arrayFoodObject){
+              f.update();
+       }
+}
 function runClock(){
        let d = new Date();
        if (serverOldTime > serverNewTime) {
@@ -296,14 +306,14 @@ function runClock(){
 }
 function ServerGameLoop() {
        runClock();
-       
+       updateFruits();
        updateBullets()
        // Tell everyone where all the bullets are by sending the whole array
        io.emit("spawnBullets", arrayBulletsObject);
+       io.emit("spawnFruits", arrayFruitsObject);
 }
 
 setInterval(ServerGameLoop, 16);
-
 
 
 server.listen(port, function () {

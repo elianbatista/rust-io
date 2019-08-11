@@ -57,7 +57,7 @@ class arena {
             this.setRandomFruit();
         }
         */
-        socket.emit('createFruits',n);
+        socket.emit('createFruits', n);
     }
     createPlayers(protPlayers) {
         for (let p of protPlayers) {
@@ -76,9 +76,9 @@ class arena {
         return this.playerPrincipal;
     }
 
-    drawBullets(){
-        for(let p of this.bullets){
-            fill(0,0,255);
+    drawBullets() {
+        for (let p of this.bullets) {
+            fill(0, 0, 255);
             circle(p.x, p.y, 20);
         }
     }
@@ -86,28 +86,42 @@ class arena {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
-     
+
         socket.on('spawnBullets', function (arrayBullets) {
-           // console.log(arrayBullets);
-            // If there's not enough bullets on the client, create them
-            for(let i=0;i<arrayBullets.length;i++){
-                if(world.bullets[i] == undefined){
+            for (let i = 0; i < arrayBullets.length; i++) {
+                if (world.bullets[i] == undefined) {
                     let pos = createVector(arrayBullets[i].x, arrayBullets[i].y)
                     world.bullets[i] = new createVector(arrayBullets[i].x, arrayBullets[i].y);
                 } else {
-                    //Otherwise, just update it! 
-                    world.bullets[i].x = arrayBullets[i].x; 
+                    world.bullets[i].x = arrayBullets[i].x;
                     world.bullets[i].y = arrayBullets[i].y;
                 }
             }
-            // Otherwise if there's too many, delete the extra 
-            for(let i=arrayBullets.length; i<world.bullets.length;i++){
-                world.bullets.splice(i,1);
-                world.bullets.splice(i,1);
+            for (let i = arrayBullets.length; i < world.bullets.length; i++) {
+                world.bullets.splice(i, 1);
+                world.bullets.splice(i, 1);
+                i--;
+            }
+        });
+        socket.on("spawnFruits", function (arrayFruits) {
+            
+            for (let i = 0; i < arrayFruits.length; i++) {
+                if (world.Fruits[i] == undefined) {
+                    let pos = createVector(arrayFruits[i].x, arrayFruits[i].y)
+                    world.fruits[i] = new createVector(arrayFruits[i].x, arrayFruits[i].y);
+                } else {
+                    world.fruits[i].x = arrayFruits[i].x;
+                    world.fruits[i].y = arrayFruits[i].y;
+                }
+            }
+            for (let i = arrayFruits.length; i < world.fruits.length; i++) {
+                world.fruits.splice(i, 1);
+                world.fruits.splice(i, 1);
                 i--;
             }
         });
         this.drawBullets();
+        this.drawFruits();
         /*
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);
@@ -168,7 +182,7 @@ class arena {
         this.playerPrincipal.display();
         this.drawPlayers();
     }
-    drawFruits(){
+    drawFruits() {
         for (let f of this.fruits) {
             push()
             f.display();
