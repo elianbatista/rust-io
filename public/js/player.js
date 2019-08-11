@@ -87,7 +87,7 @@ class player {
             this.bullets.push(bullet);
               
             this.bulletTimer.startTimer();
-          
+            /*
             socket.emit('newBullet', bullet.pos.x,
                               bullet.pos.y,
                               bullet.dir.x,
@@ -95,7 +95,7 @@ class player {
                               bullet.damage,
                               bullet.speed,
                               bullet.life);
-          
+          */
         }
     }
     handleMouseInput(mousex, mousey) {

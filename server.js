@@ -103,7 +103,8 @@ io.on('connect', (socket) => {
               }
 
        });
-                              
+             
+        
         socket.on('newBullet', function(x, y, mx, my, damage, speed, life){
           
           let prot = new protBullet(x, y, mx, my, damage, speed, life);
@@ -112,7 +113,7 @@ io.on('connect', (socket) => {
       
     
         });
-    
+      
 });
 
 
