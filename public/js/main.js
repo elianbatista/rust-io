@@ -27,6 +27,7 @@ socket.on('criarSala', function(alreadyExists, name, width, height){
     world.setName( name ) ;
     
   }else{
+    //quando n tem ngm na sala cria as frutas
     world = new arena(width, height);
     world.setName( name ) ;
     

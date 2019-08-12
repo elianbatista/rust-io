@@ -140,8 +140,11 @@ class food {
               this.life = 100;
 
               this.zero = new vec2d(randomInterval(10,-10), randomInterval(-10, 10));
+           
               this.zero.normalize();
+              
               this.zero.mult(0.1);
+              
               this.zeroRot = randomInterval(-1, 1) * (Math.PI / 8);
 
        }
@@ -149,32 +152,40 @@ class food {
               return this.life >= 0;
        }
        checkWalls() {
+              console.log(this.zero);
               const quick = 1.5;
-              let force = vec2d(0, 0);
+              let force = new vec2d(0, 0);
               if (this.pos.x >= world.width - 20 || this.pos.x <= -world.width + 20) {
                      if (this.pos.x < 0) {
-                            const f = new vec2d(1, 0)
+                            const f = new vec2d(1, 0);
                             force.add(f);
 
                      } else {
-                            const f = new vec2d(-1, 0)
+                            const f = new vec2d(-1, 0);
                             force.add(f);
                      }
               }
               if (this.pos.y > world.height - 20 || this.pos.y <= -world.height + 20) {
                      if (this.pos.y < 0) {
-                            force.add(p5.Vector(0, 1));
+                            const _f = new vec2d(0, 1)
+                            force.add(_f);
                      } else {
-                            force.add(p5.Vector(1, 0));
+                            const _f = new vec2d(0, -1)
+                            force.add(_f);
                      }
               }
               this.aplyForce(force, quick);
        }
        update() {
+             
               if (this.zero.magSq() > 0.1) {
-                     this.zero.lerp(this.zero.clone().mult(0.1), 0.5);
+                     let zero = this.zero.clone();
+                     zero.mult(0.1);
+                     this.zero.lerp(zero, 0.5);
               }
+              console.log(this.zero);
               this.checkWalls();
+              console.log(this.zero);
               this.dir.lerp(this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
