@@ -94,13 +94,7 @@ class arena {
         });
         //...
         //fazer mesma coisa para as frutas
-        let protFruit = function(x,y,size,angle,life){
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.angle = angle;
-    this.life = life;
-}
+       
         socket.on('spawnFruits', function (arrayFruits) {
             for (let i = 0; i < arrayFruits.length; i++) {
                 if (world.fruits[i] == undefined) {

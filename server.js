@@ -85,6 +85,10 @@ class vec2d {
        mag(){
               return Math.sqrt(this.x * this.x + this.y * this.y);
        }
+       copy(b){
+              this.x = b.x;
+              this.y = b.y;
+       }
        constrain(min, max){
               this.constrainX(min,max);
               this.constrainY(min,max);
@@ -152,7 +156,7 @@ class food {
               return this.life >= 0;
        }
        checkWalls() {
-              console.log(this.zero);
+              
               const quick = 1.5;
               let force = new vec2d(0, 0);
               if (this.pos.x >= world.width - 20 || this.pos.x <= -world.width + 20) {
@@ -165,6 +169,7 @@ class food {
                             force.add(f);
                      }
               }
+              
               if (this.pos.y > world.height - 20 || this.pos.y <= -world.height + 20) {
                      if (this.pos.y < 0) {
                             const _f = new vec2d(0, 1)
@@ -178,14 +183,14 @@ class food {
        }
        update() {
              
-              if (this.zero.magSq() > 0.1) {
+              if (this.zero.magSq() > 0.5) {
                      let zero = this.zero.clone();
                      zero.mult(0.1);
                      this.zero.lerp(zero, 0.5);
               }
-              console.log(this.zero);
+            
               this.checkWalls();
-              console.log(this.zero);
+           
               this.dir.lerp(this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
@@ -197,10 +202,13 @@ class food {
               this.y = this.pos.y;
        }
        aplyMovement(dir, force) {
-              this.dir = dir.mult(force);
+              dir.mult(force);
+              this.dir.copy(dir);
        }
        aplyForce(dir, force) {
-              this.zero = dir.mult(force);
+              dir.mult(force);
+            
+              this.zero.copy(dir);
        }
 }
 
@@ -331,7 +339,7 @@ function ServerGameLoop() {
        io.emit("spawnFruits", arrayFruitsObject);
 }
 
-setInterval(ServerGameLoop, 16);
+setInterval(ServerGameLoop,500);
 
 
 server.listen(port, function () {
