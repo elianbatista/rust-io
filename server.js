@@ -153,10 +153,12 @@ class food {
               let force = vec2d(0, 0);
               if (this.pos.x >= world.width - 20 || this.pos.x <= -world.width + 20) {
                      if (this.pos.x < 0) {
-                            force.add(p5.Vector(1, 0));
+                            const f = new vec2d(1, 0)
+                            force.add(f);
 
                      } else {
-                            force.add(p5.Vector(-1, 0));
+                            const f = new vec2d(-1, 0)
+                            force.add(f);
                      }
               }
               if (this.pos.y > world.height - 20 || this.pos.y <= -world.height + 20) {
@@ -172,6 +174,7 @@ class food {
               if (this.zero.magSq() > 0.1) {
                      this.zero.lerp(this.zero.clone().mult(0.1), 0.5);
               }
+              this.checkWalls();
               this.dir.lerp(this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
@@ -267,6 +270,7 @@ io.on('connect', (socket) => {
                      //console.log(fruit.pos.x, fruit.pos.y);
               }
        });
+  
 
 });
 function updateBullets(){
@@ -292,6 +296,11 @@ function updateBullets(){
               bullet.life -= serverDeltaTime * 1000;
        }
 }
+function updateFruits(){
+    for(let f of arrayFruitsObject){
+      f.update();
+    }
+}
 function runClock(){
        let d = new Date();
        if (serverOldTime > serverNewTime) {
@@ -304,11 +313,11 @@ function runClock(){
 }
 function ServerGameLoop() {
        runClock();
-
+       updateFruits();
        updateBullets()
   
        io.emit("spawnBullets", arrayBulletsObject);
-       
+       io.emit("spawnFruits", arrayFruitsObject);
 }
 
 setInterval(ServerGameLoop, 16);

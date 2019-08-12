@@ -94,10 +94,36 @@ class arena {
         });
         //...
         //fazer mesma coisa para as frutas
+        let protFruit = function(x,y,size,angle,life){
+    this.x = x;
+    this.y = y;
+    this.size = size;
+    this.angle = angle;
+    this.life = life;
+}
+        socket.on('spawnFruits', function (arrayFruits) {
+            for (let i = 0; i < arrayFruits.length; i++) {
+                if (world.fruits[i] == undefined) {
+                    //let pos = createVector(arrayFruits[i].x, arrayBullets[i].y)
+                    let _fruit = new protFruit(arrayFruits[i].pos.x, arrayFruits[i].pos.y,
+                                               arrayFruits[i].size, 
+                                              arrayFruits[i].rotate, arrayFruits[i].life);
+                    world.fruits[i] = _fruit;
+                } else {
+                    world.fruits[i].x = arrayFruits[i].x;
+                    world.fruits[i].y = arrayFruits[i].y;
+                }
+            }
+            for (let i = arrayFruits.length; i < world.fruits.length; i++) {
+                world.fruits.splice(i, 1);
+                world.fruits.splice(i, 1);
+                i--;
+            }
+        });
 
 
         this.drawBullets();
-        //this.drawFruits();
+        this.drawFruits();
         /*
         const center = createVector(0, 0);
         this.quadFruits = new quadFood(center, this.size.width * 2, this.size.height * 2);

@@ -112,13 +112,14 @@ class player {
         if (mouseIsPressed) {
             switch (mouseButton) {
                 case LEFT:
-                    this.state = playerState.WALK;
-                    this.hitTimer.startTimer();
-                    this.target = createVector(mousex, mousey);
+                        this.shoot();
+                    
                     break;
 
                 case RIGHT:
-                    this.shoot();
+                        this.state = playerState.WALK;
+                        this.hitTimer.startTimer();
+                        this.target = createVector(mousex, mousey);
                     break;
             }
         }
