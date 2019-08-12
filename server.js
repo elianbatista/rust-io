@@ -179,10 +179,11 @@ class food {
                             force.add(_f);
                      }
               }
-              this.aplyForce(force, quick);
+              this.zero.x += force.x * quick;
+              this.zero.y += force.y * quick;
        }
        update() {
-             // this.checkWalls();
+              this.checkWalls();
               if (this.zero.magSq() > 0.5) {
                      let zero = this.zero.clone();
                      zero.mult(0.1);
@@ -196,16 +197,18 @@ class food {
               this.pos.add(this.dir);
               
               this.pos.constrain(-world.width, world.height);
+           
               this.x = this.pos.x;
-              th
+              this.y = this.pos.y;
        }
        aplyMovement(dir, force) {
               dir.mult(force);
               this.dir.copy(dir);
        }
        aplyForce(dir, force) {
-              dir.mult(force);
-              this.zero.copy(dir);
+           
+              this.zero.x = dir.x * force;
+              this.zero.y = dir.y * force;
      
        }
 }
@@ -290,6 +293,11 @@ io.on('connect', (socket) => {
   
 
 });
+class serverClass{
+       constructor(){
+              
+       }
+}
 function updateBullets(){
        for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
               let bullet = arrayBulletsObject[i];
@@ -314,9 +322,41 @@ function updateBullets(){
        }
 }
 function updateFruits(){
-    for(let f of arrayFruitsObject){
-      f.update();
-    }
+    for (let fruit of arrayFruitsObject) {
+            fruit.update();
+          
+  
+            for (let fruit2 of this.fruits) {
+                this.collideAndPush(0.1, fruit, fruit2, i, j);
+                j++;
+            }
+            const quick = 1.5;
+            let force = createVector(0, 0);
+            if (fruit.pos.x >= this.size.width - 20 || fruit.pos.x <= -this.size.width + 20) {
+                if (fruit.pos.x < 0) {
+                    force = createVector(1, 0);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(-1, 0);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+            if (fruit.pos.y > this.size.height - 20 || fruit.pos.y <= -this.size.height + 20) {
+                if (fruit.pos.y < 0) {
+                    force = createVector(0, 1);
+                    fruit.aplyForce(force, quick);
+                } else {
+                    force = createVector(0, -1);
+                    fruit.aplyForce(force, quick);
+                }
+            }
+            // fruit.aplyForce(force, quick);
+            if (fruit.state != foodState.DYING) {
+                this.quadFruits.insert(fruit)
+            }
+
+            i++;
+        }
 }
 function runClock(){
        let d = new Date();
