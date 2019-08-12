@@ -5,7 +5,13 @@ var express = require('express'),
 var app = express();
 var server = http.createServer(app);
 
-//var testeRequire = require('./teste.js');
+var arenaServer = require('./arenaServer.js');
+
+var bulletServer = require('./bulletServer.js');
+
+var fruitServer = require('./fruitServer.js');
+
+var playerServer = require('./playerServer.js');
 
 var io = require('socket.io').listen(server)
 
