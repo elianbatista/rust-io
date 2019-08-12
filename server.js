@@ -182,15 +182,13 @@ class food {
               this.aplyForce(force, quick);
        }
        update() {
-             
+             // this.checkWalls();
               if (this.zero.magSq() > 0.5) {
                      let zero = this.zero.clone();
                      zero.mult(0.1);
                      this.zero.lerp(zero, 0.5);
               }
-            
-              this.checkWalls();
-           
+       
               this.dir.lerp(this.zero, 0.15);
               this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
@@ -199,7 +197,7 @@ class food {
               
               this.pos.constrain(-world.width, world.height);
               this.x = this.pos.x;
-              this.y = this.pos.y;
+              th
        }
        aplyMovement(dir, force) {
               dir.mult(force);
@@ -207,8 +205,8 @@ class food {
        }
        aplyForce(dir, force) {
               dir.mult(force);
-            
               this.zero.copy(dir);
+     
        }
 }
 
@@ -339,7 +337,7 @@ function ServerGameLoop() {
        io.emit("spawnFruits", arrayFruitsObject);
 }
 
-setInterval(ServerGameLoop,500);
+setInterval(ServerGameLoop,16);
 
 
 server.listen(port, function () {
