@@ -292,11 +292,6 @@ function updateBullets(){
               bullet.life -= serverDeltaTime * 1000;
        }
 }
-function updateFruits(){
-       for(let f of arrayFruitsObject){
-              f.update();
-       }
-}
 function runClock(){
        let d = new Date();
        if (serverOldTime > serverNewTime) {
@@ -309,12 +304,11 @@ function runClock(){
 }
 function ServerGameLoop() {
        runClock();
-       updateFruits();
+
        updateBullets()
-       // Tell everyone where all the bullets are by sending the whole array
-       //console.log(arrayFruitsObject);
+  
        io.emit("spawnBullets", arrayBulletsObject);
-       io.emit("spawnFruits", arrayFruitsObject);
+       
 }
 
 setInterval(ServerGameLoop, 16);
