@@ -5,13 +5,15 @@ var express = require('express'),
 var app = express();
 var server = http.createServer(app);
 
-var arenaServer = require('./arenaServer.js');
 
-var bulletServer = require('./bulletServer.js');
+const mathServer = require('./mathServer.js');
+const playerServer = require('./playerServer.js');
+const bulletServer = require('./bulletServer.js');
+const fruitServer = require('./fruitServer.js');
+const arenaServer = require('./arenaServer.js');
 
-var fruitServer = require('./fruitServer.js');
 
-var playerServer = require('./playerServer.js');
+
 
 var io = require('socket.io').listen(server)
 
@@ -24,13 +26,6 @@ app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-var arrayPlayersObject = [];
-var arrayBulletsObject = [];
-var arrayFruitsObject = [];
-
-let serverDeltaTime = 0;
-let serverNewTime = 0;
-let serverOldTime = 0;
 
 let world = {
        width: 400,
@@ -58,83 +53,6 @@ let protBullet = function (x, y, angle, speed, life, damage) {
        this.life = life;
        this.damage = damage;
        
-}
-class vec2d {
-       constructor(x, y) {
-              this.x = x;
-              this.y = y;
-       }
-       add(b) {
-              this.x += b.x;
-              this.y += b.y;
-       }
-       sub(b) {
-              this.x -= b.x;
-              this.y -= b.y;
-       }
-       mult(n) {
-              this.x *= n;
-              this.y *= n;
-       }
-       div(n) {
-              this.x /= n;
-              this.y /= n;
-       }
-       
-       clone(){
-              return new vec2d(this.x, this.y);
-       }
-       print(){
-              console.log("X: " +this.x+ "\t|Y: "+this.y);
-       }
-       dist(b){
-              return Math.sqrt(this.x * b.x + this.y * b.y); 
-       }
-       mag(){
-              return Math.sqrt(this.x * this.x + this.y * this.y);
-       }
-       copy(b){
-              this.x = b.x;
-              this.y = b.y;
-       }
-       constrain(min, max){
-              this.constrainX(min,max);
-              this.constrainY(min,max);
-       }
-       constrainX(min, max){
-              if(this.x <= min){
-                     this.x = min;
-              }
-              if(this.x >= max){
-                     this.x = max;
-              }
-       }
-       constrainY(min, max){
-              if(this.y <= min){
-                     this.y = min;
-              }
-              if(this.y >= max){
-                     this.y = max;
-              }
-       }
-       magSq(){
-              return (this.x * this.x + this.y * this.y);
-       }
-       fromAngle(angle, mag){
-              this.x = mag * Math.cos(angle)
-              this.y = mag * Math.sin(angle)
-       }
-       lerp(b, n){
-              this.x = (1-n)*this.x + n*b.x;
-              this.y = (1-n)*this.y + n*b.y;
-       }
-       object(){
-              return {x: this.x, y: this.y};
-       }
-       normalize(){
-              const mg = this.mag();
-              this.div(mg);
-       }
 }
 function randomInterval(min, max) {
        return Math.random() * (max - min) + min;
@@ -325,7 +243,7 @@ class serverClass{
        }
        update(){
               this.runClock();
-              
+
               updateFruits();
               updateBullets()
          
