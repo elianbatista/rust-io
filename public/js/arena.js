@@ -93,7 +93,6 @@ class arena {
             }
         });
         //...
-        //fazer mesma coisa para as frutas
        
         socket.on('spawnFruits', function (arrayFruits) {
             for (let i = 0; i < arrayFruits.length; i++) {

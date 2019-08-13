@@ -34,6 +34,9 @@ class arena {
               this.oldTime = this.newTime;
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
+       updateBullets(){
+         
+       }
        update() {
 
               this.runClock();
