@@ -1,5 +1,5 @@
 console.log('Fruit Server');
-let vec2d = 
+const vec2d = require('./mathServer.js');
 class fruit {
     constructor(posx, posy) {
         
