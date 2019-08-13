@@ -35,16 +35,25 @@ class arena {
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
        updateBullets(){
+         this.bullets.slice().reverse().forEach(function(element, index, array) {
+            if(element.life <= 0){
+              array.splice(index,1);
+              continue;
+            }
+           if(element.x <= -this.width || element.x >= this.width || element.y <= -this.height){
+             array.splice(index,1);
+              continue;
+           }
+           let pos = new vec2d(element.x, element.y);
+           let dir = new vec2d(0, 0);
+           dir.fromAngle(element.angle, element.speed * this.deltaTime);
+           pos.add(dir);
+           
+           element.x = pos.x;
+           element.y = pos.y;
+            
+         })
          for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
-              let bullet = arrayBulletsObject[i];
-              if (bullet.life <= 0) {
-                     arrayBulletsObject.splice(i, 1);
-                     continue;
-              }
-              if (bullet.x <= -400 || bullet.x >= 400 || bullet.y <= -400 || bullet.y >= 400) {
-                     arrayBulletsObject.splice(i, 1);
-                     continue;
-              }
               let pos = new vec2d(bullet.x, bullet.y);
               let dir = new vec2d(0, 0);
               dir.fromAngle(bullet.angle, bullet.speed * serverDeltaTime);
