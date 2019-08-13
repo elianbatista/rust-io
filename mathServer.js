@@ -1,4 +1,4 @@
-console.log("Init mathServer");
+console.log("Math Server");
 class vec2d {
     constructor(x, y) {
            this.x = x;
@@ -75,4 +75,11 @@ class vec2d {
            const mg = this.mag();
            this.div(mg);
     }
+}
+function randomInterval(min, max) {
+    return Math.random() * (max - min) + min;
+}
+
+function lerpN(a, b, n) {
+    return (1 - n) * a + n * b;
 }
