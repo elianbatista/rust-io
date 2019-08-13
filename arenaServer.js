@@ -1,5 +1,6 @@
 console.log('Arena Server');
 
+
 class arena {
     constructor() {
            this.players = [];
@@ -11,20 +12,28 @@ class arena {
            this.newTime = 0;
            this.deltaTime = 0;
     }
-    runClock() {
-           let d = new Date();
-           if (this.OldTime > this.NewTime) {
-                  this.DeltaTime = this.NewTime - this.OldTime + 60;
-           } else {
-                  this.DeltaTime = this.NewTime - this.OldTime;
+    getTime(optimize){
+           if(optimize){
+              return this.
+           }else{
+
            }
-           this.OldTime = this.NewTime;
-           this.NewTime = d.getSeconds() + d.getMilliseconds() / 1000;
+           
+    }
+    runClock() {
+       let d = new Date();
+       if (this.oldTime > this.newTime) {
+              this.deltaTime = this.newTime - this.oldTime + 60;
+       } else {
+              this.deltaTime = this.newTime - this.oldTime;
+       }
+       this.oldTime = this.newTime;
+       this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
     }
     update() {
-        setInterval(this.update, 16);
+       
            this.runClock();
-           console.log("Updating");
+           console.log(this.newTime);
 
            //updateFruits();
            //updateBullets()

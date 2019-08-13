@@ -7,6 +7,7 @@ var server = http.createServer(app);
 
 
 const mathServer = require('./mathServer.js');
+const clockServer = require('./clockServer.js');
 const playerServer = require('./playerServer.js');
 const bulletServer = require('./bulletServer.js');
 const fruitServer = require('./fruitServer.js');
@@ -45,15 +46,7 @@ var playerProt = function (name, id, x, y, size, mousex, mousey) {
 };
 
 
-let protBullet = function (x, y, angle, speed, life, damage) {
-       this.x = x
-       this.y = y;
-       this.angle = angle;
-       this.speed = speed;
-       this.life = life;
-       this.damage = damage;
 
-}
 
 
 
@@ -137,8 +130,8 @@ io.on('connect', (socket) => {
 
 
 });
+setInterval(function(){arenaInstance.update();}, 100);
 
-arenaInstance.update();
 
 
 
