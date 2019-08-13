@@ -15,6 +15,9 @@ class arena {
               this.newTime = 0;
               this.deltaTime = 0;
        }
+       havePlayers(){
+              return this.players.lenth==0;
+       }
        getTime(optimize) {
               if (!optimize) {
                      this.runClock();

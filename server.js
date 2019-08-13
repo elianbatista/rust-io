@@ -29,53 +29,51 @@ app.set('view engine', 'html');
 
 
 console.log(arenaServer);
-let arenaInstance = new arenaServer(400,400);
+let arenaInstance = new arenaServer(400, 400);
 
-let a = new bulletServer();
-
+let bullet = new bulletServer();
+let player = new playerServer('douglas', '123', 0, 0, 40);
+console.log(player);
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
-
 
 
 
 io.on('connect', (socket) => {
 
        socket.on('conectei', function (name) {
+              socket.emit('criarSala', arenaInstance.havePlayers(),
+                     name,
+                     arenaInstance.width,
+                     arenaInstance.height)
 
-              var newSocket = new playerProt(name, socket.id, 0, 0, 40, 0, 0);
-              arrayPlayersObject.push(newSocket);
-
-              if (arrayPlayersObject.length == 1) {
-                     socket.emit('criarSala', true, name, world.width, world.height)
-              } else {
-                     socket.emit('criarSala', false, name, world.width, world.height)
-              }
-
+              const newSocket = new playerServer(name, socket.id, 0, 0, 40);
+              arenaInstance.players.push(newSocket);
 
               socket.broadcast.emit('newSocket', newSocket);
-
-
-              socket.emit('mensagem', arrayPlayersObject);
-
+              socket.emit('mensagem', arenaInstance.players);
        });
 
        socket.on('disconnect', function () {
-
               socket.broadcast.emit('disconectPlayer', socket.id);
 
-              for (var i = 0; i < arrayPlayersObject.length; i++) {
-
-                     if (arrayPlayersObject[i]['id'] == socket.id) {
-
-                            arrayPlayersObject.splice(i, 1);
-
+              arenaInstance.players.forEach(function(element, index, array){
+                     if(element.id == socket.id){
+                            array.splice(index, 1);
                      }
-
-              }
-
+              })
        });
 
        socket.on('update', (playerX, playerY, size, mousex, mousey) => {
+
+              arenaInstance.players.forEach(function(element, index, array){
+                     if(element.id == socket.id){
+                            array.splice(index, 1);
+
+                            array[index]['x'] = playerX;
+                            array[index]['y'] = playerY;
+                            array[index]['size'] = 
+                     }
+              })
 
               for (var i = 0; i < arrayPlayersObject.length; i++) {
 
@@ -117,7 +115,9 @@ io.on('connect', (socket) => {
 
 
 });
-setInterval(function(){arenaInstance.update();}, 100);
+setInterval(function () {
+       arenaInstance.update();
+}, 100);
 
 
 
