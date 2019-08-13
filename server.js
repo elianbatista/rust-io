@@ -13,8 +13,7 @@ const bulletServer = require('./bulletServer.js');
 const fruitServer = require('./fruitServer.js');
 const arenaServer = require('./arenaServer.js');
 
-console.log(arenaServer);
-let arenaInstance = new arenaServer();
+
 
 
 var io = require('socket.io').listen(server)
@@ -29,25 +28,12 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 
+console.log(arenaServer);
+let arenaInstance = new arenaServer(400,400);
 
-let world = {
-       width: 400,
-       height: 400
-}
-let a = new protBullet();
+let a = new bulletServer();
+
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
-var playerProt = function (name, id, x, y, size, mousex, mousey) {
-       this.name = name;
-       this.x = x;
-       this.y = y;
-       this.size = size;
-       this.mousex = mousex;
-       this.mousey = mousey;
-       this.id = id;
-};
-
-
-
 
 
 

@@ -2,10 +2,13 @@ console.log('Arena Server');
 
 
 class arena {
-       constructor() {
+       constructor(width, height) {
               this.players = [];
               this.bullets = [];
               this.fruits = [];
+
+              this.width = width;
+              this.height = height;
 
 
               this.oldTime = 0;
