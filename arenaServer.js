@@ -38,11 +38,11 @@ class arena {
          this.bullets.slice().reverse().forEach(function(element, index, array) {
             if(element.life <= 0){
               array.splice(index,1);
-              continue;
+              return true;
             }
-           if(element.x <= -this.width || element.x >= this.width || element.y <= -this.height){
+           if(element.x <= -this.width || element.x >= this.width || element.y <= -this.height || element.y >= this.height){
              array.splice(index,1);
-              continue;
+              return true;
            }
            let pos = new vec2d(element.x, element.y);
            let dir = new vec2d(0, 0);
@@ -51,28 +51,22 @@ class arena {
            
            element.x = pos.x;
            element.y = pos.y;
+           element.life -= this.deltaTime * 1000;
             
          })
-         for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
-              let pos = new vec2d(bullet.x, bullet.y);
-              let dir = new vec2d(0, 0);
-              dir.fromAngle(bullet.angle, bullet.speed * serverDeltaTime);
-
-              pos.add(dir);
-              //pos.print();
-              bullet.x = pos.x;
-              bullet.y = pos.y;
-
-              bullet.life -= serverDeltaTime * 1000;
        }
+       updateFruits(){
+         for(f of this.fruits){
+           f.update();
+         }
        }
        update() {
 
               this.runClock();
              // console.log(this.newTime);
 
-              //updateFruits();
-              //updateBullets()
+              this.updateFruits();
+              this.updateBullets()
 
               //io.emit("spawnBullets", arrayBulletsObject);
               //io.emit("spawnFruits", arrayFruitsObject);
@@ -80,7 +74,7 @@ class arena {
        }
 
 }
-
+/*
 function updateBullets() {
        for (let i = arrayBulletsObject.length - 1; i >= 0; i--) {
               let bullet = arrayBulletsObject[i];
@@ -104,4 +98,5 @@ function updateBullets() {
               bullet.life -= serverDeltaTime * 1000;
        }
 }
+*/
 module.exports = arena;

@@ -40,7 +40,7 @@ let arenaInstance = new arenaServer(400, 400);
 let bullet = new bulletServer();
 let player = new playerServer('douglas', '123', 0, 0, 40);
 let _fruit = new fruitServer(0,0);
-console.log(player);
+
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 
 
@@ -75,6 +75,7 @@ io.on('connect', (socket) => {
               arenaInstance.players.forEach(function (element, index, array) {
                      if (element.id == socket.id) {
                             array[index]['x'] = playerX;
+                       
                             array[index]['y'] = playerY;
                             array[index]['size'] = size;
                             array[index]['mouseX'] = mousex;
@@ -101,7 +102,7 @@ io.on('connect', (socket) => {
                             randomInterval(-world.height, world.height));
 
                      arrayFruitsObject.push(fruit);
-                     //console.log(fruit.pos.x, fruit.pos.y);
+                     console.log(fruit.pos.x, fruit.pos.y);
               }
        });
 
