@@ -10,7 +10,6 @@ class arena {
            this.oldTime = 0;
            this.newTime = 0;
            this.deltaTime = 0;
-
     }
     runClock() {
            let d = new Date();
@@ -23,7 +22,9 @@ class arena {
            this.NewTime = d.getSeconds() + d.getMilliseconds() / 1000;
     }
     update() {
+        setInterval(this.update, 16);
            this.runClock();
+           console.log("Updating");
 
            //updateFruits();
            //updateBullets()
@@ -57,3 +58,4 @@ function updateBullets() {
            bullet.life -= serverDeltaTime * 1000;
     }
 }
+module.exports = arena;

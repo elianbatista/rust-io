@@ -13,7 +13,7 @@ const fruitServer = require('./fruitServer.js');
 const arenaServer = require('./arenaServer.js');
 
 console.log(arenaServer);
-let serverInstance = new arena();
+let arenaInstance = new arenaServer();
 
 
 var io = require('socket.io').listen(server)
@@ -26,6 +26,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'public'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
 
 
 let world = {
@@ -137,8 +138,8 @@ io.on('connect', (socket) => {
 
 });
 
+arenaInstance.update();
 
-setInterval(ServerGameLoop, 16);
 
 
 server.listen(port, function () {
