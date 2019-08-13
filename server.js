@@ -33,6 +33,7 @@ let arenaInstance = new arenaServer(400, 400);
 
 let bullet = new bulletServer();
 let player = new playerServer('douglas', '123', 0, 0, 40);
+let _fruit = new fruitServer(0,0);
 console.log(player);
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 
@@ -56,8 +57,8 @@ io.on('connect', (socket) => {
        socket.on('disconnect', function () {
               socket.broadcast.emit('disconectPlayer', socket.id);
 
-              arenaInstance.players.forEach(function(element, index, array){
-                     if(element.id == socket.id){
+              arenaInstance.players.forEach(function (element, index, array) {
+                     if (element.id == socket.id) {
                             array.splice(index, 1);
                      }
               })
@@ -65,42 +66,27 @@ io.on('connect', (socket) => {
 
        socket.on('update', (playerX, playerY, size, mousex, mousey) => {
 
-              arenaInstance.players.forEach(function(element, index, array){
-                     if(element.id == socket.id){
-                            array.splice(index, 1);
-
+              arenaInstance.players.forEach(function (element, index, array) {
+                     if (element.id == socket.id) {
                             array[index]['x'] = playerX;
                             array[index]['y'] = playerY;
-                            array[index]['size'] = 
+                            array[index]['size'] = size;
+                            array[index]['mouseX'] = mousex;
+                            array[index]['mousey'] = mousey;
+
+                            socket.volatile.broadcast.emit('updatePositions', socket.id,
+                                   playerX, playerY,
+                                   size,
+                                   mousex, mousey);
+
                      }
               })
-
-              for (var i = 0; i < arrayPlayersObject.length; i++) {
-
-                     if (arrayPlayersObject[i]['id'] == socket.id) {
-
-                            arrayPlayersObject[i]['x'] = playerX;
-
-                            arrayPlayersObject[i]['y'] = playerY;
-
-                            arrayPlayersObject[i]['size'] = size;
-
-                            arrayPlayersObject[i]['mousex'] = mousex;
-
-                            arrayPlayersObject[i]['mousey'] = mousey;
-
-                     }
-
-                     socket.volatile.broadcast.emit('updatePositions', socket.id, playerX, playerY, size, mousex, mousey);
-
-              }
-
        });
 
 
        socket.on('newBullet', function (x, y, angle, speed, life, damage) {
-              let prot = new protBullet(x, y, angle, speed, life, damage);
-              arrayBulletsObject.push(prot);
+              let prot = new bulletServer();(x, y, angle, speed, life, damage);
+              arenaInstance.push(prot);
               //socket.volatile.broadcast.emit('spawnBullet', prot);
        });
        socket.on('createFruits', function (n) {

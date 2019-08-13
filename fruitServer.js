@@ -1,6 +1,8 @@
 console.log('Fruit Server');
-class food {
+let vec2d = 
+class fruit {
     constructor(posx, posy) {
+        
            this.pos = new vec2d(posx, posy);
            this.dir = new vec2d(0, 0);
            this.dirAng = 0;
@@ -77,3 +79,4 @@ class food {
 
     }
 }
+module.exports = fruit;

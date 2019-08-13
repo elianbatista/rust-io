@@ -83,3 +83,4 @@ function randomInterval(min, max) {
 function lerpN(a, b, n) {
     return (1 - n) * a + n * b;
 }
+module.exports = vec2d;
