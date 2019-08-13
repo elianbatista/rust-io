@@ -34,6 +34,7 @@ let world = {
        width: 400,
        height: 400
 }
+let a = new protBullet();
 //this.pos.x,this.pos.y,this.size, this.mousex, this.mousey
 var playerProt = function (name, id, x, y, size, mousex, mousey) {
        this.name = name;
