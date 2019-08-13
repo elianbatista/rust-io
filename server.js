@@ -22,7 +22,7 @@ const arenaServer = require('./arenaServer.js');
 
 
 
-var io = require('socket.io').listen(server)
+var io = require('socket.io').listen(server);
 
 
 const path = require('path');
@@ -109,7 +109,7 @@ io.on('connect', (socket) => {
 
 });
 setInterval(function () {
-       arenaInstance.update();
+       arenaInstance.update(io);
 }, 100);
 
 

@@ -91,6 +91,7 @@ class arena {
                 world.bullets.splice(i, 1);
                 i--;
             }
+          console.log(arrayBullets);
         });
         //...
        

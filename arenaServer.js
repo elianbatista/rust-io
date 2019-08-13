@@ -1,6 +1,5 @@
-console.log('Arena Server');
-
-
+const vec2d = require('./mathServer.js');
+//const io = require('socket.io')
 class arena {
        constructor(width, height) {
               this.players = [];
@@ -35,7 +34,7 @@ class arena {
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
        updateBullets(){
-         this.bullets.slice().reverse().forEach(function(element, index, array) {
+         this.bullets.slice().reverse().forEach((element, index, array) => {
             if(element.life <= 0){
               array.splice(index,1);
               return true;
@@ -60,7 +59,7 @@ class arena {
            f.update();
          }
        }
-       update() {
+       update(io) {
 
               this.runClock();
              // console.log(this.newTime);
@@ -68,7 +67,7 @@ class arena {
               this.updateFruits();
               this.updateBullets()
 
-              //io.emit("spawnBullets", arrayBulletsObject);
+              io.emit("spawnBullets", this.bullets);
               //io.emit("spawnFruits", arrayFruitsObject);
 
        }
