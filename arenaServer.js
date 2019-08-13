@@ -34,6 +34,7 @@ class arena {
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
        updateBullets(){
+         
          this.bullets.slice().reverse().forEach((element, index, array) => {
             if(element.life <= 0){
               array.splice(index,1);
@@ -53,6 +54,7 @@ class arena {
            element.life -= this.deltaTime * 1000;
             
          })
+         
        }
        updateFruits(){
          for(f of this.fruits){

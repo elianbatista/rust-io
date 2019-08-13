@@ -67,31 +67,33 @@ class arena {
 
     drawBullets() {
         for (let p of this.bullets) {
-            fill(0, 0, 255);
+            fill(0, 255, 0);
             circle(p.x, p.y, 20);
+          
         }
+      console.log(this.bullets.length)
     }
     update() {
         this.deltaTime = this.newTime - this.oldTime;
         this.oldTime = this.newTime;
         this.newTime = millis();
 
-        socket.on('spawnBullets', function (arrayBullets) {
+        socket.on('spawnBullets', (arrayBullets) => {
             for (let i = 0; i < arrayBullets.length; i++) {
-                if (world.bullets[i] == undefined) {
+                if (this.bullets[i] == undefined) {
                     let pos = createVector(arrayBullets[i].x, arrayBullets[i].y)
-                    world.bullets[i] = new createVector(arrayBullets[i].x, arrayBullets[i].y);
+                    this.bullets[i] = new createVector(pos.x, pos.y);
                 } else {
-                    world.bullets[i].x = arrayBullets[i].x;
-                    world.bullets[i].y = arrayBullets[i].y;
+                    this.bullets[i].x = arrayBullets[i].x;
+                    this.bullets[i].y = arrayBullets[i].y;
                 }
             }
-            for (let i = arrayBullets.length; i < world.bullets.length; i++) {
-                world.bullets.splice(i, 1);
-                world.bullets.splice(i, 1);
+            for (let i = arrayBullets.length; i < this.bullets.length; i++) {
+                this.bullets.splice(i, 1);
+                this.bullets.splice(i, 1);
                 i--;
             }
-          console.log(arrayBullets);
+          
         });
         //...
        
