@@ -325,6 +325,7 @@ class serverClass{
        }
        update(){
               this.runClock();
+              
               updateFruits();
               updateBullets()
          
