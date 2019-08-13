@@ -4,6 +4,12 @@ var express = require('express'),
 
 var app = express();
 var server = http.createServer(app);
+//Deixar do jeito q tava antes do servidor
+// colisão bala-fruta / bala-player / fruta-fruta 1.0
+//Criar sistemas de pontos/level/xp
+//ScoreBoard e update
+//Classes
+//
 
 
 const mathServer = require('./mathServer.js');
