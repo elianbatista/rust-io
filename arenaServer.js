@@ -34,28 +34,32 @@ class arena {
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
        updateBullets() {
-
-              for (let i = this.bullets.length-1; i >= 0; i--) {
+              for (let i = this.bullets.length - 1; i >= 0; i--) {
                      if (this.bullets[i].life <= 0) {
-                            this.bullets.splice(index, 1);
-                            return true;
+                            this.bullets.splice(i, 1);
+
                      }
                      if (this.bullets[i].x <= -this.width || this.bullets[i].x >= this.width ||
                             this.bullets[i].y <= -this.height || this.bullets[i].y >= this.height) {
-                            this.bullets.splice(index, 1);
+                            this.bullets.splice(i, 1);
 
                      }
-                     let pos = new vec2d(this.bullets[i].x, this.bullets[i].y);
-                     let dir = new vec2d(0, 0);
-                     dir.fromAngle(this.bullets[i].angle, this.bullets[i].speed * this.deltaTime);
-                     pos.add(dir);
 
-                     this.bullets[i].x = pos.x;
-                     this.bullets[i].y = pos.y;
-                     this.bullets[i].life -= this.deltaTime * 1000;
+                     if (this.bullets.length != 0) {
+                            let pos = new vec2d(this.bullets[i].x, this.bullets[i].y);
+                            let dir = new vec2d(0, 0);
+                            dir.fromAngle(this.bullets[i].angle, this.bullets[i].speed * this.deltaTime);
+                            pos.add(dir);
+
+                            this.bullets[i].x = pos.x;
+                            this.bullets[i].y = pos.y;
+                            this.bullets[i].life -= this.deltaTime * 1000;
+                     }
+
               }
-
        }
+
+
        updateFruits() {
               for (f of this.fruits) {
                      f.update();
