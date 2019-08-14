@@ -68,10 +68,8 @@ class arena {
     drawBullets() {
         for (let p of this.bullets) {
             fill(0, 255, 0);
-            circle(p.x, p.y, 20);
-          
+            circle(p.x, p.y, 20);   
         }
-      console.log(this.bullets.length)
     }
     update() {
         this.deltaTime = this.newTime - this.oldTime;

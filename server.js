@@ -89,10 +89,11 @@ io.on('connect', (socket) => {
                      }
               })
        });
-
+       
 
        socket.on('newBullet', function (x, y, angle, speed, life, damage) {
-              let prot = new bulletServer();(x, y, angle, speed, life, damage);
+              let prot = new bulletServer(x, y, angle, speed, life, damage);
+              console.log(prot.x);
               arenaInstance.bullets.push(prot);
               //socket.volatile.broadcast.emit('spawnBullet', prot);
        });
