@@ -18,12 +18,12 @@ class player {
 
         this.bullets = [];
         this.bulletDamage = 25;
-        this.bulletLife = 16000
-        this.bulletAcurac = 1.0
+        this.bulletLife = 5000
+        this.bulletAcurac = 0.3
         this.bulletSpeed = 400
         this.bulletSize = 8;
 
-        this.bulletTimer = new spellTimer(300);
+        this.bulletTimer = new spellTimer(10);
 
         this.hitTimer = new spellTimer(700);
     }
