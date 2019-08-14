@@ -108,7 +108,7 @@ io.on('connect', (socket) => {
 });
 setInterval(function () {
        arenaInstance.update(io);
-}, 500);
+}, 16);
 
 
 

@@ -12,7 +12,7 @@ class arena {
 
               this.width = width;
               this.height = height;
-
+              this.frame = 0;
               this.create = true;
               this.oldTime = 0;
               this.newTime = 0;
@@ -86,22 +86,16 @@ class arena {
                                 let con = new vec2d(0,0);
                                 con.copy(b.pos);
                                 con.sub(f.pos);
-                              
                                 const dist = con.mag();
-                              console.log(f.pos, b.pos, dist );
                                 if (dist < b.size / 2 + f.size / 2) {
                                     con.normalize();
-                                    console.log(dist);
-                                    //b.aplyForce(mov, dist * 0.1)
-
-                                    
-
-                                    f.debug = 1;
-                                    b.debug = 2;
-                                }else{
-                                    f.debug = 0;
-                                    b.debug =0;
+                                    b.aplyForce(con, dist * 0.4)
+                                  
+                                    con.mult(-1);
+                                    f.aplyForce(con, dist * 0.4)
+                          
                                 }
+                                  
                             }
                            // b.debug = 0;
                             j++;
@@ -127,7 +121,8 @@ class arena {
                      randomInterval(-this.height, this.height)))
        }
        update(io) {
-
+              this.frame++;
+         
               this.runClock();
               // console.log(this.newTime);
 
@@ -135,10 +130,27 @@ class arena {
               this.updateBullets()
 
               io.emit("spawnBullets", this.bullets);
-              io.emit("spawnFruits", this.fruits);
+         if(this.frame%2 ==0){
+           io.emit("spawnFruits", this.fruits);
+         }
+              
 
        }
 
+}
+function collideAndPush(){
+      let con = new vec2d(0,0);
+      con.copy(b.pos);
+      con.sub(f.pos);
+      const dist = con.mag();
+      if (dist < b.size / 2 + f.size / 2) {
+          con.normalize();
+          b.aplyForce(con, dist * 0.4)
+
+          con.mult(-1);
+          f.aplyForce(con, dist * 0.4)
+
+      }
 }
 /*
 function updateBullets() {
