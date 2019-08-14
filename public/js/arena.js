@@ -67,7 +67,7 @@ class arena {
 
     drawBullets() {
         for (let p of this.bullets) {
-            fill(0, 255, 0);
+            fill(0, 0, 255);
             circle(p.x, p.y, 20);   
         }
     }

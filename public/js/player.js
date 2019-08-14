@@ -10,7 +10,7 @@ class player {
 
         this.life = 100;
         this.xp = 0;
-        this.size = 40;
+        this.size = 30;
         this.camera = createVector(this.pos.x, this.pos.y);
 
         this.state = playerState.STOP;
@@ -41,16 +41,19 @@ class player {
         }
         push()
 
-        strokeWeight(8);
+    
         noStroke();
 
         translate(this.pos.x, this.pos.y);
 
         stroke(0)
-        strokeWeight(2);
-        rect(this.size, this.size+10,10,10);
+        strokeWeight(8);
         fill(255, 100, 0);
-        arc(0, 50,this.size, this.size, 0, PI);
+        rect(0, -15+this.size/2,this.size,20);
+        fill(255, 100, 0);
+
+      
+        arc(0, 28,this.size, this.size, 0, PI);
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
