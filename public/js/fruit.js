@@ -242,12 +242,13 @@ class food {
     }
 
 }
-let protFruit = function(x,y,size,angle,life){
+let protFruit = function(x,y,size,angle,life,debug){
     this.x = x;
     this.y = y;
     this.size = size;
     this.angle = angle;
     this.life = life;
+    this.debug = debug;
 }
 
   

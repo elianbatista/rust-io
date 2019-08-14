@@ -101,7 +101,7 @@ class arena {
                     //let pos = createVector(arrayFruits[i].x, arrayBullets[i].y)
                     let _fruit = new protFruit(arrayFruits[i].pos.x, arrayFruits[i].pos.y,
                         arrayFruits[i].size,
-                        arrayFruits[i].rotate, arrayFruits[i].life);
+                        arrayFruits[i].rotate, arrayFruits[i].life, arrayFruits[i].debug);
                     world.fruits[i] = _fruit;
                 } else {
                     world.fruits[i].x = arrayFruits[i].x;

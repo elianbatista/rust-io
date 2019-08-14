@@ -24,7 +24,7 @@ class fruit {
            this.zero.mult(0.1);
 
            this.zeroRot = randomInterval(-1, 1) * (Math.PI / 8);
-           this.debug = 1;
+           this.debug;
 
     }
     checkLife() {

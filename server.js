@@ -66,6 +66,7 @@ io.on('connect', (socket) => {
               arenaInstance.players.forEach(function (element, index, array) {
                      if (element.id == socket.id) {
                             array.splice(index, 1);
+                            console.log("Disconected");
                      }
               })
        });
