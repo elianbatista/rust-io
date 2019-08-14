@@ -82,26 +82,30 @@ class arena {
                      j = 0;
                      
                      for (let b of this.fruits) {
-                            if (i == j) {
-                                   continue;
-                            }
-                            b.debug = 0;
-                            const dist = b.pos.dist(f.pos);
+                            if(i!=j){
+                       
+                             }
+                           // b.debug = 0;
+                            let con = new vec2d(0,0);
+                            con.copy(b.pos);
+                            con.sub(f.pos);
+                            const dist = con.mag();
                             if (dist < b.size / 2 + f.size / 2) {
-                                   let mov =  new vec2d(0,0);
-                                   mov.copy(b.pos);
-                                   mov.sub(f.pos);
-                                 
-                                   mov.normalize();
-
-                                   b.aplyForce(mov, dist * 0.1)
+                                   
+                                   con.normalize();
+                                   console.log(dist);
+                                   //b.aplyForce(mov, dist * 0.1)
                                  
                                    j++;
                                   
                                    f.debug = 1;
                                    b.debug = 2;
+                            }else{
+                              f.debug = 0;
+                              b.debug =0;
                             }
                      }
+                     
                      
                      
                      /* f.aplyForce(force, quick);

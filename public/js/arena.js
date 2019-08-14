@@ -24,10 +24,6 @@ class arena {
     setName(name) {
         this.name = name;
     }
-    randomFruit() {
-        return new food(random(-this.size.width, this.size.width),
-            random(-this.size.height, this.size.height))
-    }
     setPlayer(player) {
 
         this.playerPrincipal = player;
@@ -36,16 +32,8 @@ class arena {
     getDelta() {
         return this.deltaTime / 1000;
     }
-    setRandomFruit() {
-        this.fruits.push(new food(random(-this.size.width, this.size.width),
-            random(-this.size.height, this.size.height)));
-    }
     setFruits(n) {
-        /*
-        for (var i = 0; i < n; i++) {
-            this.setRandomFruit();
-        }
-        */
+  
         socket.emit('createFruits', n);
     }
     createPlayers(protPlayers) {
