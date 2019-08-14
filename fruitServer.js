@@ -81,7 +81,7 @@ class fruit {
            this.dir.copy(dir);
     }
     aplyForce(dir, force) {
-
+       
            this.zero.x = dir.x * force;
            this.zero.y = dir.y * force;
 
