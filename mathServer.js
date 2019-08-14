@@ -1,4 +1,4 @@
-console.log("Math Server");
+
 class vec2d {
     constructor(x, y) {
            this.x = x;

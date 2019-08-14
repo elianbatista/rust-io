@@ -34,7 +34,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
 
-console.log(arenaServer);
+
 let arenaInstance = new arenaServer(400, 400);
 
 let bullet = new bulletServer();
@@ -93,7 +93,6 @@ io.on('connect', (socket) => {
 
        socket.on('newBullet', function (x, y, angle, speed, life, damage) {
               let prot = new bulletServer(x, y, angle, speed, life, damage);
-              console.log(prot.x);
               arenaInstance.bullets.push(prot);
               //socket.volatile.broadcast.emit('spawnBullet', prot);
        });
@@ -103,7 +102,7 @@ io.on('connect', (socket) => {
                             randomInterval(-world.height, world.height));
 
                      arrayFruitsObject.push(fruit);
-                     console.log(fruit.pos.x, fruit.pos.y);
+                     //console.log(fruit.pos.x, fruit.pos.y);
               }
        });
 
@@ -111,7 +110,7 @@ io.on('connect', (socket) => {
 });
 setInterval(function () {
        arenaInstance.update(io);
-}, 100);
+}, 16);
 
 
 

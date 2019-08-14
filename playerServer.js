@@ -1,4 +1,4 @@
-console.log('Player Server');
+
 module.exports =  function (name, id, x, y, size) {
     this.name = name;
     this.x = x;

@@ -14,8 +14,8 @@ class arena {
               this.newTime = 0;
               this.deltaTime = 0;
        }
-       havePlayers(){
-              return this.players.lenth==0;
+       havePlayers() {
+              return this.players.lenth == 0;
        }
        getTime(optimize) {
               if (!optimize) {
@@ -27,45 +27,44 @@ class arena {
        runClock() {
               let d = new Date();
               if (this.oldTime > this.newTime) {
-                     this.newTime += 60;   
-              } 
+                     this.newTime += 60;
+              }
               this.deltaTime = this.newTime - this.oldTime;
               this.oldTime = this.newTime;
               this.newTime = d.getSeconds() + d.getMilliseconds() / 1000;
        }
-       updateBullets(){
-        
-         this.bullets.slice().reverse().forEach((element, index, array) => {
-            if(element.life <= 0){
-              array.splice(index,1);
-              return true;
-            }
-           if(element.x <= -this.width || element.x >= this.width || element.y <= -this.height || element.y >= this.height){
-             array.splice(index,1);
-              return true;
-           }
-           let pos = new vec2d(element.x, element.y);
-           let dir = new vec2d(0, 0);
-           dir.fromAngle(element.angle, element.speed * this.deltaTime);
-           pos.add(dir);
-           
-           element.x = pos.x;
-           element.y = pos.y;
-           element.life -= this.deltaTime * 1000;
-           
-            
-         })
-         
+       updateBullets() {
+
+              for (let i = this.bullets.length-1; i >= 0; i--) {
+                     if (this.bullets[i].life <= 0) {
+                            this.bullets.splice(index, 1);
+                            return true;
+                     }
+                     if (this.bullets[i].x <= -this.width || this.bullets[i].x >= this.width ||
+                            this.bullets[i].y <= -this.height || this.bullets[i].y >= this.height) {
+                            this.bullets.splice(index, 1);
+
+                     }
+                     let pos = new vec2d(this.bullets[i].x, this.bullets[i].y);
+                     let dir = new vec2d(0, 0);
+                     dir.fromAngle(this.bullets[i].angle, this.bullets[i].speed * this.deltaTime);
+                     pos.add(dir);
+
+                     this.bullets[i].x = pos.x;
+                     this.bullets[i].y = pos.y;
+                     this.bullets[i].life -= this.deltaTime * 1000;
+              }
+
        }
-       updateFruits(){
-         for(f of this.fruits){
-           f.update();
-         }
+       updateFruits() {
+              for (f of this.fruits) {
+                     f.update();
+              }
        }
        update(io) {
 
               this.runClock();
-             // console.log(this.newTime);
+              // console.log(this.newTime);
 
               this.updateFruits();
               this.updateBullets()
