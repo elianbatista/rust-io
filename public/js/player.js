@@ -46,12 +46,11 @@ class player {
 
         translate(this.pos.x, this.pos.y);
 
-        //  textSize(24);
-        // textAlign(CENTER);
-        // textStyle(BOLD);
-        // text(this.name.toUpperCase(), 0,this.size + 12);
         stroke(0)
-        strokeWeight(8);
+        strokeWeight(2);
+        rect(this.size, this.size+10,10,10);
+        fill(255, 100, 0);
+        arc(0, 50,this.size, this.size, 0, PI);
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
@@ -79,11 +78,11 @@ class player {
         let angle = this.mira.angleBetween(xAxis);
         const angleError = map(this.bulletAcurac,0,1,-PI/4, 0);
         angle += random(-angleError, angleError);
-      
+        const pos = this.pos.copy().add(this.mira);
         if(this.pos.y + this.mira.y > this.pos.y){
-            return new spell(this.pos, angle, this.bulletSpeed, this.bulletLife, this.bulletDamage);
+            return new spell(pos, angle, this.bulletSpeed, this.bulletLife, this.bulletDamage);
         }else{
-            return new spell(this.pos, -angle, this.bulletSpeed, this.bulletLife, this.bulletDamage);
+            return new spell(pos, -angle, this.bulletSpeed, this.bulletLife, this.bulletDamage);
         }
         
     

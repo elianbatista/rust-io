@@ -37,12 +37,12 @@ class arena {
               for (let i = this.bullets.length - 1; i >= 0; i--) {
                      if (this.bullets[i].life <= 0) {
                             this.bullets.splice(i, 1);
-
+                            continue;
                      }
                      if (this.bullets[i].x <= -this.width || this.bullets[i].x >= this.width ||
                             this.bullets[i].y <= -this.height || this.bullets[i].y >= this.height) {
                             this.bullets.splice(i, 1);
-
+                            continue;
                      }
 
                      if (this.bullets.length != 0) {
