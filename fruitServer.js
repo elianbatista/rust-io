@@ -82,8 +82,8 @@ class fruit {
     }
     aplyForce(dir, force) {
        
-           this.zero.x = dir.x * force;
-           this.zero.y = dir.y * force;
+           this.zero.x += dir.x * force;
+           this.zero.y += dir.y * force;
 
     }
 }

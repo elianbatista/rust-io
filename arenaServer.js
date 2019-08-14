@@ -65,46 +65,43 @@ class arena {
 
 
        updateFruits() {
-              /*
+              
               let i = 0
               let j = 0;
-              for (let fruit of this.fruits) {
+              for (let f of this.fruits) {
                      /*
                      if (fruit.state == foodState.DEAD) {
                             this.fruits.splice(i, 1);
                             continue;
                      }
                      */
-                    fruit.update(this.width, this.height);
+                    f.update(this.width, this.height);
                      //this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
                      j = 0;
-                     /*
+                     
                      for (let b of this.fruits) {
                             if (i == j) {
                                    continue;
                             }
-                            const dist = b.pos.dist(fruit.pos);
-                            if (dist < b.size / 2 + fruit.size / 2) {
-                                   const angle = fruit.pos.angleBetween(b.pos);
-                                   let mov = b.pos;
-                                   mov.sub(fruit.pos);
-                                 
+                            const dist = b.pos.dist(f.pos);
+                            if (dist < b.size / 2 + f.size / 2) {
+                                   let mov =  new vec2d(0,0);
+                                   //mov.copy(b.pos);
+                                   //mov.sub(f.pos);
                                    j++;
-                                 //  b.aplyForce(mov, dist * 0.001)
+                                   //b.aplyForce(mov, dist * 0.000001)
                             }
                      }
-                     */
-                     /* fruit.aplyForce(force, quick);
-                     if (fruit.state != foodState.DYING) {
-                            this.quadFruits.insert(fruit)
+                     
+                     /* f.aplyForce(force, quick);
+                     if (f.state != foodState.DYING) {
+                            this.quadfs.insert(f)
                      }
                      */
                      i++;
               }
-              */
-             for(let f of this.fruits){
-                    f.update(this.width, this.height);
-             }
+             
+           
 
 
        }
