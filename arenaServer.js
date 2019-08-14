@@ -120,7 +120,7 @@ class arena {
 
               io.emit("spawnBullets", this.bullets);
          if(this.frame%2 ==0){
-           io.emit("spawnFruits", this.fruits);
+           //io.emit("spawnFruits", this.fruits);
          }
               
 
