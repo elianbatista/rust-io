@@ -20,7 +20,10 @@ class vec2d {
            this.x /= n;
            this.y /= n;
     }
-    
+    angleBetween(b){
+           const dot = this.x * b.x + this.y + b.y;
+           return Math.atan(dot);
+    }
     clone(){
            return new vec2d(this.x, this.y);
     }

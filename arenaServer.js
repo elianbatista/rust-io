@@ -65,12 +65,43 @@ class arena {
 
 
        updateFruits() {
-              for (let f of this.fruits) {
-             
-                     f.update(this.width, this.height);
-                     
+              let i = 0
+              let j = 0;
+              for (let fruit of this.fruits) {
+                     /*
+                     if (fruit.state == foodState.DEAD) {
+                            this.fruits.splice(i, 1);
+                            continue;
+                     }
+                     */
+                     fruit.update();
+                     //this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
+                     j = 0;
+                     for (let b of this.fruits) {
+                            if (i == j) {
+                                   continue;
+                            }
+                            const dist = b.pos.dist(fruit.pos);
+                            if (dist < b.size / 2 + fruit.size / 2) {
+                                   const angle = fruit.pos.angleBetween(b.pos);
+                                   const mov = b.pos.copy().sub(fruit.pos);
+                                   j++;
+                                   b.aplyForce(mov, dist * force)
+                            }
+                     }
+
+                     /* fruit.aplyForce(force, quick);
+                     if (fruit.state != foodState.DYING) {
+                            this.quadFruits.insert(fruit)
+                     }
+                     */
+                     i++;
               }
+
+
+
        }
+
        createFruit() {
               this.fruits.push(new fruit(randomInterval(-this.width, this.width),
                      randomInterval(-this.height, this.height)))
