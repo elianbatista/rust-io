@@ -1,26 +1,5 @@
-console.log('Fruit Server');
+
 const vec2d = require('./mathServer.js');
-function randomInterval(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function lerpN(a, b, n) {
-    return (1 - n) * a + n * b;
-}
-function randomInterval(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function lerpN(a, b, n) {
-    return (1 - n) * a + n * b;
-}
-function randomInterval(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-function lerpN(a, b, n) {
-    return (1 - n) * a + n * b;
-}
 function randomInterval(min, max) {
     return Math.random() * (max - min) + min;
 }

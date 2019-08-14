@@ -94,15 +94,12 @@ io.on('connect', (socket) => {
        socket.on('newBullet', function (x, y, angle, speed, life, damage) {
               let prot = new bulletServer(x, y, angle, speed, life, damage);
               arenaInstance.bullets.push(prot);
-              //socket.volatile.broadcast.emit('spawnBullet', prot);
+              socket.volatile.broadcast.emit('spawnBullet', prot);
        });
        socket.on('createFruits', function (n) {
               for (let i = 0; i <= n; i++) {
-                     let fruit = new food(randomInterval(-world.width, world.width),
-                            randomInterval(-world.height, world.height));
-
-                     arrayFruitsObject.push(fruit);
-                     //console.log(fruit.pos.x, fruit.pos.y);
+                     arenaInstance.createFruit();
+                     console.log(fruit.pos.x, fruit.pos.y);
               }
        });
 

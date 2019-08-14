@@ -1,5 +1,9 @@
 const vec2d = require('./mathServer.js');
+const fruit = require('./fruitServer.js');
 //const io = require('socket.io')
+function randomInterval(min, max) {
+       return Math.random() * (max - min) + min;
+}
 class arena {
        constructor(width, height) {
               this.players = [];
@@ -15,7 +19,7 @@ class arena {
               this.deltaTime = 0;
        }
        havePlayers() {
-              return this.players.lenth == 0;
+              return this.players.length == 0;
        }
        getTime(optimize) {
               if (!optimize) {
@@ -64,6 +68,10 @@ class arena {
               for (f of this.fruits) {
                      f.update();
               }
+       }
+       createFruit() {
+              this.fruits.push(new fruit(randomInterval(-this.width, this.width),
+                     randomInterval(-this.height, this.height)))
        }
        update(io) {
 

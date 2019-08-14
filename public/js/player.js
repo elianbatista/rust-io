@@ -10,7 +10,7 @@ class player {
 
         this.life = 100;
         this.xp = 0;
-        this.size = 30;
+        this.size = 40;
         this.camera = createVector(this.pos.x, this.pos.y);
 
         this.state = playerState.STOP;
@@ -20,10 +20,10 @@ class player {
         this.bulletDamage = 25;
         this.bulletLife = 16000
         this.bulletAcurac = 1.0
-        this.bulletSpeed = 200
-        this.bulletSize = 16;
+        this.bulletSpeed = 400
+        this.bulletSize = 8;
 
-        this.bulletTimer = new spellTimer(100);
+        this.bulletTimer = new spellTimer(300);
 
         this.hitTimer = new spellTimer(700);
     }
@@ -48,12 +48,7 @@ class player {
 
         stroke(0)
         strokeWeight(8);
-        fill(255, 100, 0);
-        rect(0, -15+this.size/2,this.size,20);
-        fill(255, 100, 0);
-
-      
-        arc(0, 28,this.size, this.size, 0, PI);
+       
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
