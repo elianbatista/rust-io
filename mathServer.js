@@ -67,9 +67,14 @@ class vec2d {
            this.x = mag * Math.cos(angle)
            this.y = mag * Math.sin(angle)
     }
-    lerp(b, n){
+    lerp(b, amt){
+      /*
            this.x = (1-n)*this.x + n*b.x;
            this.y = (1-n)*this.y + n*b.y;
+           */
+          this.x += (b.x - this.x) * amt || 0;
+          this.y += (b.y - this.y) * amt || 0;
+  
     }
     object(){
            return {x: this.x, y: this.y};

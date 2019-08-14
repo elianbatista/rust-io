@@ -101,7 +101,7 @@ io.on('connect', (socket) => {
               for (let i = 0; i <= n; i++) {
                      arenaInstance.createFruit();
               }
-              arenaInstance.create = true;
+              arenaInstance.create = false;
        });
 
 
