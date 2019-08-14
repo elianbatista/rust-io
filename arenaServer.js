@@ -82,28 +82,29 @@ class arena {
                      j = 0;
                      
                      for (let b of this.fruits) {
-                            if(i!=j){
-                       
-                             }
-                           // b.debug = 0;
-                            let con = new vec2d(0,0);
-                            con.copy(b.pos);
-                            con.sub(f.pos);
-                            const dist = con.mag();
-                            if (dist < b.size / 2 + f.size / 2) {
-                                   
-                                   con.normalize();
-                                   console.log(dist);
-                                   //b.aplyForce(mov, dist * 0.1)
-                                 
-                                   j++;
-                                  
-                                   f.debug = 1;
-                                   b.debug = 2;
-                            }else{
-                              f.debug = 0;
-                              b.debug =0;
+                            if(i != j){
+                                let con = new vec2d(0,0);
+                                con.copy(b.pos);
+                                con.sub(f.pos);
+                              
+                                const dist = con.mag();
+                              console.log(f.pos, b.pos, dist );
+                                if (dist < b.size / 2 + f.size / 2) {
+                                    con.normalize();
+                                    console.log(dist);
+                                    //b.aplyForce(mov, dist * 0.1)
+
+                                    
+
+                                    f.debug = 1;
+                                    b.debug = 2;
+                                }else{
+                                    f.debug = 0;
+                                    b.debug =0;
+                                }
                             }
+                           // b.debug = 0;
+                            j++;
                      }
                      
                      
