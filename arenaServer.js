@@ -75,20 +75,17 @@ class arena {
                             continue;
                      }
                      */
-               
                     f.update(this.width, this.height);
-                      for(let p of this.players){
-                        collideAndPush(p.pos, f, 1.5, false);
-                      }
+        
                      
                      j = 0;
                      
                      for (let b of this.fruits) {
                             if(i != j){
-                                collideAndPush(f, b, 1.5, false);
+                                collideAndPush(f, b,f.size,b.size, 1.5, true);
                                   
                             }
-                           // b.debug = 0;
+                  
                             j++;
                      }
                      
