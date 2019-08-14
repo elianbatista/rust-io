@@ -65,8 +65,10 @@ class arena {
 
 
        updateFruits() {
-              for (f of this.fruits) {
-                     f.update();
+              for (let f of this.fruits) {
+             
+                     f.update(this.width, this.height);
+                     
               }
        }
        createFruit() {
@@ -82,7 +84,7 @@ class arena {
               this.updateBullets()
 
               io.emit("spawnBullets", this.bullets);
-              //io.emit("spawnFruits", arrayFruitsObject);
+              io.emit("spawnFruits", this.fruits);
 
        }
 

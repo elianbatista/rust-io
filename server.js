@@ -99,7 +99,6 @@ io.on('connect', (socket) => {
        socket.on('createFruits', function (n) {
               for (let i = 0; i <= n; i++) {
                      arenaInstance.createFruit();
-                     console.log(fruit.pos.x, fruit.pos.y);
               }
        });
 

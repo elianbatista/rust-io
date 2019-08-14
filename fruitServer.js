@@ -29,11 +29,11 @@ class fruit {
     checkLife() {
            return this.life >= 0;
     }
-    checkWalls() {
+    checkWalls(width, height) {
 
            const quick = 1.5;
            let force = new vec2d(0, 0);
-           if (this.pos.x >= world.width - 20 || this.pos.x <= -world.width + 20) {
+           if (this.pos.x >= width - 20 || this.pos.x <= -width + 20) {
                   if (this.pos.x < 0) {
                          const f = new vec2d(1, 0);
                          force.add(f);
@@ -44,7 +44,7 @@ class fruit {
                   }
            }
 
-           if (this.pos.y > world.height - 20 || this.pos.y <= -world.height + 20) {
+           if (this.pos.y > height - 20 || this.pos.y <= -height + 20) {
                   if (this.pos.y < 0) {
                          const _f = new vec2d(0, 1)
                          force.add(_f);
@@ -56,8 +56,8 @@ class fruit {
            this.zero.x += force.x * quick;
            this.zero.y += force.y * quick;
     }
-    update() {
-           this.checkWalls();
+    update(width, height) {
+           this.checkWalls(width, height);
            if (this.zero.magSq() > 0.5) {
                   let zero = this.zero.clone();
                   zero.mult(0.1);
@@ -68,9 +68,10 @@ class fruit {
            this.dirAng = lerpN(this.dirAng, this.zeroRot, 0.4);
 
            this.rotate += this.dirAng;
+          // let dir = this.dir;
            this.pos.add(this.dir);
 
-           this.pos.constrain(-world.width, world.height);
+           this.pos.constrain(-width, height);
 
            this.x = this.pos.x;
            this.y = this.pos.y;
