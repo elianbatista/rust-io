@@ -23,7 +23,7 @@ class player {
         this.bulletSpeed = 400
         this.bulletSize = 8;
 
-        this.bulletTimer = new spellTimer(10);
+        this.bulletTimer = new spellTimer(100);
 
         this.hitTimer = new spellTimer(700);
     }

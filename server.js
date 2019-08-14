@@ -35,7 +35,7 @@ app.set('view engine', 'html');
 
 
 
-let arenaInstance = new arenaServer(400, 400);
+let arenaInstance = new arenaServer(1600, 1600);
 
 let bullet = new bulletServer();
 let player = new playerServer('douglas', '123', 0, 0, 40);
