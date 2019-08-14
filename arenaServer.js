@@ -77,24 +77,15 @@ class arena {
                      */
                
                     f.update(this.width, this.height);
-
-                     //this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
+                      for(let p of this.players){
+                        collideAndPush(p.pos, f, 1.5, false);
+                      }
+                     
                      j = 0;
                      
                      for (let b of this.fruits) {
                             if(i != j){
-                                let con = new vec2d(0,0);
-                                con.copy(b.pos);
-                                con.sub(f.pos);
-                                const dist = con.mag();
-                                if (dist < b.size / 2 + f.size / 2) {
-                                    con.normalize();
-                                    b.aplyForce(con, dist * 0.4)
-                                  
-                                    con.mult(-1);
-                                    f.aplyForce(con, dist * 0.4)
-                          
-                                }
+                                collideAndPush(f, b, 1.5, false);
                                   
                             }
                            // b.debug = 0;
@@ -138,17 +129,20 @@ class arena {
        }
 
 }
-function collideAndPush(){
+function collideAndPush(a, b, sizeA, sizeB, force, options){
       let con = new vec2d(0,0);
       con.copy(b.pos);
-      con.sub(f.pos);
+      con.sub(a.pos);
       const dist = con.mag();
-      if (dist < b.size / 2 + f.size / 2) {
+      if (dist < sizeB / 2 + sizeA / 2) {
           con.normalize();
           b.aplyForce(con, dist * 0.4)
-
-          con.mult(-1);
-          f.aplyForce(con, dist * 0.4)
+          
+          if(options){
+            con.mult(-1);
+            a.aplyForce(con, dist * 0.4)
+          }
+          
 
       }
 }
