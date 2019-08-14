@@ -1,4 +1,3 @@
-console.log('Bullet Server');
 module.exports = function (x, y, angle, speed, life, damage) {
     this.x = x
     this.y = y;

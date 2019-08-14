@@ -13,7 +13,7 @@ class arena {
               this.width = width;
               this.height = height;
 
-
+              this.create = false;
               this.oldTime = 0;
               this.newTime = 0;
               this.deltaTime = 0;
@@ -79,7 +79,7 @@ class arena {
 
                      //this.collideAndPush(0.05, this.playerPrincipal, fruit, 1, 0);
                      j = 0;
-                     
+                     /*
                      for (let b of this.fruits) {
                             if (i == j) {
                                    continue;
@@ -101,6 +101,7 @@ class arena {
                                    b.debug = 2;
                             }
                      }
+                     */
                      
                      /* f.aplyForce(force, quick);
                      if (f.state != foodState.DYING) {

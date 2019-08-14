@@ -48,7 +48,7 @@ let _fruit = new fruitServer(0,0);
 io.on('connect', (socket) => {
 
        socket.on('conectei', function (name) {
-              socket.emit('criarSala', arenaInstance.havePlayers(),
+              socket.emit('criarSala', arenaInstance.create,
                      name,
                      arenaInstance.width,
                      arenaInstance.height)
@@ -101,6 +101,7 @@ io.on('connect', (socket) => {
               for (let i = 0; i <= n; i++) {
                      arenaInstance.createFruit();
               }
+              arenaInstance.create = true;
        });
 
 
