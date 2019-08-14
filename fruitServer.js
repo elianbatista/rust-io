@@ -24,6 +24,7 @@ class fruit {
            this.zero.mult(0.1);
 
            this.zeroRot = randomInterval(-1, 1) * (Math.PI / 8);
+           this.debug = 1;
 
     }
     checkLife() {
@@ -58,7 +59,7 @@ class fruit {
     }
     update(width, height) {
            this.checkWalls(width, height);
-           if (this.zero.magSq() > 0.5) {
+           if (this.zero.magSq() > 0.1) {
                   let zero = this.zero.clone();
                   zero.mult(0.1);
                   this.zero.lerp(zero, 0.5);
@@ -82,8 +83,8 @@ class fruit {
     }
     aplyForce(dir, force) {
        
-           this.zero.x += dir.x * force;
-           this.zero.y += dir.y * force;
+           this.zero.x = dir.x * force;
+           this.zero.y = dir.y * force;
 
     }
 }

@@ -86,10 +86,14 @@ class arena {
                             const dist = b.pos.dist(f.pos);
                             if (dist < b.size / 2 + f.size / 2) {
                                    let mov =  new vec2d(0,0);
-                                   //mov.copy(b.pos);
-                                   //mov.sub(f.pos);
+                                   mov.copy(b.pos);
+                                   mov.sub(f.pos);
+                                   b.aplyForce(mov, dist * 0.001)
+                                   mov.mult(-1);
                                    j++;
-                                   //b.aplyForce(mov, dist * 0.000001)
+                                   f.aplyForce(mov, dist * 0.001)
+                                   f.debug = 1;
+                                   b.debug = 2;
                             }
                      }
                      

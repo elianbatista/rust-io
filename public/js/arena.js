@@ -68,7 +68,7 @@ class arena {
     drawBullets() {
         for (let p of this.bullets) {
             fill(0, 0, 255);
-            circle(p.x, p.y, 20);   
+            circle(p.x, p.y, 20);
         }
     }
     update() {
@@ -91,17 +91,17 @@ class arena {
                 this.bullets.splice(i, 1);
                 i--;
             }
-          
+
         });
         //...
-       
+
         socket.on('spawnFruits', function (arrayFruits) {
             for (let i = 0; i < arrayFruits.length; i++) {
                 if (world.fruits[i] == undefined) {
                     //let pos = createVector(arrayFruits[i].x, arrayBullets[i].y)
                     let _fruit = new protFruit(arrayFruits[i].pos.x, arrayFruits[i].pos.y,
-                                               arrayFruits[i].size, 
-                                              arrayFruits[i].rotate, arrayFruits[i].life);
+                        arrayFruits[i].size,
+                        arrayFruits[i].rotate, arrayFruits[i].life);
                     world.fruits[i] = _fruit;
                 } else {
                     world.fruits[i].x = arrayFruits[i].x;
@@ -181,13 +181,29 @@ class arena {
     drawFruits() {
         for (let f of this.fruits) {
             push()
-           
+
             translate(f.x, f.y);
             rotate(f.angle * PI / 180)
             stroke(0);
 
-           
-            fill(50, 200, 50);
+            if (f.debug) {
+                switch (f.debug) {
+                    case 0:
+                        fill(50, 200, 50);
+                        break;
+                    case 1:
+                        fill(200, 200, 50);
+                        break;
+                    case 2:
+                        fill(200, 0, 200);
+                        break;
+                }
+            } else {
+
+                fill(50, 200, 50);
+
+            }
+
             rect(0, 0, f.size, f.size);
             pop()
 
