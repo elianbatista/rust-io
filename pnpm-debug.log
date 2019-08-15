@@ -1,0 +1,50 @@
+---
+  0 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  1 info pnpm: 
+    message: "A store server is running. All store manipulations are delegated to it."
+    prefix: "/app"
+  2 debug pnpm:package-json: 
+    initial: 
+      name: "rust-io"
+      version: "1.0.0"
+      description: ""
+      main: "server.js"
+      scripts: 
+        dev: "nodemon server.js"
+        start: "node server.js"
+      repository: 
+        type: "git"
+        url: "git+https://github.com/elianbatista/rust-io.git"
+      author: 
+        name: "Elian"
+      license: "ISC"
+      bugs: 
+        url: "https://github.com/elianbatista/rust-io/issues"
+      homepage: "https://github.com/elianbatista/rust-io#readme"
+      dependencies: 
+        ejs: "^2.6.2"
+        express: "^4.17.1"
+        p5: "^0.9.0"
+        socket.io: "^2.2.0"
+        uws: "^100.0.1"
+      gitHead: "7fba236cef17937fc5d6d5cef5e4170f1066d867"
+      readme: "ERROR: No README data found!"
+      _id: "rust-io@1.0.0"
+    prefix: "/app"
+  3 warn pnpm: 
+    message: "Moving ejs that was installed by a different package manager to \"node_modules/.ignored"
+    prefix: "/app"
+  4 error pnpm: 
+    message: 
+      errno: -39
+      code: "ENOTEMPTY"
+      syscall: "rename"
+      path: "/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/ejs"
+      dest: "/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/.ignored/ejs"
+    err: 
+      name: "Error"
+      message: "ENOTEMPTY: directory not empty, rename '/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/ejs' -> '/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/.ignored/ejs'"
+      code: "ENOTEMPTY"
+      stack: "Error: ENOTEMPTY: directory not empty, rename '/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/ejs' -> '/rbd/pnpm-volume/73b6b2f6-d6f8-4cfd-84f0-825635e8ce6d/node_modules/.ignored/ejs'"
