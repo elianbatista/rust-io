@@ -17,6 +17,7 @@ class player {
 
 
         this.bullets = [];
+<<<<<<< HEAD
         this.bulletDamage = 25;
         this.bulletLife = 5000
         this.bulletAcurac = 0.3
@@ -26,12 +27,24 @@ class player {
         this.bulletTimer = new spellTimer(100);
 
         this.hitTimer = new spellTimer(700);
+=======
+        this.bulletDamage = 50;
+        this.bulletLife = 16000
+        this.bulletAcurac = 1
+        this.bulletSpeed = 200
+        this.bulletSize = 16;
+
+        this.bulletTimer = new spellTimer(500);
+
+
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
     }
 
     display() {
         for (let bullet of this.bullets) {
             bullet.display();
             bullet.update();
+<<<<<<< HEAD
         }
         if (!this.hitTimer.checkTimer()) {
             fill(0, 0, 255);
@@ -52,6 +65,36 @@ class player {
         fill(255, 0, 0);
         circle(0, 0, this.size);
 
+=======
+            
+
+        }
+
+        push()
+
+        fill(0, 0, 255);
+        circle(this.target.x, this.target.y, 20);
+        //----
+        stroke(0, 0, 255);
+        strokeWeight(5);
+        line(this.pos.x, this.pos.y, this.target.x, this.target.y);
+
+
+        noStroke();
+        //------
+
+        translate(this.pos.x, this.pos.y);
+
+        //  textSize(24);
+        // textAlign(CENTER);
+        // textStyle(BOLD);
+        // text(this.name.toUpperCase(), 0,this.size + 12);
+        fill(255, 0, 0);
+        circle(0, 0, this.size);
+
+        stroke(0)
+        strokeWeight(8);
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 
         line(0, 0, this.mira.x / 2, this.mira.y / 2);
 
@@ -59,6 +102,7 @@ class player {
         //
         fill(0);
         circle(this.mira.x / 2, this.mira.y / 2, 20);
+<<<<<<< HEAD
         pop()
 
     }
@@ -66,10 +110,20 @@ class player {
         this.life -= amount;
         GUIAtualizarLife();
     }
+=======
+        //------
+
+        noStroke();
+        //
+        pop()
+
+    }
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
     lookAt(x, y) {
         let a = createVector(x - this.pos.x, y - this.pos.y)
         return a.normalize()
     }
+<<<<<<< HEAD
     produceBullet(){
 
         const xAxis = createVector(1,0);
@@ -117,6 +171,32 @@ class player {
                         this.state = playerState.WALK;
                         this.hitTimer.startTimer();
                         this.target = createVector(mousex, mousey);
+=======
+    shoot() {
+        if (this.bulletTimer.checkTimer()) {
+            const bullet = new spell(this.pos,
+                this.mira,
+                this.bulletAcurac,
+                this.bulletSpeed,
+                this.bulletLife,
+                this.bulletDamage,
+                this.bulletSize);
+
+            this.bullets.push(bullet)
+            this.bulletTimer.startTimer();
+        }
+    }
+    handleMouseInput(mousex, mousey) {
+        if (mouseIsPressed) {
+            switch (mouseButton) {
+                case LEFT:
+                    this.shoot();
+                    break;
+
+                case RIGHT:
+                    this.state = playerState.WALK;
+                    this.target = createVector(mousex, mousey);
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
                     break;
             }
         }
@@ -128,9 +208,16 @@ class player {
         }
         if (keyDown('s')) {
             this.state = playerState.STOP;
+<<<<<<< HEAD
             this.hitTimer.forceStop();
         }
         if (keyWentDown('h')) {
+=======
+        } else {
+            this.state = playerState.WALK;
+        }
+        if(keyDown('h')){
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             debugMode = !debugMode;
         }
         if (keyWentDown('q')) {
@@ -153,6 +240,7 @@ class player {
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
+<<<<<<< HEAD
 
     update(mousex, mousey) {
 
@@ -177,20 +265,34 @@ class player {
 
         this.bulletTimer.runTimer();
         this.hitTimer.runTimer();
+=======
+    update(mousex, mousey) {
+        
+        this.camera = createVector(this.pos.x, this.pos.y)
+        camera.position = this.camera;
+        this.mira = this.lookAt(mousex, mousey).mult(this.size);
+        this.bulletTimer.runTimer();
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 
         this.handleMouseInput(mousex, mousey);
         this.handleKeyboardInput();
 
+<<<<<<< HEAD
        
 
 
 
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         //Se tiver clicado vai até o target
         //Se nao freia até chegar a 0 velocidade
         if (this.target.dist(this.pos) > 10 && this.state == playerState.WALK) {
             this.seekTarget();
         } else {
+<<<<<<< HEAD
             this.state = playerState.STOP
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             this.dir.x = lerp(this.dir.x, 0, 0.3);
             this.dir.y = lerp(this.dir.y, 0, 0.3);
         }
@@ -200,6 +302,7 @@ class player {
 
     }
 }
+<<<<<<< HEAD
 class protPlayer {
     constructor(name, x, y, id, size, tx, ty) {
         this.pos = createVector(x, y);
@@ -234,6 +337,38 @@ class protPlayer {
 
 
 
+=======
+class protoPlayer {
+    constructor(x, y, size, angle) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.angle = angle;
+    }
+    display() {
+        let mira = p5.Vector.fromAngle(angle);
+        mira.mult(this.size);
+        push()
+
+        translate(this.pos.x, this.pos.y);
+        fill(255, 0, 0);
+        circle(0, 0, this.size);
+        //
+        stroke(0)
+        strokeWeight(8);
+
+        line(0, 0, this.mira.x / 2, this.mira.y / 2);
+
+        noStroke();
+        //
+        fill(0);
+        circle(mira.x / 2, mira.y / 2, 20);
+        //------
+
+        noStroke();
+        //
+        pop()
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
     }
     update(x, y) {
         this.x = x;

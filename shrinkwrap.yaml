@@ -1,7 +1,10 @@
 dependencies:
   ejs: 2.6.2
   express: 4.17.1
+<<<<<<< HEAD
   p5: 0.9.0
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
   socket.io: 2.2.0
 packages:
   /accepts/1.3.7:
@@ -409,10 +412,13 @@ packages:
       node: '>= 0.8'
     resolution:
       integrity: sha1-IPEzZIGwg811M3mSoWlxqi2QaUc=
+<<<<<<< HEAD
   /p5/0.9.0:
     dev: false
     resolution:
       integrity: sha512-N8FzKr9SKofl4f+d9g6oYDRk5JOYgY1bIhCInzNxW7khc1zk7whQIOhaHeijSslfN3rJYfWso6Fn3O/w+TCwLg==
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
   /parseqs/0.0.5:
     dependencies:
       better-assert: 1.0.2
@@ -617,5 +623,8 @@ shrinkwrapVersion: 3
 specifiers:
   ejs: ^2.6.2
   express: ^4.17.1
+<<<<<<< HEAD
   p5: ^0.9.0
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
   socket.io: ^2.2.0

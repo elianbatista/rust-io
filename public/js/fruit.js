@@ -48,7 +48,11 @@ class quadFood {
 
         if (this.fruits.length > 0) {
             for (let food of this.fruits) {
+<<<<<<< HEAD
                // food.display();
+=======
+                food.display();
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             }
         }
         if (this.leftUp) {
@@ -121,8 +125,15 @@ class quadFood {
             for (let i = this.fruits.length - 1; i >= 0; i--) {
                 this.checkQuad(this.fruits[i]);
                 this.fruits.splice(i, 1);
+<<<<<<< HEAD
             }
             this.checkQuad(fruit);
+=======
+                //  console.log('a');
+            }
+            this.checkQuad(fruit);
+
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         }
     }
 }
@@ -148,6 +159,7 @@ class food {
     checkLife() {
         return this.life >= 0;
     }
+<<<<<<< HEAD
     checkWalls() {
         const quick = 1.5;
         let force = createVector(0,0);
@@ -178,6 +190,17 @@ class food {
         this.rotate += this.dirAng;
         this.pos.add(this.dir);
 
+=======
+    update() {
+        if (this.zero.mag() > 0.1) {
+            this.zero = p5.Vector.lerp(this.zero, this.zero.copy().mult(0.1), 0.5);
+        }
+        this.dir = p5.Vector.lerp(this.dir, this.zero, 0.15);
+
+        this.dirAng = lerp(this.dirAng, this.zeroRot, 0.4);
+        this.rotate += this.dirAng;
+        this.pos.add(this.dir);
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         this.pos.x = constrain(this.pos.x, -world.size.width, world.size.width)
         this.pos.y = constrain(this.pos.y, -world.size.height, world.size.height)
     }
@@ -189,7 +212,11 @@ class food {
     }
     display() {
         this.hit.runTimer()
+<<<<<<< HEAD
        
+=======
+
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         if (this.checkLife()) {
             if (this.life < 100) {
                 this.lifeD.display(this.life, this.pos, 35);
@@ -220,8 +247,12 @@ class food {
             }
 
             if (this.hit.checkTimer()) {
+<<<<<<< HEAD
                // world.fruits.splice(world.fruits.indexOf(this), 1);
                 this.state = foodState.DEAD;
+=======
+                world.fruits.splice(world.fruits.indexOf(this), 1);
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
                 world.setRandomFruit();
 
             } else {
@@ -241,6 +272,7 @@ class food {
 
     }
 
+<<<<<<< HEAD
 }
 let protFruit = function(x,y,size,angle,life,debug){
     this.x = x;
@@ -252,3 +284,6 @@ let protFruit = function(x,y,size,angle,life,debug){
 }
 
   
+=======
+}
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e

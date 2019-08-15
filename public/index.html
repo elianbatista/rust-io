@@ -3,6 +3,7 @@
 
 <head>
 
+<<<<<<< HEAD
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         <script>
           (adsbygoogle = window.adsbygoogle || []).push({
@@ -11,6 +12,8 @@
           });
         </script> 
       
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
        <meta charset="UTF-8">
 
        <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,6 +28,7 @@
   
        <link href="https://fonts.googleapis.com/css?family=Dosis:400,500,600,700,800&display=swap" rel="stylesheet">
 
+<<<<<<< HEAD
        <link href="https://fonts.googleapis.com/css?family=Roboto:700,900&display=swap" rel="stylesheet">
 
        <!-- Fim dos Includes do CSS -->
@@ -33,11 +37,23 @@
 
 </head>
 
+=======
+       <!-- Fim dos Includes do CSS -->
+
+       <title>Rust.io</title>
+
+</head>
+
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 <body oncontextmenu="return false;">
   
        <div class="box">
       
+<<<<<<< HEAD
          <h1>Olox.io</h1>
+=======
+         <h1>Rust.io</h1>
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
          
          <input type="text" class="nome" placeholder="Digite seu Apelido" autofocus>
          
@@ -47,6 +63,7 @@
   
       <div class="informacoes right">BETA 1.0</div>
   
+<<<<<<< HEAD
       <div class="gui none" align="center">
 
         <div class="nome"></div>
@@ -59,6 +76,8 @@
         
       </div>
   
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
       </div> 
   
       <script
@@ -72,6 +91,7 @@
   
         <script>
                      
+<<<<<<< HEAD
                var socket = io();
             
                //let socket = io.connect('https://elianbatista-rust-io.glitch.me/');
@@ -82,25 +102,41 @@
        
        <script src="/js/arena.js"></script>
        <script src="/js/clientSocket.js"></script>
+=======
+               var socket = io('http://localhost:3000/');
+
+        </script>
+
+       <script src="/js/arena.js"></script>
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
        <script src="/js/fruit.js"></script>
        <script src="/js/player.js"></script>
        <script src="/js/spell.js"></script>
        <script src="/js/main.js"></script>
        <script src="/js/life.js"></script>
+<<<<<<< HEAD
       
+=======
+  
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         <script>
   
         document.querySelector('body').addEventListener('keydown', function(event) {
           
           if(event.keyCode == 13){
+<<<<<<< HEAD
 
             $(".gui").removeClass("none");
 
+=======
+            
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             $(".box").fadeOut();
             
             var nome = $(".box .nome").val();
             
             createWorld(nome);
+<<<<<<< HEAD
 
             socket.emit('conectei', nome);
             
@@ -108,16 +144,21 @@
             $(".gui .nome").text(nome);
             
             GUIAtualizarLife();
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             
           }
           
         });
+<<<<<<< HEAD
           
         function GUIAtualizarLife(){
             if(world && world.playerPrincipal){
               $('.gui .life .life-content').css({width: (world.playerPrincipal.life) + "%"});
             }
           }
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
         
       </script>
   

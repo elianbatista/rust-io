@@ -8,6 +8,7 @@ class spellTimer {
         this.start = millis();
         this.end = this.start + this.cd;
     }
+<<<<<<< HEAD
     forceStop() {
         this.start = this.end;
     }
@@ -16,6 +17,13 @@ class spellTimer {
     }
     runTimer() {
         if (this.start <= this.end) {
+=======
+    remainTime(){
+        return this.end - this.start;
+    }
+    runTimer() {
+        if(this.start <= this.end){
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             this.start += world.deltaTime;
         }
     }
@@ -24,6 +32,7 @@ class spellTimer {
     }
 }
 class spell {
+<<<<<<< HEAD
     constructor(pos, angle, speed, life, damage) {
         this.pos = createVector(pos.x, pos.y);
         //this.dir = p5.Vector.fromAngle(angle).mult(speed);
@@ -35,6 +44,25 @@ class spell {
        
         //MUDAR
         this.size = 10;
+=======
+    constructor(pos, target, acurac, speed, life, damage, size) {
+        this.pos = createVector(pos.x, pos.y);
+        
+
+        this.size = size;
+        this.speed = speed;
+        this.dir = createVector(target.x, target.y);
+
+        const angle = map(acurac, 0, 1, -PI / 4, 0);
+        this.dir.rotate(random(angle, -angle));
+        this.dir.normalize();
+        this.dir.mult(speed);
+
+        this.damage = damage;
+
+        this.life = life;
+
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
     }
     display() {
         if (this.checkLife()) {
@@ -46,10 +74,17 @@ class spell {
         return this.life >= 0;
     }
     update() {
+<<<<<<< HEAD
         if (this.pos.x > world.size.width || this.pos.x < -world.size.width) {
             this.life = -10;
         }
         if (this.pos.y > world.size.height || this.pos.y < -world.size.height) {
+=======
+        if(this.pos.x > world.size.width || this.pos.x < -world.size.width){
+            this.life = -10;
+        }
+        if(this.pos.y > world.size.height || this.pos.y < -world.size.height){
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
             this.life = -10;
         }
         const dir = this.dir.copy().mult(world.getDelta());
@@ -57,7 +92,12 @@ class spell {
         this.life -= world.deltaTime;
 
         if (!this.checkLife()) {
+<<<<<<< HEAD
             world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1);
         }
+=======
+            world.playerPrincipal.bullets.splice(world.playerPrincipal.bullets.indexOf(this), 1); 
+        } 
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
     }
 }

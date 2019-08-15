@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .none {
 
   opacity: 0;
@@ -6,16 +7,21 @@
 
 }
 
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 body {
   
   background-color: #AA00FF;
   
+<<<<<<< HEAD
   overflow: hidden;
   
 }
 canvas {
   
   overflow: hidden;
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 }
 
 .box {
@@ -60,6 +66,11 @@ canvas {
   
   width: 300px;
   
+<<<<<<< HEAD
+=======
+  text-transform: uppercase;
+  
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
   color: #AA00FF;
   
   text-align: center;
@@ -98,6 +109,7 @@ canvas {
   
 }
 
+<<<<<<< HEAD
 .gui {
 
   position: absolute;
@@ -162,6 +174,8 @@ canvas {
 
 }
 
+=======
+>>>>>>> 0609e4bf93cbec187398ee37493165f6102d456e
 @keyframes intro {
   
   0%{
